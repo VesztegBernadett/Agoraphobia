@@ -8,7 +8,7 @@ namespace Agoraphobia.Items
 {
     internal interface IWeapons : IItemUsable
     {
-        float Multiplier { get; set; }
-        int Energy { get; set; }
+        float Multiplier { get; }
+        int Energy { get; }
     }
 }

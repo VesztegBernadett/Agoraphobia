@@ -8,6 +8,6 @@ namespace Agoraphobia.Entity
 {
     internal interface IEnemy : IAttackable
     {
-        
+        string Type { get; }
     }
 }

@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia
 {
-    internal interface IItem
+    internal interface IItem : IElement
     {
-        string Name { get; }
-        string Description { get; }
+        void PickUp();
         string Inspect();
         void Drop();
         void Delete();

@@ -1,5 +1,8 @@
 Tutorial #Name
 This is where you learn the things #Description
+
 Cat:4*3 #Npc
+
 Popcorn machine:10*7 #Enemies
+
 Stick; Bread #Items

@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia.Rooms
 {
-    internal interface IRoom
+    internal interface IRoom : IElement
     {
-        int Id { get; }
-        string Name { get; }
-        string Description { get; }
+       List<IElement> Elements { get; }
         int Orientation { get; }  // positive / negative / neutral
-
         string View();
     }
 }

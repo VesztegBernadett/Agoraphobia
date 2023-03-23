@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\INPC.cs" />
+    <Compile Include="IElement.cs" />
     <Compile Include="Entity\IAttackable.cs" />
     <Compile Include="Entity\IEnemy.cs" />
     <Compile Include="Entity\IEntity.cs" />

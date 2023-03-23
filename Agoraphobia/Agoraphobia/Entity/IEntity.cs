@@ -6,14 +6,8 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia.Character
 {
-    internal interface IEntity
+    internal interface IEntity : IElement
     {
-        string Name { get; }
-        string Description { get; }
-        List<IItem> Inventory { get; set; }
-        int Armor { get; set; }
-        int HP { get; set; }
-        int Energy { get; set; }
-        int AttackDamage { get; set; }
+        List<IItem> Inventory { get; } // Inventory size is capped.
     }
 }

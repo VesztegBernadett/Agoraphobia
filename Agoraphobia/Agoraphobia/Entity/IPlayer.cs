@@ -8,6 +8,9 @@ namespace Agoraphobia.Entity
 {
     internal interface IPlayer : IAttackable
     {
-
+        void Death();
+        void Respawn();
+        void ChangeSanity(int amount);
+        // possible improvements - hardcore mode
     }
 }
