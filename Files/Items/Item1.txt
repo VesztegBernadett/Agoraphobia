@@ -1,0 +1,6 @@
+1#Id
+Stick#Name
+A wooden stick. Nobody knows how it got here.#Description
+Weapon#Type
+1-1.5#Multiplier
+1#Energy

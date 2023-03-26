@@ -9,7 +9,7 @@ namespace Agoraphobia.Entity
 {
     internal interface IAttackable : IEntity
     {
-        int Armor { get; }
+        int Defense { get; }
         int HP { get; }
         int Energy { get; }
         int AttackDamage { get; }

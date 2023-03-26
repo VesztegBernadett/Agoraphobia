@@ -8,6 +8,8 @@ namespace Agoraphobia
 {
     internal interface IItem : IElement
     {
+        int[] Coordinates { get; }
+        string Type { get; set; }
         void PickUp();
         string Inspect();
         void Drop();

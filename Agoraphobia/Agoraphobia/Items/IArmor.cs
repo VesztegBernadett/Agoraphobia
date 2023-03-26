@@ -8,6 +8,7 @@ namespace Agoraphobia.Items
 {
     internal interface IArmor : IItemUsable
     {
-
+        int Defense { get; }
+        int Attack { get; }
     }
 }

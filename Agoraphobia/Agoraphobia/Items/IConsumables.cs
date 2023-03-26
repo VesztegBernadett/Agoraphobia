@@ -12,5 +12,6 @@ namespace Agoraphobia.Items
         int HP { get; }
         int Armor { get; }
         int Attack { get; }
+        int Duration { get; }
     }
 }
