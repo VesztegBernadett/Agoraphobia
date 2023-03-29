@@ -1,0 +1,10 @@
+2#Id
+Bread#Id
+A bit stale, but must do#Desciption
+Common#Rarity
+Consumable#Type
+1#Energy
+0#HP
+2#Armor
+0#Attack
+1#Duration
