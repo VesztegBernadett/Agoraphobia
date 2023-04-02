@@ -10,5 +10,6 @@ namespace Agoraphobia.Character
     {
         int[] Coordinates { get; }
         List<IItem> Inventory { get; } // Inventory size is capped.
+        int DreamCoins { get; }
     }
 }

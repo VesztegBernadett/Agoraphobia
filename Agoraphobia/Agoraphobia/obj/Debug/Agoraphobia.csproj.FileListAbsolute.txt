@@ -5,3 +5,11 @@ C:\Users\Suli\Desktop\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agorap
 C:\Users\Suli\Desktop\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.CoreCompileInputs.cache
 C:\Users\Suli\Desktop\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.exe
 C:\Users\Suli\Desktop\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.pdb
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.AssemblyReference.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.SuggestedBindingRedirects.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.CoreCompileInputs.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.exe
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.pdb
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.exe.config
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.exe
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.pdb

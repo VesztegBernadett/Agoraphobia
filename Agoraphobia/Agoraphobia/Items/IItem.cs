@@ -8,11 +8,19 @@ namespace Agoraphobia
 {
     internal interface IItem : IElement
     {
-        int[] Coordinates { get; }
-        string Type { get; set; }
+        //static int[] Coordinates { get; }
         void PickUp();
         string Inspect();
         void Drop();
         void Delete();
+        //enum Rarity
+        //{
+        //    Common,
+        //    Uncommon,
+        //    Rare,
+        //    Epic,
+        //    Legendary,
+        //    Fabled
+        //};
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agoraphobia.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,9 @@ namespace Agoraphobia
     {
         static void Main(string[] args)
         {
+            Consumable consumable = new Consumable("Files/Items/Consumable0.txt");
+            Console.WriteLine(consumable.Name);
+            Console.WriteLine(consumable.Description);
         }
     }
 }

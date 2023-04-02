@@ -11,7 +11,6 @@ namespace Agoraphobia.Entity
         void Death();
         void Respawn();
         void ChangeSanity(int amount);
-        int DreamCoins { get; }
 
         // possible improvements - hardcore mode
     }

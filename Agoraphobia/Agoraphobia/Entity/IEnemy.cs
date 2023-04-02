@@ -11,6 +11,5 @@ namespace Agoraphobia.Entity
     {
         string Type { get; }
         Dictionary<int, float> DropRate { get; }
-        int[] Gold { get; }
     }
 }

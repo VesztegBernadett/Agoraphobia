@@ -9,7 +9,15 @@ namespace Agoraphobia.Entity
 {
     interface INPC : IEntity
     {
-        byte Type { get; } // 0 - quest, 1 - trade, 2 - merchant, 3 - neutral, 4 - buff / debuff
+        //enum Type
+        //{
+        //    Quest,
+        //    Trade,
+        //    Merchant,
+        //    Neutral,
+        //    Buff,
+        //    Debuff
+        //};
         bool Interact();
     }
 }

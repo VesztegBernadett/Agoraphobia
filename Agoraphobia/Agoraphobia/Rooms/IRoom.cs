@@ -8,11 +8,16 @@ namespace Agoraphobia.Rooms
 {
     internal interface IRoom : IElement
     {
-        List<IElement> Elements { get; }
+        List<string> Elements { get; }
         int Items { get; }
         List<IRoom> Exits { get; }
-        byte Orientation { get; }  // 0 - positive / 1 - negative / 2 - neutral
-        byte Type { get; } // 0 - basic, 1 - quest
+        //enum Orientation
+        //{
+        //    Positive,
+        //    Negative,
+        //    Neutral
+        //};
+        bool IsQuest { get; }
         string View();
     }
 }
