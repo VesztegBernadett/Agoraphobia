@@ -18,6 +18,8 @@ namespace Agoraphobia.Entity
         //    Buff,
         //    Debuff
         //};
+
+        //static List<INPC> NPCs { get; } //Add the instance to this list in the constructor
         bool Interact();
     }
 }

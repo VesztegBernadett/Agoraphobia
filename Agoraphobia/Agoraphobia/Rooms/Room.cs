@@ -15,8 +15,10 @@ namespace Agoraphobia.Rooms
         public string Name { get => name; }
         private string description;
         public string Description { get => description; }
-        public List<string> Elements { get; set; }
-        public int Items { get; set; }
+        List<int> NPCs { get; }
+        List<int> Enemies { get; }
+        List<int> Items { get; }
+        public int ItemsNum { get; set; }
         public List<IRoom> Exits { get; private set; }
         public bool IsQuest { get; private set; }
         public string View()
@@ -43,6 +45,15 @@ namespace Agoraphobia.Rooms
                         IsQuest = int.Parse(data[0]) == 0 ? false : true;
                         break;
                     case "Orientation":
+                        break;
+                    case "NPC":
+                        NPCs = data[0].Split(';').Select(int.Parse).ToList();
+                        break;
+                    case "Enemies":
+                        Enemies = data[0].Split(';').Select(int.Parse).ToList();
+                        break;
+                    case "Items":
+                        Items = data[0].Split(';').Select(int.Parse).ToList();
                         break;
                     default:
                         break;
