@@ -44,12 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Enemy.cs" />
     <Compile Include="Entity\INPC.cs" />
+    <Compile Include="Entity\NPC.cs" />
     <Compile Include="IElement.cs" />
     <Compile Include="Entity\IAttackable.cs" />
     <Compile Include="Entity\IEnemy.cs" />
     <Compile Include="Entity\IEntity.cs" />
     <Compile Include="Entity\IPlayer.cs" />
+    <Compile Include="Items\Armor.cs" />
     <Compile Include="Items\Consumable.cs" />
     <Compile Include="Items\IArmor.cs" />
     <Compile Include="Items\IConsumables.cs" />

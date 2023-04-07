@@ -2,5 +2,4 @@
 Cat#Name
 A strange creature. What might be its intentions?#Description
 3#Type
-4*3#Coordinates
 #Inventory

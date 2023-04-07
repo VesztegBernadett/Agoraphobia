@@ -1,6 +1,7 @@
-1#Id
+2#Id
 Stick#Name
 A wooden stick. Nobody knows how it got here.#Description
+Weapon#Type
 Uncommon#Rarity
 1-1.5#Multiplier
 1#Energy

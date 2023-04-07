@@ -8,8 +8,7 @@ namespace Agoraphobia.Character
 {
     internal interface IEntity : IElement
     {
-        int[] Coordinates { get; }
-        List<IItem> Inventory { get; } // Inventory size is capped.
+        List<int> Inventory { get; } // Inventory size is capped, Inventory contains the Id of the items.
         int DreamCoins { get; }
     }
 }

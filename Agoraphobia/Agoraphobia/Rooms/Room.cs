@@ -15,9 +15,9 @@ namespace Agoraphobia.Rooms
         public string Name { get => name; }
         private string description;
         public string Description { get => description; }
-        List<int> NPCs { get; }
-        List<int> Enemies { get; }
-        List<int> Items { get; }
+        public List<int> NPCs { get; }
+        public List<int> Enemies { get; }
+        public List<int> Items { get; }
         public int ItemsNum { get; set; }
         public List<IRoom> Exits { get; private set; }
         public bool IsQuest { get; private set; }

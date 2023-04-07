@@ -32,3 +32,11 @@ C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Files\Items
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Files\Items\Weapon0.txt
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Files\NPCs\NPC0.txt
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Files\Rooms\Room0.txt
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.AssemblyReference.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.SuggestedBindingRedirects.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.csproj.CoreCompileInputs.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.exe
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\Agoraphobia.pdb
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.exe.config
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.exe
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\Agoraphobia.pdb

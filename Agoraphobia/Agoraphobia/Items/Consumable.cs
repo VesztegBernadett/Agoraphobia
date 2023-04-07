@@ -10,7 +10,6 @@ namespace Agoraphobia.Items
 {
     internal class Consumable
     {
-        static readonly int[] Coordinates = { 10, 25 };
         private int id;
         public int Id { get => id; }
         private string name;
@@ -18,14 +17,10 @@ namespace Agoraphobia.Items
         private string description;
         public string Description { get => description; }
         public int Energy { get; private set; }
-        private int hp;
-        public int HP { get => hp; }
-        private int armor;
-        public int Armor { get => armor; }
-        private int attack;
-        public int Attack { get => attack; }
-        private int duration;
-        public int Duration { get => duration; }
+        public int HP { get; private set; }
+        public int Armor { get; private set; }
+        public int Attack { get; private set; }
+        public int Duration { get; private set; }
         public Consumable(string filename)
         {
             foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
@@ -46,16 +41,16 @@ namespace Agoraphobia.Items
                         Energy = int.Parse(data[0]);
                         break;
                     case "HP":
-                        hp = int.Parse(data[0]);
+                        HP = int.Parse(data[0]);
                         break;
                     case "Armor":
-                        armor = int.Parse(data[0]);
+                        Armor = int.Parse(data[0]);
                         break;
                     case "Attack":
-                        attack = int.Parse(data[0]);
+                        Attack = int.Parse(data[0]);
                         break;
                     case "Duration":
-                        duration = int.Parse(data[0]);
+                        Duration = int.Parse(data[0]);
                         break;
                     default:
                         break;

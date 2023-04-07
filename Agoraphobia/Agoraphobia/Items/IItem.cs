@@ -14,6 +14,12 @@ namespace Agoraphobia
         string Inspect();
         void Drop();
         void Delete();
+        //enum Type
+        //{
+        //    Weapon,
+        //    Consumable,
+        //    Armor
+        //};
         //enum Rarity
         //{
         //    Common,

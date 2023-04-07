@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Agoraphobia.Items
 {
-    internal class Weapon : IWeapons
+    internal class Armor : IArmor
     {
         private int id;
         public int Id { get => id; }
@@ -16,8 +16,8 @@ namespace Agoraphobia.Items
         public string Name { get => name; }
         private string description;
         public string Description { get => description; }
-        public float Multiplier { get; private set; }
-        public int Energy { get; private set; }
+        public int Defense { get; private set; }
+        public int Attack { get; private set; }
         public void Use()
         {
 
@@ -38,7 +38,8 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Weapon(string filename)
+
+        public Armor(string filename)
         {
             foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
             {
@@ -54,11 +55,11 @@ namespace Agoraphobia.Items
                     case "Description":
                         description = data[0];
                         break;
-                    case "Multiplier":
-                        Multiplier = float.Parse(data[0]);
+                    case "Defense":
+                        Defense = int.Parse(data[0]);
                         break;
-                    case "Energy":
-                        Energy = int.Parse(data[0]);
+                    case "Attack":
+                        Attack = int.Parse(data[0]);
                         break;
                     default:
                         break;

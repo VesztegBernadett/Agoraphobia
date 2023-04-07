@@ -5,4 +5,4 @@ This is where you learn the basics#Description
 1#Orientation
 0#NPC
 0#Enemies
-1;2#Items
+0;2#Items

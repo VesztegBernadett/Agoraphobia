@@ -1,6 +1,7 @@
 0#Id
 Popcorn#Name
 A yummy snack#Description
+Consumable#Type
 Common#Rarity
 1#Energy
 2#HP
