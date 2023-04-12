@@ -13,12 +13,12 @@ namespace Agoraphobia.Rooms
         List<int> Items { get; } // Ids of Items in the room
         int ItemsNum { get; }
         List<IRoom> Exits { get; }
-        //enum Orientation
-        //{
-        //    Positive,
-        //    Negative,
-        //    Neutral
-        //};
+        enum Orientation
+        {
+            Positive,
+            Negative,
+            Neutral
+        };
         bool IsQuest { get; }
         string View();
     }

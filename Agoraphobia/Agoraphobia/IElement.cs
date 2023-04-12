@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia
 {
-    interface IElement
+    internal interface IElement
     {
         int Id { get; }
         string Name { get; }

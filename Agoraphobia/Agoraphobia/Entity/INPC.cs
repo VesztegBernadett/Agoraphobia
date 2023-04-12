@@ -9,17 +9,17 @@ namespace Agoraphobia.Entity
 {
     interface INPC : IEntity
     {
-        //enum Type
-        //{
-        //    Quest,
-        //    Trade,
-        //    Merchant,
-        //    Neutral,
-        //    Buff,
-        //    Debuff
-        //};
+        enum Type
+        {
+            Quest,
+            Trade,
+            Merchant,
+            Neutral,
+            Buff,
+            Debuff
+        };
 
-        //static List<INPC> NPCs { get; } //Add the instance to this list in the constructor
+        static List<INPC> NPCs { get; } //Add the instance to this list in the constructor
         bool Interact();
     }
 }

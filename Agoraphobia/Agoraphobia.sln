@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.3.32922.545
+VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agoraphobia", "Agoraphobia\Agoraphobia.csproj", "{7BCC0A65-E68D-4C89-9117-ABC044C61CC3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agoraphobia", "Agoraphobia\Agoraphobia.csproj", "{ED1B6DB8-0373-4BB8-9A01-4FDD8F009C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7BCC0A65-E68D-4C89-9117-ABC044C61CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7BCC0A65-E68D-4C89-9117-ABC044C61CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7BCC0A65-E68D-4C89-9117-ABC044C61CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7BCC0A65-E68D-4C89-9117-ABC044C61CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED1B6DB8-0373-4BB8-9A01-4FDD8F009C24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED1B6DB8-0373-4BB8-9A01-4FDD8F009C24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED1B6DB8-0373-4BB8-9A01-4FDD8F009C24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED1B6DB8-0373-4BB8-9A01-4FDD8F009C24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {55D70353-F657-4816-A3C3-E6CBBCDA5265}
+		SolutionGuid = {E95FAE18-72F4-4143-94DC-A4E70519F715}
 	EndGlobalSection
 EndGlobal

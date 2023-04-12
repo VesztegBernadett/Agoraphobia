@@ -10,12 +10,12 @@ namespace Agoraphobia.Items
     {
         int Defense { get; }
         int Attack { get; }
-        //enum Armorpiece
-        //{
-        //    helmet,
-        //    chestplate,
-        //    greaves,
-        //    boots
-        //};
+        enum Armorpiece
+        {
+            helmet,
+            chestplate,
+            greaves,
+            boots
+        };
     }
 }
