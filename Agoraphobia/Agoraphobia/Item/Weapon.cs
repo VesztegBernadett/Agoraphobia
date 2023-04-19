@@ -5,19 +5,21 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Collections;
 
 namespace Agoraphobia.Items
 {
     internal class Weapon : IWeapons
     {
-        private int id;
+        private readonly int id;
         public int Id { get => id; }
-        private string name;
+        private readonly string name;
         public string Name { get => name; }
-        private string description;
+        private readonly string description;
         public string Description { get => description; }
         public float Multiplier { get; private set; }
         public int Energy { get; private set; }
+        public IItem.Rarity Rarity { get; private set; }
         public void Use()
         {
 
@@ -38,32 +40,15 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Weapon(string filename)
+        public Weapon(int id, string name, string desc, float multiplier, int energy, int rarity)
         {
-            foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
-            {
-                string[] data = line.Split('#');
-                switch (data[1])
-                {
-                    case "Id":
-                        id = int.Parse(data[0]);
-                        break;
-                    case "Name":
-                        name = data[0];
-                        break;
-                    case "Description":
-                        description = data[0];
-                        break;
-                    case "Multiplier":
-                        Multiplier = float.Parse(data[0]);
-                        break;
-                    case "Energy":
-                        Energy = int.Parse(data[0]);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            this.id = id;
+            this.name = name;
+            description = desc;
+            Multiplier = multiplier;
+            Energy = energy;
+            Rarity = (IItem.Rarity)rarity;
+            IItem.Items.Add(this);
         }
     }
 }

@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using static Agoraphobia.IItem;
+using System.Collections;
 
 
 namespace Agoraphobia.Entity
 {
     internal class Enemy : IEnemy
     {
-        private static Random r = new Random(); 
-        private int id;
+        private readonly int id;
         public int Id { get => id; }
-        private string name;
+        private readonly string name;
         public string Name { get => name; }
-        private string description;
+        private readonly string description;
         public string Description { get => description; }
-        private int dreamCoins;
+        private readonly int dreamCoins;
         public int DreamCoins { get => dreamCoins; }
         public Dictionary<int, float> DropRate { get; private set; }
-        private int sanity;
+        private readonly int sanity;
         public int Sanity { get => sanity; }
         public int Defense { get; private set; }
         public int HP { get; private set; }
@@ -31,58 +32,25 @@ namespace Agoraphobia.Entity
         {
 
         }
-        public Enemy(string filename)
+        public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<float> rates)
         {
-            foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
+            DropRate = new Dictionary<int, float>();
+            Inventory = new List<int>();
+            this.id = id;
+            this.name = name;
+            description = desc;
+            Defense = def;
+            AttackDamage = attack;
+            this.sanity = sanity;
+            HP = hp;
+            Energy = energy;
+            dreamCoins = coins;
+            for (int i = 0; i < items.Count; i++)
             {
-                string[] data = line.Split('#');
-                switch (data[1])
-                {
-                    case "Id":
-                        id = int.Parse(data[0]);
-                        break;
-                    case "Name":
-                        name = data[0];
-                        break;
-                    case "Description":
-                        description = data[0];
-                        break;
-                    case "Inventory":
-                        foreach (var item in data[0].Split(';'))
-                        {
-                            int _;
-                            string[] curr = item.Split('(');
-                            if (int.TryParse(curr[0], out _))
-                            {
-                                DropRate.Add(int.Parse(curr[0]), float.Parse(curr[1]));
-                                Inventory.Add(int.Parse(curr[0]));
-                            }
-                            else
-                            {
-                                int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
-                                dreamCoins = r.Next(interval[0], interval[1] + 1);
-                            }
-                        }
-                        break;
-                    case "Defense":
-                        Defense = int.Parse(data[0]);
-                        break;
-                    case "HP":
-                        HP = int.Parse(data[0]);
-                        break;
-                    case "Energy":
-                        Energy = int.Parse(data[0]);
-                        break;
-                    case "AttackDamage":
-                        AttackDamage = int.Parse(data[0]);
-                        break;
-                    case "Sanity":
-                        sanity = int.Parse(data[0]);
-                        break;
-                    default:
-                        break;
-                }
+                Inventory.Add(items[i]);
+                DropRate.Add(items[i], rates[i]);
             }
+            IEnemy.Enemies.Add(this);
         }
     }
 }

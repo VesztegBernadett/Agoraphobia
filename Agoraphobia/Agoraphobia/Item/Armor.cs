@@ -19,6 +19,7 @@ namespace Agoraphobia.Items
         public int Defense { get; private set; }
         public int Attack { get; private set; }
         public IItem.Rarity Rarity { get; private set; }
+        public IArmor.Armorpiece Armorpiece { get; private set; }
         public void Use()
         {
 
@@ -40,14 +41,15 @@ namespace Agoraphobia.Items
 
         }
 
-        public Armor(int id, string name, string desc, int def, int attack, int rarity)
+        public Armor(int id, string name, string desc, int def, int attack, int piece, int rarity)
         {
             this.id = id;
             this.name = name;
-            this.description = desc;
-            this.Defense = def;
-            this.Attack = attack;
-            this.Rarity = (IItem.Rarity)rarity;
+            description = desc;
+            Defense = def;
+            Attack = attack;
+            Rarity = (IItem.Rarity)rarity;
+            Armorpiece = (IArmor.Armorpiece)piece;
             IItem.Items.Add(this);
         }
     }

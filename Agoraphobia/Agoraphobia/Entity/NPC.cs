@@ -18,7 +18,7 @@ namespace Agoraphobia.Entity
         public string Description { get => description; }
         public List<int> Inventory { get; set; }
         private int dreamCoins;
-        public int DreamCoins { get; }
+        public int DreamCoins { get => dreamCoins; }
         public bool Interact()
         {
             return true;
@@ -26,6 +26,7 @@ namespace Agoraphobia.Entity
 
         public NPC(string filename)
         {
+            Inventory = new List<int>();
             foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
             {
                 string[] data = line.Split('#');

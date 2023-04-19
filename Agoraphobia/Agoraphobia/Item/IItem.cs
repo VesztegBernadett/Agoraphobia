@@ -8,8 +8,8 @@ namespace Agoraphobia
 {
     internal interface IItem : IElement
     {
-        static int[] Coordinates { get; }
-        static List<IItem> Items { get; } //Add the instance to this list in the constructor
+        static int[] Coordinates = {60, 12};
+        static List<IItem> Items = new List<IItem>();//Add the instance to this list in the constructor
         void PickUp();
         string Inspect();
         void Drop();
