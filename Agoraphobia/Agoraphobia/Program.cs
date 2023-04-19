@@ -1,4 +1,5 @@
-﻿using Agoraphobia.Items;
+﻿using Agoraphobia;
+using Agoraphobia.Items;
 
 string path = "../../../Files/";
 Consumable consumable = new Consumable($"{path}Items/Consumable0.txt");

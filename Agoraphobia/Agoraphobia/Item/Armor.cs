@@ -10,14 +10,15 @@ namespace Agoraphobia.Items
 {
     internal class Armor : IArmor
     {
-        private int id;
+        private readonly int id;
         public int Id { get => id; }
-        private string name;
+        private readonly string name;
         public string Name { get => name; }
-        private string description;
+        private readonly string description;
         public string Description { get => description; }
         public int Defense { get; private set; }
         public int Attack { get; private set; }
+        public IItem.Rarity Rarity { get; private set; }
         public void Use()
         {
 
@@ -39,32 +40,15 @@ namespace Agoraphobia.Items
 
         }
 
-        public Armor(string filename)
+        public Armor(int id, string name, string desc, int def, int attack, int rarity)
         {
-            foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
-            {
-                string[] data = line.Split('#');
-                switch (data[1])
-                {
-                    case "Id":
-                        id = int.Parse(data[0]);
-                        break;
-                    case "Name":
-                        name = data[0];
-                        break;
-                    case "Description":
-                        description = data[0];
-                        break;
-                    case "Defense":
-                        Defense = int.Parse(data[0]);
-                        break;
-                    case "Attack":
-                        Attack = int.Parse(data[0]);
-                        break;
-                    default:
-                        break;
-                }
-            }
+            this.id = id;
+            this.name = name;
+            this.description = desc;
+            this.Defense = def;
+            this.Attack = attack;
+            this.Rarity = (IItem.Rarity)rarity;
+            IItem.Items.Add(this);
         }
     }
 }

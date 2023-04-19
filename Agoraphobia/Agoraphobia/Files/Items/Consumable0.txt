@@ -1,7 +1,7 @@
 0#Id
 Popcorn#Name
 A yummy snack#Description
-Common#Rarity
+0#Rarity
 1#Energy
 2#HP
 0#Armor

@@ -1,7 +1,7 @@
 1#Id
 Bread#Id
 A bit stale, but must do#Desciption
-Common#Rarity
+0#Rarity
 1#Energy
 0#HP
 2#Armor
