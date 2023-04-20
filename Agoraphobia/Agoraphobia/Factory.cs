@@ -9,6 +9,7 @@ using Agoraphobia.Items;
 using System.Collections;
 using Agoraphobia.Entity;
 using static Agoraphobia.IItem;
+using Agoraphobia.Rooms;
 
 namespace Agoraphobia
 {
@@ -26,11 +27,15 @@ namespace Agoraphobia
             int energy = 0;
             int hp = 0;
             int duration = 0;
-            int armor = 0;
             int def = 0;
             int attack = 0;
             int rarity = 0;
             int piece = 0;
+            int orientation = 0;
+            bool type = false;
+            List<int> exits = new List<int>();
+            List<int> npcs = new List<int>();
+            List<int> enemies = new List<int>();
             List<int> items = new List<int>();
             List<float> rates = new List<float>();
 
@@ -86,7 +91,7 @@ namespace Agoraphobia
                                 hp = int.Parse(data[0]);
                                 break;
                             case "Armor":
-                                armor = int.Parse(data[0]);
+                                def = int.Parse(data[0]);
                                 break;
                             case "Attack":
                                 attack = int.Parse(data[0]);
@@ -99,7 +104,7 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Consumable(id, name, desc, energy, hp, attack, armor, duration, rarity);
+                    return new Consumable(id, name, desc, energy, hp, attack, def, duration, rarity);
                 case "Wea":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -159,6 +164,58 @@ namespace Agoraphobia
                         }
                     }
                     return new Enemy(id, name, desc, def, attack, sanity, hp, energy, coins, items, rates);
+                case "NPC":
+                    foreach (var line in File.ReadLines(filename, Encoding.UTF8))
+                    {
+                        string[] data = line.Split('#');
+                        switch (data[1])
+                        {
+                            case "Inventory":
+                                foreach (var item in data[0].Split(';'))
+                                {
+                                    int _;
+                                    string[] curr = item.Split('(');
+                                    if (int.TryParse(curr[0], out _))
+                                        items.Add(int.Parse(curr[0]));
+                                    else
+                                    {
+                                        int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
+                                        coins = r.Next(interval[0], interval[1] + 1);
+                                    }
+                                }
+                            break;
+                        }
+                    }
+                    return new NPC(id, name, desc, coins, items);
+                case "Roo":
+                    foreach (var line in File.ReadLines(filename, Encoding.UTF8))
+                    {
+                        string[] data = line.Split('#');
+                        switch (data[1])
+                        {
+                            case "Type":
+                                type = int.Parse(data[0]) == 0 ? false : true;
+                                break;
+                            case "Orientation":
+                                orientation = int.Parse(data[0]);
+                                break;
+                            case "NPC":
+                                npcs = data[0].Split(';').Select(int.Parse).ToList();
+                                break;
+                            case "Enemies":
+                                enemies = data[0].Split(';').Select(int.Parse).ToList();
+                                break;
+                            case "Items":
+                                items = data[0].Split(';').Select(int.Parse).ToList();
+                                break;
+                            case "Exits":
+                                exits = data[0].Split(';').Select(int.Parse).ToList();
+                                break;
+                        }
+                    }
+                    return new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                default:
+                    return new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
             }
         }
     }

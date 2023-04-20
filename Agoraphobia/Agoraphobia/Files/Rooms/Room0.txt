@@ -6,3 +6,4 @@ This is where you learn the basics#Description
 0#NPC
 0#Enemies
 0;2#Items
+1;2#Exits

@@ -9,56 +9,35 @@ namespace Agoraphobia.Rooms
 {
     internal class Room : IRoom
     {
-        private int id;
+        private readonly int id;
         public int Id { get => id; }
-        private string name;
+        private readonly string name;
         public string Name { get => name; }
-        private string description;
+        private readonly string description;
         public string Description { get => description; }
         public List<int> NPCs { get; }
         public List<int> Enemies { get; }
         public List<int> Items { get; }
+        public List<int> Exits { get; private set; }
         public int ItemsNum { get; set; }
-        public List<IRoom> Exits { get; private set; }
+        public IRoom.Orientation Orientation { get; private set; }
         public bool IsQuest { get; private set; }
         public string View()
         {
             return $"";
         }
-        public Room (string filename)
+        public Room (int id, string name, string desc, bool type, int orientation, List<int> npcs, List<int> enemies, List<int> items, List<int> exits)
         {
-            foreach (var line in File.ReadAllLines(filename, Encoding.UTF8))
-            {
-                string[] data = line.Split('#');
-                switch (data[1])
-                {
-                    case "Id":
-                        id = int.Parse(data[0]);
-                        break;
-                    case "Name":
-                        name = data[0];
-                        break;
-                    case "Description":
-                        description = data[0];
-                        break;
-                    case "Type":
-                        IsQuest = int.Parse(data[0]) == 0 ? false : true;
-                        break;
-                    case "Orientation":
-                        break;
-                    case "NPC":
-                        NPCs = data[0].Split(';').Select(int.Parse).ToList();
-                        break;
-                    case "Enemies":
-                        Enemies = data[0].Split(';').Select(int.Parse).ToList();
-                        break;
-                    case "Items":
-                        Items = data[0].Split(';').Select(int.Parse).ToList();
-                        break;
-                    default:
-                        break;
-                }
-            }
+            this.id = id;
+            this.name = name;
+            description = desc;
+            IsQuest = type;
+            Orientation = (IRoom.Orientation)orientation;
+            NPCs = npcs;
+            Items = items;
+            Enemies = enemies;
+            Exits = exits;
+            ItemsNum = items.Count;
         }
     }
 }

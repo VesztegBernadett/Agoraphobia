@@ -35,7 +35,7 @@ namespace Agoraphobia.Entity
         public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<float> rates)
         {
             DropRate = new Dictionary<int, float>();
-            Inventory = new List<int>();
+            Inventory = items;
             this.id = id;
             this.name = name;
             description = desc;
@@ -46,10 +46,7 @@ namespace Agoraphobia.Entity
             Energy = energy;
             dreamCoins = coins;
             for (int i = 0; i < items.Count; i++)
-            {
-                Inventory.Add(items[i]);
                 DropRate.Add(items[i], rates[i]);
-            }
             IEnemy.Enemies.Add(this);
         }
     }
