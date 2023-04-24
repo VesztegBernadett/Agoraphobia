@@ -17,6 +17,8 @@ namespace Agoraphobia.Entity
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
+
+        public readonly string art;
         public string Description { get => description; }
         private readonly int dreamCoins;
         public int DreamCoins { get => dreamCoins; }
@@ -48,6 +50,7 @@ namespace Agoraphobia.Entity
             for (int i = 0; i < items.Count; i++)
                 DropRate.Add(items[i], rates[i]);
             IEnemy.Enemies.Add(this);
+            art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
         }
     }
 }

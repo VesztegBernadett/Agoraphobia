@@ -15,6 +15,8 @@ namespace Agoraphobia.Items
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
+
+        public readonly string art;
         public string Description { get => description; }
         public int Defense { get; private set; }
         public int Attack { get; private set; }
@@ -51,6 +53,7 @@ namespace Agoraphobia.Items
             Rarity = (IItem.Rarity)rarity;
             Armorpiece = (IArmor.Armorpiece)piece;
             IItem.Items.Add(this);
+            art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
     }
 }

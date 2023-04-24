@@ -16,6 +16,8 @@ namespace Agoraphobia.Items
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
+
+        public readonly string art;
         public string Description { get => description; }
         public float Multiplier { get; private set; }
         public int Energy { get; private set; }
@@ -49,6 +51,7 @@ namespace Agoraphobia.Items
             Energy = energy;
             Rarity = (IItem.Rarity)rarity;
             IItem.Items.Add(this);
+            art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
     }
 }

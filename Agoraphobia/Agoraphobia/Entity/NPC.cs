@@ -20,6 +20,8 @@ namespace Agoraphobia.Entity
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
+
+        public readonly string art;
         public string Description { get => description; }
         public List<int> Inventory { get; set; }
         private readonly int dreamCoins;
@@ -37,7 +39,7 @@ namespace Agoraphobia.Entity
             dreamCoins = coins;
             INPC.NPCs.Add(this);
             Inventory = items;
-           
+            art = File.ReadAllText($"{IElement.PATH}/Arts/NArt{id}.txt");
         }
     }
 }

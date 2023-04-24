@@ -1,7 +1,10 @@
 ﻿using Agoraphobia;
 using Agoraphobia.Items;
+using System;
 
-string path = "../../../Files/";
-IElement consumable = Factory.Create($"{path}Items/Consumable0.txt");
+Factory.Create($"{IElement.PATH}Items/Consumable0.txt");
+Consumable consumable = (Consumable)IItem.Items[0];
 Console.WriteLine(consumable.Name);
 Console.WriteLine(consumable.Description);
+Console.WriteLine(consumable.art);
+

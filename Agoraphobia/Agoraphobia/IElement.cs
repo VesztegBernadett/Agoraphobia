@@ -11,5 +11,6 @@ namespace Agoraphobia
         int Id { get; }
         string Name { get; }
         string Description { get; }
+        static string PATH = "../../../Files/";
     }
 }

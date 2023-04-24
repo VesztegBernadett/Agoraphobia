@@ -16,7 +16,7 @@ namespace Agoraphobia
     internal class Factory
     {
         private static Random r = new Random();
-        public static IElement Create(string filename)
+        public static void Create(string filename)
         {
             int id = 0;
             string name = "";
@@ -55,7 +55,7 @@ namespace Agoraphobia
                         break;
                 }
             }
-            switch (filename[..3])
+            switch (filename.Split('/')[5][..3])
             {
                 case "Arm":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -77,7 +77,8 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Armor(id, name, desc, def, attack, piece, rarity);
+                    new Armor(id, name, desc, def, attack, piece, rarity);
+                    break;
                 case "Con":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -104,7 +105,8 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Consumable(id, name, desc, energy, hp, attack, def, duration, rarity);
+                    new Consumable(id, name, desc, energy, hp, attack, def, duration, rarity);
+                    break;
                 case "Wea":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -122,7 +124,8 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Weapon(id, name, desc, multiplier, energy, rarity);
+                    new Weapon(id, name, desc, multiplier, energy, rarity);
+                    break;
                 case "Ene":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -163,7 +166,8 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Enemy(id, name, desc, def, attack, sanity, hp, energy, coins, items, rates);
+                    new Enemy(id, name, desc, def, attack, sanity, hp, energy, coins, items, rates);
+                    break;
                 case "NPC":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -186,7 +190,8 @@ namespace Agoraphobia
                             break;
                         }
                     }
-                    return new NPC(id, name, desc, coins, items);
+                    new NPC(id, name, desc, coins, items);
+                    break;
                 case "Roo":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -213,9 +218,11 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    return new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                    new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                    break;
                 default:
-                    return new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                    new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                    break;
             }
         }
     }
