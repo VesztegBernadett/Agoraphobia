@@ -22,7 +22,7 @@ namespace Agoraphobia
             string name = "";
             string desc = "";
             int coins = 0;
-            float multiplier = 0;
+            double multiplier = 0;
             int sanity = 0;
             int energy = 0;
             int hp = 0;
@@ -37,7 +37,7 @@ namespace Agoraphobia
             List<int> npcs = new List<int>();
             List<int> enemies = new List<int>();
             List<int> items = new List<int>();
-            List<float> rates = new List<float>();
+            List<double> rates = new List<double>();
 
             foreach (var line in File.ReadLines(filename, Encoding.UTF8))
             {
@@ -139,7 +139,8 @@ namespace Agoraphobia
                                     string[] curr = item.Split('(');
                                     if (int.TryParse(curr[0], out _))
                                     {
-                                        rates.Add(float.Parse(curr[1]));
+                                        Console.WriteLine(curr[1]);
+                                        rates.Add(Convert.ToDouble(curr[1]));
                                         items.Add(int.Parse(curr[0]));
                                     }
                                     else
@@ -175,16 +176,19 @@ namespace Agoraphobia
                         switch (data[1])
                         {
                             case "Inventory":
-                                foreach (var item in data[0].Split(';'))
+                                if (data[0]!="")
                                 {
-                                    int _;
-                                    string[] curr = item.Split('(');
-                                    if (int.TryParse(curr[0], out _))
-                                        items.Add(int.Parse(curr[0]));
-                                    else
+                                    foreach (var item in data[0].Split(';'))
                                     {
-                                        int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
-                                        coins = r.Next(interval[0], interval[1] + 1);
+                                        int _;
+                                        string[] curr = item.Split('(');
+                                        if (int.TryParse(curr[0], out _))
+                                            items.Add(int.Parse(curr[0]));
+                                        else
+                                        {
+                                            int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
+                                            coins = r.Next(interval[0], interval[1] + 1);
+                                        }
                                     }
                                 }
                             break;

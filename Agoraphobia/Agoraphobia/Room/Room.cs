@@ -38,6 +38,7 @@ namespace Agoraphobia.Rooms
             Enemies = enemies;
             Exits = exits;
             ItemsNum = items.Count;
+            IRoom.Rooms.Add(this);
         }
     }
 }

@@ -11,6 +11,6 @@ namespace Agoraphobia.Entity
     {
         static int[] Coordinates = { 25, 1}; 
         static List<IEnemy> Enemies = new List<IEnemy>(); //Add the instance to this list in the constructor
-        Dictionary<int, float> DropRate { get; }
+        Dictionary<int, double> DropRate { get; }
     }
 }

@@ -22,7 +22,7 @@ namespace Agoraphobia.Entity
         public string Description { get => description; }
         private readonly int dreamCoins;
         public int DreamCoins { get => dreamCoins; }
-        public Dictionary<int, float> DropRate { get; private set; }
+        public Dictionary<int, double> DropRate { get; private set; }
         private readonly int sanity;
         public int Sanity { get => sanity; }
         public int Defense { get; private set; }
@@ -34,9 +34,9 @@ namespace Agoraphobia.Entity
         {
 
         }
-        public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<float> rates)
+        public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
         {
-            DropRate = new Dictionary<int, float>();
+            DropRate = new Dictionary<int, double>();
             Inventory = items;
             this.id = id;
             this.name = name;

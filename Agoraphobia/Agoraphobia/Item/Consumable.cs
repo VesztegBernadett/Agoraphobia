@@ -18,7 +18,7 @@ namespace Agoraphobia.Items
         public string Name { get => name; }
         private readonly string description;
 
-        public readonly string art;
+        public string art { get; private set; }
         public string Description { get => description; }
         public int Energy { get; private set; }
         public int HP { get; private set; }

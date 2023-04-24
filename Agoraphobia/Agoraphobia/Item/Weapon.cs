@@ -17,9 +17,9 @@ namespace Agoraphobia.Items
         public string Name { get => name; }
         private readonly string description;
 
-        public readonly string art;
+        public string art { get; private set; }
         public string Description { get => description; }
-        public float Multiplier { get; private set; }
+        public double Multiplier { get; private set; }
         public int Energy { get; private set; }
         public IItem.Rarity Rarity { get; private set; }
         public void Use()
@@ -42,7 +42,7 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Weapon(int id, string name, string desc, float multiplier, int energy, int rarity)
+        public Weapon(int id, string name, string desc, double multiplier, int energy, int rarity)
         {
             this.id = id;
             this.name = name;

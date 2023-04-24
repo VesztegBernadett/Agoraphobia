@@ -10,6 +10,7 @@ namespace Agoraphobia
     {
         static int[] Coordinates = {60, 12};
         static List<IItem> Items = new List<IItem>();//Add the instance to this list in the constructor
+        public string art { get; }
         void PickUp();
         string Inspect();
         void Drop();
