@@ -34,6 +34,15 @@ namespace Agoraphobia.Entity
         {
 
         }
+        public void Show()
+        {
+            List<string> rows = art.Split('\n').ToList();
+            for (int i = 0; i < rows.Count(); i++)
+            {
+                Console.SetCursorPosition(IEnemy.Coordinates[0], IEnemy.Coordinates[1]+i);
+                Console.Write(rows[i]);
+            }
+        }
         public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
         {
             DropRate = new Dictionary<int, double>();

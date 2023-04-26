@@ -9,8 +9,8 @@ Factory.Create($"{IElement.PATH}NPCs/NPC0.txt");
 Factory.Create($"{IElement.PATH}Enemies/Enemy0.txt");
 Consumable consumable = (Consumable)IItem.Items[0];
 Viewport vp = new Viewport();
-Console.WriteLine(consumable.Name);
-Console.WriteLine(consumable.Description);
-Console.WriteLine(consumable.art);
+//Console.WriteLine(consumable.Name);
+//Console.WriteLine(consumable.Description);
+//Console.WriteLine(consumable.art);
 vp.Show(0);
 

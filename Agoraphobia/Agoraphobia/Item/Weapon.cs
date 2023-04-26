@@ -42,6 +42,15 @@ namespace Agoraphobia.Items
         {
 
         }
+        public void Show()
+        {
+            List<string> rows = art.Split('\n').ToList();
+            for(int i = 0; i<rows.Count(); i++)
+            {
+                Console.SetCursorPosition(IItem.Coordinates[0], IItem.Coordinates[1]+i);
+                Console.Write(rows[i]);
+            }
+        }
         public Weapon(int id, string name, string desc, double multiplier, int energy, int rarity)
         {
             this.id = id;
