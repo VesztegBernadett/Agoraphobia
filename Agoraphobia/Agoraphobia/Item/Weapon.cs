@@ -17,7 +17,7 @@ namespace Agoraphobia.Items
         public string Name { get => name; }
         private readonly string description;
 
-        public string art { get; private set; }
+        public string Art { get; private set; }
         public string Description { get => description; }
         public double Multiplier { get; private set; }
         public int Energy { get; private set; }
@@ -42,15 +42,6 @@ namespace Agoraphobia.Items
         {
 
         }
-        public void Show()
-        {
-            List<string> rows = art.Split('\n').ToList();
-            for(int i = 0; i<rows.Count(); i++)
-            {
-                Console.SetCursorPosition(IItem.Coordinates[0], IItem.Coordinates[1]+i);
-                Console.Write(rows[i]);
-            }
-        }
         public Weapon(int id, string name, string desc, double multiplier, int energy, int rarity)
         {
             this.id = id;
@@ -60,7 +51,7 @@ namespace Agoraphobia.Items
             Energy = energy;
             Rarity = (IItem.Rarity)rarity;
             IItem.Items.Add(this);
-            art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Agoraphobia.Items
         public string Name { get => name; }
         private readonly string description;
 
-        public string art { get; private set; }
+        public string Art { get; private set; }
         public string Description { get => description; }
         public int Energy { get; private set; }
         public int HP { get; private set; }
@@ -38,7 +38,7 @@ namespace Agoraphobia.Items
             Duration = duration;
             Rarity = (IItem.Rarity)rarity;
             IItem.Items.Add(this);
-            art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
 
         public void Use()
@@ -64,15 +64,6 @@ namespace Agoraphobia.Items
         public void Delete()
         {
 
-        }
-        public void Show()
-        {
-            List<string> rows = art.Split('\n').ToList();
-            for (int i = 0; i < rows.Count(); i++)
-            {
-                Console.SetCursorPosition(IItem.Coordinates[0], IItem.Coordinates[1]+i);
-                Console.Write(rows[i]);
-            }
         }
     }
 }

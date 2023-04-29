@@ -21,7 +21,7 @@ namespace Agoraphobia.Entity
         public string Name { get => name; }
         private readonly string description;
 
-        public readonly string art;
+        public string Art { get; private set; }
         public string Description { get => description; }
         public List<int> Inventory { get; set; }
         private readonly int dreamCoins;
@@ -30,16 +30,6 @@ namespace Agoraphobia.Entity
         {
             return true;
         }
-        public void Show()
-        {
-            List<string> rows = art.Split('\n').ToList();
-            for (int i = 0; i < rows.Count(); i++)
-            {
-                Console.SetCursorPosition(INPC.Coordinates[0], INPC.Coordinates[1]+i);
-                Console.Write(rows[i]);
-            }
-        }
-
         public NPC(int id, string name, string desc, int coins, List<int> items)
         {
             this.id = id;
@@ -48,7 +38,7 @@ namespace Agoraphobia.Entity
             dreamCoins = coins;
             INPC.NPCs.Add(this);
             Inventory = items;
-            art = File.ReadAllText($"{IElement.PATH}/Arts/NArt{id}.txt");
+            Art = File.ReadAllText($"{IElement.PATH}/Arts/NArt{id}.txt");
         }
     }
 }
