@@ -17,16 +17,16 @@ namespace Agoraphobia
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
             int[] Coordinates = new int[2];
             string type = element.GetType().ToString();
-            if (type=="Agoraphobia.Entity.NPC")
+            if (type == "Agoraphobia.Entity.NPC")
             {
-                Coordinates=INPC.Coordinates;
-            }else if (type=="Agoraphobia.Entity.Enemy")
+                Coordinates = INPC.Coordinates;
+            } else if (type == "Agoraphobia.Entity.Enemy")
             {
-                Coordinates=IEnemy.Coordinates;
+                Coordinates = IEnemy.Coordinates;
             }
             else
             {
-                Coordinates=IItem.Coordinates;
+                Coordinates = IItem.Coordinates;
             }
 
             List<string> rows = element.Art.Split('\n').ToList();
@@ -82,7 +82,7 @@ namespace Agoraphobia
 
         public static void ShowGrid()
         {
-         
+            Console.ForegroundColor = ConsoleColor.DarkRed;
             for (int i = 0; i < 200; i++)
             {
                 Console.SetCursorPosition(i, 23);
@@ -93,6 +93,7 @@ namespace Agoraphobia
                 Console.SetCursorPosition(120, i);
                 Console.Write("|");
             }
+            Console.ForegroundColor = ConsoleColor.White;
             string book = @"  __
  (`/\
  `=\/\ __...--~~~~~-._   _.-~~~~~--...__
@@ -126,6 +127,22 @@ __ejm\___/________dwb`---`____________________________________________";
             Console.Write($"Energy: {Player.MAXENERGY} / {Player.Energy}");
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}");
+        }
+
+        public static void ShowInventory(int id)
+        {
+            Console.SetCursorPosition(157, 0);
+            Console.Write("Inventory");
+            for (int i = 0; i < Player.Inventory.Count; i++)
+            {
+                if (id == i)
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                Console.SetCursorPosition(125, 2 + i);
+                Console.Write(IItem.Items.Find(x => x.Id == Player.Inventory[i]).Name);
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            Console.SetCursorPosition(148, 22);
+            Console.Write(". Inspect | + Use | - Drop");
         }
     }
 }
