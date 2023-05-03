@@ -45,6 +45,7 @@ namespace Agoraphobia
             //NPCs
             if (room.NPC != 0)
             {
+                //Id starts with 1
                 NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
                 ShowSingle(npc);
             }
@@ -52,6 +53,7 @@ namespace Agoraphobia
             //Enemies
             if (room.Enemy != 0)
             {
+                //Id starts with 1
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
                 ShowSingle(enemy);
             }
@@ -59,6 +61,7 @@ namespace Agoraphobia
             //Items
             if (room.Items.Count > 0)
             {
+                //Id starts with 0
                 if (room.Items.Count == 1)
                 {
                     IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
@@ -107,5 +110,22 @@ __ejm\___/________dwb`---`____________________________________________";
             }
         }
 
+        public static void ShowStats()
+        {
+            Console.SetCursorPosition(123, 25);
+            Console.Write("Statistics:");
+            Console.SetCursorPosition(125, 26);
+            Console.Write($"Sanity: {Player.Sanity} / 100");
+            Console.SetCursorPosition(125, 27);
+            Console.Write($"HP: {Player.MaxHP} / {Player.HP}");
+            Console.SetCursorPosition(125, 28);
+            Console.Write($"Attack: {Player.AttackDamage}");
+            Console.SetCursorPosition(125, 29);
+            Console.Write($"Defense: {Player.Defense}");
+            Console.SetCursorPosition(125, 30);
+            Console.Write($"Energy: {Player.MAXENERGY} / {Player.Energy}");
+            Console.SetCursorPosition(125, 31);
+            Console.Write($"DreamCoins: {Player.DreamCoins}");
+        }
     }
 }

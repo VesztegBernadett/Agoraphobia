@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Item\" />
-    <Folder Include="Entity\" />
     <Folder Include="Room\" />
   </ItemGroup>
 

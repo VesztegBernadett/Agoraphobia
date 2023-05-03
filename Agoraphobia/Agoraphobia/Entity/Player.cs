@@ -8,55 +8,62 @@ namespace Agoraphobia.Entity
 {
     internal class Player 
     {
-        public static int Defense { get; private set; }
-        public static int MaxHP { get; private set; }
+        public static int Defense { get; private set; } = 100;
+        public static int MaxHP { get; private set; } = 100;
+        private static int hp = 100;
         public static int HP
         {
-            get => HP;
+            get => hp;
             private set
             {
                 if (value > MaxHP)
-                    HP = MaxHP;
+                    hp = MaxHP;
                 else if (value < 0)
                     Death();
-                else HP = value;
+                else hp = value;
             }
         }
         public const int MAXENERGY = 100;
-        public static int Energy 
-        { get => Energy;
+        private static int energy = 100;
+        public static int Energy
+        {
+            get => energy;
             private set
             {
                 if (value < 0)
-                    Energy = 0;
+                    energy = 0;
                 else if (value > MAXENERGY)
-                    Energy = MAXENERGY;
-                else Energy = value;
+                    energy = MAXENERGY;
+                else energy = value;
             }
         }
-        public static int AttackDamage 
-        { get => AttackDamage;
+        private static int attack = 100;
+        public static int AttackDamage
+        {
+            get => attack;
             private set
             {
                 if (value < 0)
-                    AttackDamage = 0;
-                else AttackDamage = value;
+                    attack = 0;
+                else attack = value;
             }
         }
-        public static int Sanity 
-        { get => Sanity;
+        private static int sanity = 50;
+        public static int Sanity
+        {
+            get => sanity;
             private set
             {
                 if (value <= 0)
                     WakeUp();
                 else if (value >= 100)
                     GoInsane();
-                else Sanity = value;
+                else sanity = value;
             }
         }
         public static List<int> Inventory { get; private set; } = new List<int>();
-        public static int DreamCoins { get; private set; }
-        public static string Name { get; private set; }
+        public static int DreamCoins { get; private set; } = 100;
+        public static string Name { get; private set; } = "asdasd";
         public static void Attack(IAttackable target)
         {
 

@@ -15,4 +15,5 @@ Factory.Create($"{IElement.PATH}Enemies/Enemy1.txt");
 Viewport.Show(0);
 
 Viewport.ShowGrid();
+Viewport.ShowStats();
 Console.ReadKey();
