@@ -11,7 +11,7 @@ namespace Agoraphobia
 {
     class Viewport
     {
-        public void ShowSingle(IArtist element)
+        public static void ShowSingle(IArtist element)
         {
             //Its an universal Show method so we don't need it for each class
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
@@ -37,33 +37,73 @@ namespace Agoraphobia
             }
         }
 
-        public void Show(int roomId)
+        public static void Show(int roomId)
         {
             Console.Clear();
             Room room = (Room)IRoom.Rooms[roomId];
 
             //NPCs
-            if (room.NPCs.Count > 0)
+            if (room.NPC != 0)
             {
-                Console.SetCursorPosition(INPC.Coordinates[0], INPC.Coordinates[1]);
-                NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPCs[0]);
+                NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
                 ShowSingle(npc);
             }
 
             //Enemies
-            if (room.Enemies.Count > 0)
+            if (room.Enemy != 0)
             {
-                Console.SetCursorPosition(IEnemy.Coordinates[0], IEnemy.Coordinates[1]);
-                Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemies[0]);
+                Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
                 ShowSingle(enemy);
             }
 
             //Items
             if (room.Items.Count > 0)
             {
-                Console.SetCursorPosition(IItem.Coordinates[0], IItem.Coordinates[1]);
-                IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowSingle(item);
+                if (room.Items.Count == 1)
+                {
+                    IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
+                    ShowSingle(item);
+                }
+                else
+                {
+                    string sack = File.ReadAllText($"{IElement.PATH}Arts/IArt.txt");
+                    string[] lines = sack.Split('\n');
+                    for (int i = 0; i < lines.Length; i++)
+                    {
+                        Console.SetCursorPosition(IItem.Coordinates[0], IItem.Coordinates[1] + i);
+                        Console.Write(lines[i]);
+                    }
+                }
+            }
+        }
+
+        public static void ShowGrid()
+        {
+         
+            for (int i = 0; i < 200; i++)
+            {
+                Console.SetCursorPosition(i, 23);
+                Console.Write("_");
+            }
+            for (int i = 0; i < 45; i++)
+            {
+                Console.SetCursorPosition(120, i);
+                Console.Write("|");
+            }
+            string book = @"  __
+ (`/\
+ `=\/\ __...--~~~~~-._   _.-~~~~~--...__
+  `=\/\               \ /               \\
+   `=\/                V                 \\
+   //_\___--~~~~~~-._  |  _.-~~~~~~--...__\\
+  //  ) (..----~~~~._\ | /_.~~~~----.....__\\
+ ===( INK )==========\\|//====================  
+__ejm\___/________dwb`---`____________________________________________";
+            string[] lines = book.Split('\n');
+            for (int i = 0; i < lines.Length; i++)
+            {
+                Console.SetCursorPosition(2, 14 + i);
+                Console.Write(lines[i]);
             }
         }
 

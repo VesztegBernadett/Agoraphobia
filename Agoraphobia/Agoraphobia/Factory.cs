@@ -22,7 +22,8 @@ namespace Agoraphobia
             string name = "";
             string desc = "";
             int coins = 0;
-            double multiplier = 0;
+            double minMultiplier = 0;
+            double maxMultiplier = 0;
             int sanity = 0;
             int energy = 0;
             int hp = 0;
@@ -34,8 +35,8 @@ namespace Agoraphobia
             int orientation = 0;
             bool type = false;
             List<int> exits = new List<int>();
-            List<int> npcs = new List<int>();
-            List<int> enemies = new List<int>();
+            int npc = 0;
+            int enemy = 0;
             List<int> items = new List<int>();
             List<double> rates = new List<double>();
 
@@ -117,14 +118,16 @@ namespace Agoraphobia
                                 energy = int.Parse(data[0]);
                                 break;
                             case "Multiplier":
-                                multiplier = int.Parse(data[0]);
+                                double[] current = Array.ConvertAll(data[0].Split('-'), double.Parse);
+                                minMultiplier = current[0];
+                                maxMultiplier = current[1];
                                 break;
                             case "Rarity":
                                 rarity = int.Parse(data[0]);
                                 break;
                         }
                     }
-                    new Weapon(id, name, desc, multiplier, energy, rarity);
+                    new Weapon(id, name, desc, minMultiplier, maxMultiplier, energy, rarity);
                     break;
                 case "Ene":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -196,7 +199,7 @@ namespace Agoraphobia
                     }
                     new NPC(id, name, desc, coins, items);
                     break;
-                case "Roo":
+                default:
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
                         string[] data = line.Split('#');
@@ -209,10 +212,10 @@ namespace Agoraphobia
                                 orientation = int.Parse(data[0]);
                                 break;
                             case "NPC":
-                                npcs = data[0].Split(';').Select(int.Parse).ToList();
+                                npc = int.Parse(data[0]);
                                 break;
-                            case "Enemies":
-                                enemies = data[0].Split(';').Select(int.Parse).ToList();
+                            case "Enemy":
+                                enemy = int.Parse(data[0]);
                                 break;
                             case "Items":
                                 items = data[0].Split(';').Select(int.Parse).ToList();
@@ -222,10 +225,7 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
-                    break;
-                default:
-                    new Room(id, name, desc, type, orientation, npcs, enemies, items, exits);
+                    new Room(id, name, desc, type, orientation, npc, enemy, items, exits);
                     break;
             }
         }

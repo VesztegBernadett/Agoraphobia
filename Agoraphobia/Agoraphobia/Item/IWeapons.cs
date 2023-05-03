@@ -8,7 +8,8 @@ namespace Agoraphobia.Items
 {
     internal interface IWeapons : IItemUsable
     {
-        double Multiplier { get; }
+        double MinMultiplier { get; }
+        double MaxMultiplier { get; }
         int Energy { get; }
     }
 }

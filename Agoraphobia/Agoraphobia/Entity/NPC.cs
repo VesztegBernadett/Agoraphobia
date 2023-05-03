@@ -14,7 +14,6 @@ namespace Agoraphobia.Entity
 {
     internal class NPC : INPC
     {
-        private static Random r = new Random();
         private readonly int id;
         public int Id { get => id; }
         private readonly string name;

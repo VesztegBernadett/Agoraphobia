@@ -3,7 +3,7 @@ Tutorial#Name
 This is where you learn the basics#Description
 0#Type
 1#Orientation
-0#NPC
-0#Enemies
+1#NPC
+1#Enemy
 0;2#Items
 1;2#Exits

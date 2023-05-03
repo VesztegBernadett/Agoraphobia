@@ -19,7 +19,9 @@ namespace Agoraphobia.Items
 
         public string Art { get; private set; }
         public string Description { get => description; }
-        public double Multiplier { get; private set; }
+        public double MinMultiplier { get; private set; }
+        public double MaxMultiplier { get; private set; }
+
         public int Energy { get; private set; }
         public IItem.Rarity Rarity { get; private set; }
         public void Use()
@@ -42,12 +44,13 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Weapon(int id, string name, string desc, double multiplier, int energy, int rarity)
+        public Weapon(int id, string name, string desc, double minMultiplier, double maxMultiplier, int energy, int rarity)
         {
             this.id = id;
             this.name = name;
             description = desc;
-            Multiplier = multiplier;
+            MinMultiplier = minMultiplier;
+            MaxMultiplier = maxMultiplier;
             Energy = energy;
             Rarity = (IItem.Rarity)rarity;
             IItem.Items.Add(this);
