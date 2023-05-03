@@ -30,3 +30,10 @@ C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agor
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\ref\Agoraphobia.dll
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.pdb
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.genruntimeconfig.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.csproj.AssemblyReference.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.AssemblyInfoInputs.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.AssemblyInfo.cs
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.csproj.CoreCompileInputs.cache
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.dll
+C:\Users\Szokol Attila\Documents\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.pdb
