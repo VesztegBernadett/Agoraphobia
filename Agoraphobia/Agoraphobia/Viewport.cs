@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Agoraphobia.Rooms;
 using Agoraphobia.Entity;
 using Agoraphobia.Items;
+using System.IO;
 
 namespace Agoraphobia
 {
