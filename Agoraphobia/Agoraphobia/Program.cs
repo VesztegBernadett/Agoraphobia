@@ -65,11 +65,18 @@ while (input != ConsoleKey.X)
             Viewport.Interaction(room.Id, interaction, isOpened);
             break;
         case ConsoleKey.Enter:
-            if (interaction == 2)
+            switch (interaction)
             {
-                isOpened = true;
-                length += room.Items.Count - 1;
-                Viewport.Interaction(room.Id, interaction, isOpened);
+                case 2:
+                    if (!isOpened)
+                    {
+                        isOpened = true;
+                        length += room.Items.Count - 1;
+                        Viewport.Interaction(room.Id, interaction, isOpened);
+                    }
+                    break;
+                default:
+                    break;
             }
             break;
         default:
