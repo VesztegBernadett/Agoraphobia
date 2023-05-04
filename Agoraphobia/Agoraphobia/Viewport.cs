@@ -11,7 +11,7 @@ namespace Agoraphobia
 {
     class Viewport
     {
-        public static void ShowSingle(IArtist element)
+        private static void ShowSingle(IArtist element)
         {
             //Its an universal Show method so we don't need it for each class
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
@@ -40,7 +40,7 @@ namespace Agoraphobia
         public static void Show(int roomId)
         {
             Console.Clear();
-            Room room = (Room)IRoom.Rooms[roomId];
+            Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
 
             //NPCs
             if (room.NPC != 0)
@@ -143,6 +143,65 @@ __ejm\___/________dwb`---`____________________________________________";
             }
             Console.SetCursorPosition(148, 22);
             Console.Write(". Inspect | + Use | - Drop");
+        }
+
+        public static void Interaction(int roomId, int id, bool isOpened)
+        {
+            Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
+            int selected = 0;
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
+            Console.Write(room.Name);
+            Console.BackgroundColor = ConsoleColor.Black;
+            
+            if (room.NPC != 0)
+            {
+                ShowOption(ref selected, id, 0, 0);
+                Console.Write($">> Interact with: {INPC.NPCs.Find(x => x.Id == room.NPC).Name}");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            if (room.Enemy != 0)
+            {
+                ShowOption(ref selected, id, 0, 0);
+                Console.Write($">> Fight: {IEnemy.Enemies.Find(x => x.Id == room.Enemy).Name}");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+            if (room.Items.Count > 1)
+            {
+
+                if (isOpened)
+                {
+                    Console.SetCursorPosition(3, 25 + selected);
+                    Console.Write(">> Sack:          ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    for (int i = 0; i < room.Items.Count(); i++)
+                    {
+                        ShowOption(ref selected, id, 2, 1);
+                        Console.Write($">> Pick up {IItem.Items.Find(x => x.Id == room.Items[0]).Name}");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                }
+                else
+                {
+                    ShowOption(ref selected, id, 0, 0);
+                    Console.Write(">> Inspect Sack...");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+            }
+            else if (room.Items.Count == 1)
+            {
+                ShowOption(ref selected, id, 0, 0);
+                Console.Write($">> Pick up {IItem.Items.Find(x => x.Id == room.Items[0]).Name}");
+                Console.BackgroundColor = ConsoleColor.Black;
+            }
+        }
+
+        private static void ShowOption(ref int selected, int id, int hOffset, int vOffset)
+        {
+            if (selected == id)
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(3 + hOffset, 25 + selected + vOffset);
+            selected++;
         }
     }
 }

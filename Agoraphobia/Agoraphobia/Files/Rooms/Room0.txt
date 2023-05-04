@@ -1,5 +1,5 @@
 0#Id
-Tutorial#Name
+A new dream begins...#Name
 This is where you learn the basics#Description
 0#Type
 1#Orientation
