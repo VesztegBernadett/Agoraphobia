@@ -15,6 +15,7 @@ namespace Agoraphobia.Rooms
         public string Name { get => name; }
         private readonly string description;
         public string Description { get => description; }
+        public string Intro { get; private set; }
         public int NPC { get; }
         public int Enemy { get; }
         public List<int> Items { get; }
@@ -26,7 +27,7 @@ namespace Agoraphobia.Rooms
         {
             return $"";
         }
-        public Room (int id, string name, string desc, bool type, int orientation, int npc, int enemy, List<int> items, List<int> exits)
+        public Room (int id, string name, string desc, bool type, int orientation, int npc, int enemy, List<int> items, List<int> exits, string intro)
         {
             this.id = id;
             this.name = name;
@@ -38,6 +39,7 @@ namespace Agoraphobia.Rooms
             Enemy = enemy;
             Exits = exits;
             ItemsNum = items.Count;
+            Intro = intro;
             IRoom.Rooms.Add(this);
         }
     }

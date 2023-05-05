@@ -7,3 +7,4 @@ This is where you learn the basics#Description
 1#Enemy
 0;2#Items
 1;2#Exits
+John Merta is an author well-known all around the globe. On a night, that seems just like every other, he finds himself in a strange dream after finally finding solace in sleep. He wakes up in a room that he has never seen before, yet it seems oddly familiar... And right in front of him, his own book lies...#Intro

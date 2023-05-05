@@ -4,6 +4,7 @@ using Agoraphobia.Items;
 using Agoraphobia.Rooms;
 using System;
 
+Console.Title = "Agoraphobia";
 
 Factory.Create($"{IElement.PATH}Items/Consumable0.txt");
 Factory.Create($"{IElement.PATH}Items/Consumable1.txt");
@@ -17,12 +18,11 @@ Player.Inventory.Add(1);
 Player.Inventory.Add(0);
 
 Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
-
 void ZoomOut()
 {
     Console.Clear();
     Console.WriteLine("Please zoom out until this text is slightly smaller, but still readable. Press any key if you're ready.");
-    Console.ReadKey();
+    Console.ReadKey(true);
     Main();
 }
 
@@ -30,6 +30,7 @@ void Main() {
     try
     {
         Console.SetWindowSize(200, 45);
+        Console.CursorVisible = false;
 
         Viewport.Show(0);
         Viewport.ShowGrid();

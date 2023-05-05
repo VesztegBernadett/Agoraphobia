@@ -7,6 +7,8 @@ using Agoraphobia.Rooms;
 using Agoraphobia.Entity;
 using Agoraphobia.Items;
 using System.IO;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Agoraphobia
 {
@@ -136,23 +138,39 @@ __ejm\___/________dwb`---`____________________________________________";
         public static void Interaction(int roomId, int id, bool isOpened)
         {
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
+            int height = room.Intro.Length / 110 + 1;
             int selected = 0;
+            int vOffset = 0;
             Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
             Console.Write(room.Name);
             Console.BackgroundColor = ConsoleColor.Black;
-            
+
+            string[] words = room.Intro.Split(' ');
+            int current = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (current + words[i].Length >= 110)
+                {
+                    vOffset++;
+                    current = 0;
+                }
+                Console.SetCursorPosition(5 + current, 25 + vOffset);
+                current += words[i].Length + 1;
+                Console.Write($"{words[i]} ");
+            }
+
             if (room.NPC != 0)
             {
                 NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
-                ShowOption(ref selected, id, 0, 0, npc.Art);
+                ShowOption(ref selected, id, 0, 0 + height, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             if (room.Enemy != 0)
             {
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
-                ShowOption(ref selected, id, 0, 0, enemy.Art);
+                ShowOption(ref selected, id, 0, 0 + height, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
@@ -161,20 +179,20 @@ __ejm\___/________dwb`---`____________________________________________";
 
                 if (isOpened)
                 {
-                    Console.SetCursorPosition(3, 25 + selected);
+                    Console.SetCursorPosition(10, 26 + selected + height);
                     Console.Write(">> Sack:          ");
                     Console.BackgroundColor = ConsoleColor.Black;
                     for (int i = 0; i < room.Items.Count(); i++)
                     {
                         IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
-                        ShowOption(ref selected, id, 2, 1, item.Art);
+                        ShowOption(ref selected, id, 2, 1 + height, item.Art);
                         Console.Write($">> Pick up {item.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, 0, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
+                    ShowOption(ref selected, id, 0, 0 + height, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
                     Console.Write(">> Inspect Sack...");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
@@ -182,7 +200,7 @@ __ejm\___/________dwb`---`____________________________________________";
             else if (room.Items.Count == 1)
             {
                 IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowOption(ref selected, id, 0, 0, item.Art);
+                ShowOption(ref selected, id, 0, 0 + height, item.Art);
                 Console.Write($">> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
@@ -195,7 +213,7 @@ __ejm\___/________dwb`---`____________________________________________";
                 ShowSingle(art, new int[] {80, 30});
                 Console.BackgroundColor = ConsoleColor.Magenta;
             }
-            Console.SetCursorPosition(3 + hOffset, 25 + selected + vOffset);
+            Console.SetCursorPosition(10 + hOffset, 26 + selected + vOffset);
             selected++;
         }
     }
