@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using static Agoraphobia.IItem;
 
 namespace Agoraphobia.Items
 {
@@ -20,7 +21,7 @@ namespace Agoraphobia.Items
         public string Description { get => description; }
         public int Defense { get; private set; }
         public int Attack { get; private set; }
-        public IItem.Rarity Rarity { get; private set; }
+        public ItemRarity Rarity { get; set; }
         public IArmor.Armorpiece Armorpiece { get; private set; }
         public void Use()
         {
@@ -49,7 +50,7 @@ namespace Agoraphobia.Items
             description = desc;
             Defense = def;
             Attack = attack;
-            Rarity = (IItem.Rarity)rarity;
+            Rarity = (ItemRarity)rarity;
             Armorpiece = (IArmor.Armorpiece)piece;
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");

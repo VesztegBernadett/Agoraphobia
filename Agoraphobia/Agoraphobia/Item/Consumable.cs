@@ -25,7 +25,7 @@ namespace Agoraphobia.Items
         public int Armor { get; private set; }
         public int Attack { get; private set; }
         public int Duration { get; private set; }
-        public IItem.Rarity Rarity { get; private set; }
+        public ItemRarity Rarity { get; set; }
         public Consumable(int id, string name, string desc, int energy, int hp, int attack, int armor, int duration, int rarity)
         {
             this.id = id;
@@ -36,7 +36,7 @@ namespace Agoraphobia.Items
             Energy = energy;
             HP = hp;
             Duration = duration;
-            Rarity = (IItem.Rarity)rarity;
+            Rarity = (ItemRarity)rarity;
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }

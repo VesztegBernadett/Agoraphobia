@@ -1,9 +1,13 @@
 ﻿using Agoraphobia.Items;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using static Agoraphobia.IItem;
 
 namespace Agoraphobia.Entity
 {
@@ -65,6 +69,11 @@ namespace Agoraphobia.Entity
         public static List<int> Inventory { get; private set; } = new List<int>();
         public static int DreamCoins { get; private set; } = 0;
         public static string Name { get; private set; } = "asdasd";
+
+        public static DateTime playTimeStart;
+        private static int score = 0;
+        private static int roomcount = 0;
+
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
@@ -120,9 +129,33 @@ namespace Agoraphobia.Entity
 
         }
 
+        //TODO: DESIGN
         public static void WakeUp()
         {
+            // TODO: A "victory screen"-t meg kell designolni, egyenlőre csak törli az összes ui-t és kiírja a játékidőt és pontszámot amit itemekből számol ki.
 
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+
+            DateTime playTimeEnd = DateTime.UtcNow;
+            TimeSpan playTime = playTimeEnd - playTimeStart;
+            Console.WriteLine("játékidő: {0:hh} óra {0:mm} perc {0:ss} másodperc", playTime);
+            
+            Dictionary<ItemRarity, int> itemValue = new Dictionary<ItemRarity, int>() {
+                {ItemRarity.Common, 1 },
+                {ItemRarity.Uncommon, 2 },
+                {ItemRarity.Rare, 3 },
+                {ItemRarity.Epic, 4 },
+                {ItemRarity.Legendary, 5 },
+                {ItemRarity.Fabled, 6 },
+            };
+
+            foreach (int itemID in Player.Inventory){
+                IItem i = IItem.Items.Find(item => item.Id == itemID);
+                score += itemValue[i.Rarity] * 10;
+            }
+
+            Console.WriteLine($"Elért pontszám: {score}");
         }
 
         public static void Respawn()

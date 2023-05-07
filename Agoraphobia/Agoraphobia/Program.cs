@@ -29,6 +29,7 @@ void ZoomOut()
 void Main() {
     try
     {
+        Player.playTimeStart = DateTime.UtcNow;
         Console.SetWindowSize(200, 45);
         Console.CursorVisible = false;
 
