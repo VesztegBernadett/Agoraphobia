@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agoraphobia.Items;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia.Entity
 {
-    internal class Player 
+    internal class Player
     {
-        public static int Defense { get; private set; } = 100;
-        public static int MaxHP { get; private set; } = 100;
-        private static int hp = 100;
+        public static int Defense { get; private set; } = 3;
+        public static int MaxHP { get; private set; } = 15;
+        private static int hp = 15;
         public static int HP
         {
             get => hp;
@@ -23,8 +24,8 @@ namespace Agoraphobia.Entity
                 else hp = value;
             }
         }
-        public const int MAXENERGY = 100;
-        private static int energy = 100;
+        public const int MAXENERGY = 3;
+        private static int energy = 3;
         public static int Energy
         {
             get => energy;
@@ -37,7 +38,7 @@ namespace Agoraphobia.Entity
                 else energy = value;
             }
         }
-        private static int attack = 100;
+        private static int attack = 2;
         public static int AttackDamage
         {
             get => attack;
@@ -62,16 +63,56 @@ namespace Agoraphobia.Entity
             }
         }
         public static List<int> Inventory { get; private set; } = new List<int>();
-        public static int DreamCoins { get; private set; } = 100;
+        public static int DreamCoins { get; private set; } = 0;
         public static string Name { get; private set; } = "asdasd";
-        public static void Attack(IAttackable target)
+        public static void Attack(IEnemy target)
         {
+            Random r = new Random();
+            Console.Clear();
+            Console.SetCursorPosition(50, 1);
+            Console.WriteLine(target.Name);
+            Console.Write(target.Art);
+            Viewport.ShowGrid();
+            int inventory=0;
+            while (Energy>0)
+            {
+                Viewport.ShowStats();
+                Viewport.ShowInventory(inventory);
+                ConsoleKey input = Console.ReadKey(true).Key;
 
+                switch (input)
+                {
+                    case ConsoleKey.LeftArrow:
+                        if (inventory == 0)
+                            inventory = Player.Inventory.Count - 1;
+                        else inventory--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        if (inventory == Player.Inventory.Count - 1)
+                            inventory = 0;
+                        else inventory++;
+                        break;
+                    case ConsoleKey.Enter:
+                        IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory[inventory]);
+                        if (selectedItem.GetType().ToString() =="Agoraphobia.Items.Weapon")
+                        {
+                            Weapon selectedWeapon = (Weapon)selectedItem;
+                            if (selectedWeapon.Energy<=Energy)
+                            {
+                                Energy -= selectedWeapon.Energy;
+                                target.HP -= Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier))-target.Defense;
+                            }
+                        }
+                        break;
+                }
+            }
+            if(target.HP>0)
+            target.Attack();
         }
 
         public static void Death()
         {
-
+            Console.WriteLine("You are dead.");
         }
 
         public static void GoInsane()

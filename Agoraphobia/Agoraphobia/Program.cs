@@ -88,6 +88,12 @@ void Main() {
                                 Viewport.Interaction(room.Id, interaction, isOpened);
                             }
                             break;
+                        case 1:
+                            if (room.Enemy != 0)
+                            {
+                                Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                            }
+                            break;
                         default:
                             break;
                     }

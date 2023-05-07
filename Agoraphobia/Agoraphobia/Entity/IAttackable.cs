@@ -10,10 +10,10 @@ namespace Agoraphobia.Entity
     internal interface IAttackable : IEntity
     {
         int Defense { get; }
-        int HP { get; }
+        int HP { get; set; }
         int Energy { get; }
         int AttackDamage { get; }
         int Sanity { get; }
-        void Attack(IAttackable target);
+        void Attack();//We only use IAttackable for Enemy so we know that we attack the player
     }
 }

@@ -26,13 +26,27 @@ namespace Agoraphobia.Entity
         private readonly int sanity;
         public int Sanity { get => sanity; }
         public int Defense { get; private set; }
-        public int HP { get; private set; }
+
+        private int hp;
+        public int HP 
+        {
+            get => hp;
+            set
+            {
+                if (value < 0)
+                    Death();
+                else hp = value;
+            }
+        }
         public int Energy { get; private set; }
         public int AttackDamage { get; private set; }
         public List<int> Inventory { get; set; }
-        public void Attack(IAttackable target)
+        public void Attack()
         {
-
+            Player.ChangeHP(-(AttackDamage-Player.Defense));
+            Player.ChangeEnergy(int.Parse(Math.Ceiling(Player.MAXENERGY * 0.1).ToString()));
+            if (Player.HP > 0)
+                Player.Attack(this);
         }
         public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
         {
@@ -51,6 +65,11 @@ namespace Agoraphobia.Entity
                 DropRate.Add(items[i], rates[i]);
             IEnemy.Enemies.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+        }
+
+        public void Death()
+        {
+            Console.WriteLine($"{Name} is dead.");
         }
     }
 }
