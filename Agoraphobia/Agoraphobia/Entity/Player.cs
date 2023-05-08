@@ -1,4 +1,5 @@
 ﻿using Agoraphobia.Items;
+using Agoraphobia.Rooms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,7 +78,6 @@ namespace Agoraphobia.Entity
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
-            Console.Clear();
             Console.SetCursorPosition(50, 1);
             Console.WriteLine(target.Name);
             Console.Write(target.Art);
@@ -125,7 +125,6 @@ namespace Agoraphobia.Entity
         public static void Death()
         {
             Viewport.Message("You are dead.");
-            Program.room.RemoveEnemy();
             Program.MainScene();
         }
 
