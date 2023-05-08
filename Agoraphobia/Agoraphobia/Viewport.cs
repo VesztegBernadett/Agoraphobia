@@ -123,6 +123,7 @@ __ejm\___/________dwb`---`____________________________________________";
         {
             Console.SetCursorPosition(157, 0);
             Console.Write("Inventory");
+            int vOffset = 0;
             for (int i = 0; i < Player.Inventory.Count; i++)
             {
                 if (id == i)
@@ -141,24 +142,7 @@ __ejm\___/________dwb`---`____________________________________________";
             int height = room.Intro.Length / 110 + 1;
             int selected = 0;
             int vOffset = 0;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
-            Console.Write(room.Name);
-            Console.BackgroundColor = ConsoleColor.Black;
-
-            string[] words = room.Intro.Split(' ');
-            int current = 0;
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (current + words[i].Length >= 110)
-                {
-                    vOffset++;
-                    current = 0;
-                }
-                Console.SetCursorPosition(5 + current, 25 + vOffset);
-                current += words[i].Length + 1;
-                Console.Write($"{words[i]} ");
-            }
+            ShowRoomInfo(ref vOffset, room);
 
             if (room.NPC != 0)
             {
@@ -206,11 +190,33 @@ __ejm\___/________dwb`---`____________________________________________";
             }
         }
 
+        private static void ShowRoomInfo (ref int vOffset, Room room)
+        {
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
+            Console.Write(room.Name);
+            Console.BackgroundColor = ConsoleColor.Black;
+
+            string[] words = room.Intro.Split(' ');
+            int current = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (current + words[i].Length >= 110)
+                {
+                    vOffset++;
+                    current = 0;
+                }
+                Console.SetCursorPosition(5 + current, 25 + vOffset);
+                current += words[i].Length + 1;
+                Console.Write($"{words[i]} ");
+            }
+        }
+
         private static void ShowOption(ref int selected, int id, int hOffset, int vOffset, string art)
         {
             if (selected == id)
             {
-                ShowSingle(art, new int[] {80, 30});
+                ShowSingle(art, new int[] {80, 32});
                 Console.BackgroundColor = ConsoleColor.Magenta;
             }
             Console.SetCursorPosition(10 + hOffset, 26 + selected + vOffset);

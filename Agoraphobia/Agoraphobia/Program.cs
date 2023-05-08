@@ -80,6 +80,12 @@ void Main() {
                 case ConsoleKey.Enter:
                     switch (interaction)
                     {
+                        case 0:
+                            if (INPC.NPCs.Find(x => x.Id == room.Id).Interact())
+                            {
+
+                            }
+                            break;
                         case 2:
                             if (!isOpened)
                             {
