@@ -125,6 +125,8 @@ namespace Agoraphobia.Entity
         public static void Death()
         {
             Viewport.Message("You are dead.");
+            Program.room.RemoveEnemy();
+            Program.MainScene();
         }
 
         public static void GoInsane()

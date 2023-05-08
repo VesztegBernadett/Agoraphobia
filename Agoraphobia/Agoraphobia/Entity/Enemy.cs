@@ -86,7 +86,8 @@ namespace Agoraphobia.Entity
                 }
             }
             Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy
-            //Need to somehow get back to the Main scene
+            Program.room.RemoveEnemy();
+            Program.MainScene();//Need to somehow get back to the Main scene
         }
     }
 }
