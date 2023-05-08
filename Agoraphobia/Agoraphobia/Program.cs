@@ -85,7 +85,15 @@ namespace Agoraphobia
                                     if (room.Enemy != 0)
                                     {
                                         Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
-                                        room.RemoveEnemy();
+                                    }
+                                    else
+                                    {
+                                        if (!isOpened)
+                                        {
+                                            isOpened = true;
+                                            length += room.Items.Count - 1;
+                                            Viewport.Interaction(room.Id, interaction, isOpened);
+                                        }
                                     }
                                     break;
                                 default:
@@ -119,7 +127,7 @@ namespace Agoraphobia
             Player.Inventory.Add(1);
             //Player.Inventory.Add(0);
 
-            Program.MainScene();
+            MainScene();
 
         }
         public static void ZoomOut()
