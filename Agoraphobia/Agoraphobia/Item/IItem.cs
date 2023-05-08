@@ -14,7 +14,9 @@ namespace Agoraphobia
         string Inspect();
         void Drop();
         void Delete();
-        enum Rarity
+        ItemRarity Rarity { get; set; }
+
+        enum ItemRarity
         {
             Common,
             Uncommon,

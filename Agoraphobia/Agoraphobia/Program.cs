@@ -29,6 +29,7 @@ void ZoomOut()
 void Main() {
     try
     {
+        Player.playTimeStart = DateTime.UtcNow;
         Console.SetWindowSize(200, 45);
         Console.CursorVisible = false;
 
@@ -92,6 +93,13 @@ void Main() {
                                 isOpened = true;
                                 length += room.Items.Count - 1;
                                 Viewport.Interaction(room.Id, interaction, isOpened);
+                            }
+                            break;
+                        case 1:
+                            if (room.Enemy != 0)
+                            {
+                                Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                                room.RemoveEnemy();
                             }
                             break;
                         default:

@@ -222,5 +222,20 @@ __ejm\___/________dwb`---`____________________________________________";
             Console.SetCursorPosition(10 + hOffset, 26 + selected + vOffset);
             selected++;
         }
+        public static void Message(string msg)
+        {
+            //Clear interaction window
+            for (int i = 0; i < 50; i++)
+            {
+                for (int a = 0; a < 15; a++)
+                {
+                    Console.SetCursorPosition(5 + i, 25+a);
+                    Console.Write(" ");
+                }
+            }
+            Console.SetCursorPosition(5, 25);
+            Console.Write(msg+"\nPress any key to dream on.");
+            Console.ReadKey();
+        }
     }
 }

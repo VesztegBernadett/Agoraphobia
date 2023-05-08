@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
+using static Agoraphobia.IItem;
 
 namespace Agoraphobia.Items
 {
@@ -23,7 +24,7 @@ namespace Agoraphobia.Items
         public double MaxMultiplier { get; private set; }
 
         public int Energy { get; private set; }
-        public IItem.Rarity Rarity { get; private set; }
+        public ItemRarity Rarity { get; set; }
         public void Use()
         {
 
@@ -52,7 +53,7 @@ namespace Agoraphobia.Items
             MinMultiplier = minMultiplier;
             MaxMultiplier = maxMultiplier;
             Energy = energy;
-            Rarity = (IItem.Rarity)rarity;
+            Rarity = (ItemRarity)rarity;
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
