@@ -138,6 +138,32 @@ namespace Agoraphobia
                 ZoomOut();
             }
         }
+
+        static void Main()
+        {
+            Console.Title = "Agoraphobia";
+
+            Factory.Create($"{IElement.PATH}Items/Consumable0.txt");
+            Factory.Create($"{IElement.PATH}Items/Consumable1.txt");
+            Factory.Create($"{IElement.PATH}Rooms/Room0.txt");
+            Factory.Create($"{IElement.PATH}NPCs/NPC1.txt");
+            Factory.Create($"{IElement.PATH}Items/Weapon2.txt");
+            Factory.Create($"{IElement.PATH}Enemies/Enemy1.txt");
+
+            Player.Inventory.Add(2);
+            Player.Inventory.Add(1);
+            Player.Inventory.Add(0);
+
+            Program.MainScene();
+
+        }
+        public static void ZoomOut()
+        {
+            Console.Clear();
+            Console.WriteLine("Please zoom out until this text is slightly smaller, but still readable. Press any key if you're ready.");
+            Console.ReadKey(true);
+            MainScene();
+        }
     }
 }
 
