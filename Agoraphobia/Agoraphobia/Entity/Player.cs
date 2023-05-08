@@ -78,8 +78,9 @@ namespace Agoraphobia.Entity
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
-            Console.SetCursorPosition(50, 1);
+            Console.SetCursorPosition((120 - target.Name.Length) / 2, 1);
             Console.WriteLine(target.Name);
+            Console.SetCursorPosition(12, 5);
             Console.Write(target.Art);
             Viewport.ShowGrid();
             int inventory=0;
