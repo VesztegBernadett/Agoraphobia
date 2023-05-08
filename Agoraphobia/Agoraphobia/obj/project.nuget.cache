@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "9kkPv04Fb5BXiYIwlUewl3XtO3HLZ7ZSsWNAp5VEzFaCPt/7HHR2j6ZvcK3pjuOX0X2VOFB2htSv8XMxy1WzRg==",
+  "dgSpecHash": "sqA8h+qwILYWlbfLAlQHC/8gn1qttm6z8mArc27OYwuvPTT5T9C7Chq+GrC8e5ykHeg3E+ymtTL/2SnbDftaOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Szokol Attila\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Szokol Attila\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Szokol Attila\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\Szokol Attila\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }

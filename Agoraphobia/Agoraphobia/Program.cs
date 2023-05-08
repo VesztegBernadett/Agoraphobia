@@ -79,8 +79,11 @@ void Main() {
                     switch (interaction)
                     {
                         case 0:
-                            Viewport.ClearInteraction();
-                            INPC.NPCs.Find(x => x.Id == room.Id).Interact();
+                            if (room.NPC != 0)
+                            {
+                                Viewport.ClearInteraction();
+                                INPC.NPCs.Find(x => x.Id == room.Id).Interact();
+                            }
                             break;
                         case 1:
                             if (room.Enemy != 0)
