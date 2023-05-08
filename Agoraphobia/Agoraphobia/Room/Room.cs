@@ -16,9 +16,9 @@ namespace Agoraphobia.Rooms
         private readonly string description;
         public string Description { get => description; }
         public string Intro { get; private set; }
-        public int NPC { get; }
-        public int Enemy { get; }
-        public List<int> Items { get; }
+        public int NPC { get; private set; }
+        public int Enemy { get; private set; }
+        public List<int> Items { get; private set; }
         public List<int> Exits { get; private set; }
         public int ItemsNum { get; set; }
         public IRoom.Orientation Orientation { get; private set; }
@@ -41,6 +41,36 @@ namespace Agoraphobia.Rooms
             ItemsNum = items.Count;
             Intro = intro;
             IRoom.Rooms.Add(this);
+        }
+
+        public void RemoveItem(int item)
+        {
+            Items.Remove(item);
+        }
+
+        public void AddItem(int item)
+        {
+            Items.Add(item);
+        }
+
+        public void RemoveEnemy()
+        {
+            Enemy = 0;
+        }
+
+        public void AddEnemy(int enemy)
+        {
+            Enemy = enemy;
+        }
+
+        public void RemoveNPC()
+        {
+            NPC = 0;
+        }
+
+        public void AddNPC(int npc)
+        {
+            NPC = npc;
         }
     }
 }

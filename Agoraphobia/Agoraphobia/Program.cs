@@ -93,6 +93,7 @@ void Main() {
                             if (room.Enemy != 0)
                             {
                                 Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                                room.RemoveEnemy();
                             }
                             break;
                         default:

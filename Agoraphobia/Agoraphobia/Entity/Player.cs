@@ -83,7 +83,7 @@ namespace Agoraphobia.Entity
             Console.Write(target.Art);
             Viewport.ShowGrid();
             int inventory=0;
-            while (Energy>0)
+            while (Energy>0&&target.HP>0)
             {
                 Viewport.ShowStats();
                 Viewport.ShowInventory(inventory);
@@ -115,13 +115,15 @@ namespace Agoraphobia.Entity
                         break;
                 }
             }
-            if(target.HP>0)
-            target.Attack();
+            if (target.HP > 0)
+            {
+                target.Attack();
+            }
         }
 
         public static void Death()
         {
-            Console.WriteLine("You are dead.");
+            Viewport.Message("You are dead.");
         }
 
         public static void GoInsane()

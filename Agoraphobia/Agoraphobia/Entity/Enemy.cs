@@ -33,7 +33,7 @@ namespace Agoraphobia.Entity
             get => hp;
             set
             {
-                if (value < 0)
+                if (value <= 0)
                     Death();
                 else hp = value;
             }
@@ -46,7 +46,13 @@ namespace Agoraphobia.Entity
             Player.ChangeHP(-(AttackDamage-Player.Defense));
             Player.ChangeEnergy(int.Parse(Math.Ceiling(Player.MAXENERGY * 0.1).ToString()));
             if (Player.HP > 0)
+            {
                 Player.Attack(this);
+            }
+            else
+            {
+                Player.ChangeSanity(-Sanity);
+            }
         }
         public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
         {
@@ -69,7 +75,18 @@ namespace Agoraphobia.Entity
 
         public void Death()
         {
-            Console.WriteLine($"{Name} is dead.");
+            Random r = new Random();
+            Player.ChangeSanity(Sanity);
+            Player.ChangeCoins(DreamCoins);
+            foreach (int item in Inventory)
+            {
+                if (r.Next()<=DropRate[item])
+                {
+                    Player.Inventory.Add(item);
+                }
+            }
+            Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy
+            //Need to somehow get back to the Main scene
         }
     }
 }
