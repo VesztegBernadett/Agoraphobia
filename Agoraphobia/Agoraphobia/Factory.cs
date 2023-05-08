@@ -196,9 +196,12 @@ namespace Agoraphobia
                                     }
                                 }
                             break;
+                            case "Intro":
+                                intro = data[0];
+                                break;
                         }
                     }
-                    new NPC(id, name, desc, coins, items);
+                    new NPC(id, name, desc, coins, items, intro);
                     break;
                 default:
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))

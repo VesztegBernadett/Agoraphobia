@@ -25,11 +25,12 @@ namespace Agoraphobia.Entity
         public List<int> Inventory { get; set; }
         private readonly int dreamCoins;
         public int DreamCoins { get => dreamCoins; }
+        public string Intro { get; private set; }
         public bool Interact()
         {
             return true;
         }
-        public NPC(int id, string name, string desc, int coins, List<int> items)
+        public NPC(int id, string name, string desc, int coins, List<int> items, string intro)
         {
             this.id = id;
             this.name = name;
@@ -37,6 +38,7 @@ namespace Agoraphobia.Entity
             dreamCoins = coins;
             INPC.NPCs.Add(this);
             Inventory = items;
+            Intro = intro;
             Art = File.ReadAllText($"{IElement.PATH}/Arts/NArt{id}.txt");
         }
     }

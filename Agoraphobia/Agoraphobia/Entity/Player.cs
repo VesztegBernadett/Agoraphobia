@@ -83,6 +83,7 @@ namespace Agoraphobia.Entity
             Console.Write(target.Art);
             Viewport.ShowGrid();
             int inventory=0;
+
             while (Energy>0&&target.HP>0)
             {
                 Viewport.ShowStats();

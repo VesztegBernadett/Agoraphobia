@@ -114,7 +114,7 @@ __ejm\___/________dwb`---`____________________________________________";
             Console.SetCursorPosition(125, 29);
             Console.Write($"Defense: {Player.Defense}");
             Console.SetCursorPosition(125, 30);
-            Console.Write($"Energy: {Player.MAXENERGY} / {Player.Energy}");
+            Console.Write($"Energy: {Player.Energy} / {Player.MAXENERGY}");
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}");
         }
@@ -150,11 +150,25 @@ __ejm\___/________dwb`---`____________________________________________";
                 ShowOption(ref selected, id, 0, 0 + height, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
+
+                string[] words = npc.Intro.Split(' ');
+                int current = 0;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (current + words[i].Length >= 60)
+                    {
+                        vOffset++;
+                        current = 0;
+                    }
+                    Console.SetCursorPosition(15 + current, 25 + vOffset + height);
+                    current += words[i].Length + 1;
+                    Console.Write($"{words[i]} ");
+                }
             }
             if (room.Enemy != 0)
             {
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
-                ShowOption(ref selected, id, 0, 0 + height, enemy.Art);
+                ShowOption(ref selected, id, 0, -1 + height + vOffset, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
@@ -163,20 +177,20 @@ __ejm\___/________dwb`---`____________________________________________";
 
                 if (isOpened)
                 {
-                    Console.SetCursorPosition(10, 26 + selected + height);
+                    Console.SetCursorPosition(10, 25 + selected + height + vOffset);
                     Console.Write(">> Sack:          ");
                     Console.BackgroundColor = ConsoleColor.Black;
                     for (int i = 0; i < room.Items.Count(); i++)
                     {
                         IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
-                        ShowOption(ref selected, id, 2, 1 + height, item.Art);
+                        ShowOption(ref selected, id, 2, 0 + height + vOffset, item.Art);
                         Console.Write($">> Pick up {item.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, 0 + height, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
+                    ShowOption(ref selected, id, 0, -1 + height + vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
                     Console.Write(">> Inspect Sack...");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
@@ -184,7 +198,7 @@ __ejm\___/________dwb`---`____________________________________________";
             else if (room.Items.Count == 1)
             {
                 IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowOption(ref selected, id, 0, 0 + height, item.Art);
+                ShowOption(ref selected, id, 0, -1 + height + vOffset, item.Art);
                 Console.Write($">> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
