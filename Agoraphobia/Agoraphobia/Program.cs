@@ -117,7 +117,7 @@ namespace Agoraphobia
 
             Player.Inventory.Add(2);
             Player.Inventory.Add(1);
-            Player.Inventory.Add(0);
+            //Player.Inventory.Add(0);
 
             Program.MainScene();
 

@@ -80,7 +80,7 @@ namespace Agoraphobia.Entity
             Player.ChangeCoins(DreamCoins);
             foreach (int item in Inventory)
             {
-                if (r.Next()<=DropRate[item])
+                if (r.NextDouble()<=DropRate[item])
                 {
                     Player.Inventory.Add(item);
                 }
