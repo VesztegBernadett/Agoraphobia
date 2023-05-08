@@ -20,7 +20,7 @@ namespace Agoraphobia.Entity
         };
         static int[] Coordinates = { 10, 4 };
         static List<INPC> NPCs = new List<INPC>(); //Add the instance to this list in the constructor
-        bool Interact();
+        void Interact();
         public string Intro { get; }
     }
 }

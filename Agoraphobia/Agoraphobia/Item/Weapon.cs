@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Collections;
 using static Agoraphobia.IItem;
+using Agoraphobia.Entity;
 
 namespace Agoraphobia.Items
 {
@@ -25,11 +26,8 @@ namespace Agoraphobia.Items
 
         public int Energy { get; private set; }
         public ItemRarity Rarity { get; set; }
+        public int Price { get; private set; }
         public void Use()
-        {
-
-        }
-        public void PickUp()
         {
 
         }

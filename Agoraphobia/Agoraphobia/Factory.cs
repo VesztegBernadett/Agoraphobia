@@ -143,7 +143,6 @@ namespace Agoraphobia
                                     string[] curr = item.Split('(');
                                     if (int.TryParse(curr[0], out _))
                                     {
-                                        Console.WriteLine(curr[1]);
                                         rates.Add(Convert.ToDouble(curr[1]));
                                         items.Add(int.Parse(curr[0]));
                                     }
@@ -227,12 +226,9 @@ namespace Agoraphobia
                             case "Exits":
                                 exits = data[0].Split(';').Select(int.Parse).ToList();
                                 break;
-                            case "Intro":
-                                intro = data[0];
-                                break;
                         }
                     }
-                    new Room(id, name, desc, type, orientation, npc, enemy, items, exits, intro);
+                    new Room(id, name, desc, type, orientation, npc, enemy, items, exits);
                     break;
             }
         }

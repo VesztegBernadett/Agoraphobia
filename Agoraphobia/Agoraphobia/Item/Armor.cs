@@ -23,11 +23,8 @@ namespace Agoraphobia.Items
         public int Attack { get; private set; }
         public ItemRarity Rarity { get; set; }
         public IArmor.Armorpiece Armorpiece { get; private set; }
+        public int Price { get; private set; }
         public void Use()
-        {
-
-        }
-        public void PickUp()
         {
 
         }

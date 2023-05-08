@@ -26,9 +26,9 @@ namespace Agoraphobia.Entity
         private readonly int dreamCoins;
         public int DreamCoins { get => dreamCoins; }
         public string Intro { get; private set; }
-        public bool Interact()
+        public void Interact()
         {
-            return true;
+            
         }
         public NPC(int id, string name, string desc, int coins, List<int> items, string intro)
         {

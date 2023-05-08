@@ -29,7 +29,6 @@ namespace Agoraphobia
 
         public static void Show(int roomId)
         {
-            Console.Clear();
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
 
             //NPCs
@@ -39,7 +38,7 @@ namespace Agoraphobia
                 NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
                 ShowSingle(npc.Art, INPC.Coordinates);
             }
-
+            else ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), INPC.Coordinates);
             //Enemies
             if (room.Enemy != 0)
             {
@@ -47,7 +46,7 @@ namespace Agoraphobia
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
                 ShowSingle(enemy.Art, IEnemy.Coordinates);
             }
-
+            else ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), IEnemy.Coordinates);
             //Items
             if (room.Items.Count > 0)
             {
@@ -68,6 +67,8 @@ namespace Agoraphobia
                     }
                 }
             }
+            else ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), IItem.Coordinates);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 2, 14 });
         }
 
         public static void ShowGrid()
@@ -84,21 +85,6 @@ namespace Agoraphobia
                 Console.Write("|");
             }
             Console.ForegroundColor = ConsoleColor.White;
-            string book = @"  __
- (`/\
- `=\/\ __...--~~~~~-._   _.-~~~~~--...__
-  `=\/\               \ /               \\
-   `=\/                V                 \\
-   //_\___--~~~~~~-._  |  _.-~~~~~~--...__\\
-  //  ) (..----~~~~._\ | /_.~~~~----.....__\\
- ===( INK )==========\\|//====================  
-__ejm\___/________dwb`---`____________________________________________";
-            string[] lines = book.Split('\n');
-            for (int i = 0; i < lines.Length; i++)
-            {
-                Console.SetCursorPosition(2, 14 + i);
-                Console.Write(lines[i]);
-            }
         }
 
         public static void ShowStats()
@@ -135,11 +121,26 @@ __ejm\___/________dwb`---`____________________________________________";
             Console.SetCursorPosition(148, 22);
             Console.Write(". Inspect | + Use | - Drop");
         }
-
+        private static void ShowDescription(ref int vOffset, int height, string text, int limit, int start)
+        {
+            string[] words = text.Split(' ');
+            int current = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (current + words[i].Length >= limit)
+                {
+                    vOffset++;
+                    current = 0;
+                }
+                Console.SetCursorPosition(start + current, 25 + vOffset + height);
+                current += words[i].Length + 1;
+                Console.Write($"{words[i]} ");
+            }
+        }
         public static void Interaction(int roomId, int id, bool isOpened)
         {
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
-            int height = room.Intro.Length / 110 + 1;
+            int height = room.Description.Length / 110 + 1;
             int selected = 0;
             int vOffset = 0;
             ShowRoomInfo(ref vOffset, room);
@@ -150,20 +151,7 @@ __ejm\___/________dwb`---`____________________________________________";
                 ShowOption(ref selected, id, 0, 0 + height, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
-
-                string[] words = npc.Intro.Split(' ');
-                int current = 0;
-                for (int i = 0; i < words.Length; i++)
-                {
-                    if (current + words[i].Length >= 60)
-                    {
-                        vOffset++;
-                        current = 0;
-                    }
-                    Console.SetCursorPosition(15 + current, 25 + vOffset + height);
-                    current += words[i].Length + 1;
-                    Console.Write($"{words[i]} ");
-                }
+                ShowDescription(ref vOffset, height, npc.Description, 60, 15);
             }
             if (room.Enemy != 0)
             {
@@ -171,6 +159,7 @@ __ejm\___/________dwb`---`____________________________________________";
                 ShowOption(ref selected, id, 0, -1 + height + vOffset, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
+                ShowDescription(ref vOffset, height, enemy.Description, 60, 15);
             }
             if (room.Items.Count > 1)
             {
@@ -210,20 +199,7 @@ __ejm\___/________dwb`---`____________________________________________";
             Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
             Console.Write(room.Name);
             Console.BackgroundColor = ConsoleColor.Black;
-
-            string[] words = room.Intro.Split(' ');
-            int current = 0;
-            for (int i = 0; i < words.Length; i++)
-            {
-                if (current + words[i].Length >= 110)
-                {
-                    vOffset++;
-                    current = 0;
-                }
-                Console.SetCursorPosition(5 + current, 25 + vOffset);
-                current += words[i].Length + 1;
-                Console.Write($"{words[i]} ");
-            }
+            ShowDescription(ref vOffset, 0, room.Description, 110, 5);
         }
 
         private static void ShowOption(ref int selected, int id, int hOffset, int vOffset, string art)
@@ -238,18 +214,22 @@ __ejm\___/________dwb`---`____________________________________________";
         }
         public static void Message(string msg)
         {
-            //Clear interaction window
+            ClearInteraction();
+            Console.SetCursorPosition(5, 25);
+            Console.Write(msg+"\nPress any key to dream on.");
+            Console.ReadKey();
+        }
+
+        public static void ClearInteraction()
+        {
             for (int i = 0; i < 50; i++)
             {
                 for (int a = 0; a < 15; a++)
                 {
-                    Console.SetCursorPosition(5 + i, 25+a);
+                    Console.SetCursorPosition(5 + i, 25 + a);
                     Console.Write(" ");
                 }
             }
-            Console.SetCursorPosition(5, 25);
-            Console.Write(msg+"\nPress any key to dream on.");
-            Console.ReadKey();
         }
     }
 }

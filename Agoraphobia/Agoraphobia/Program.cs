@@ -13,10 +13,6 @@ Factory.Create($"{IElement.PATH}NPCs/NPC1.txt");
 Factory.Create($"{IElement.PATH}Items/Weapon2.txt");
 Factory.Create($"{IElement.PATH}Enemies/Enemy1.txt");
 
-Player.Inventory.Add(2);
-Player.Inventory.Add(1);
-Player.Inventory.Add(0);
-
 Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
 void ZoomOut()
 {
@@ -32,6 +28,7 @@ void Main() {
         Player.playTimeStart = DateTime.UtcNow;
         Console.SetWindowSize(200, 45);
         Console.CursorVisible = false;
+        Console.Clear();
 
         Viewport.Show(0);
         Viewport.ShowGrid();
@@ -82,18 +79,8 @@ void Main() {
                     switch (interaction)
                     {
                         case 0:
-                            if (INPC.NPCs.Find(x => x.Id == room.Id).Interact())
-                            {
-
-                            }
-                            break;
-                        case 2:
-                            if (!isOpened)
-                            {
-                                isOpened = true;
-                                length += room.Items.Count - 1;
-                                Viewport.Interaction(room.Id, interaction, isOpened);
-                            }
+                            Viewport.ClearInteraction();
+                            INPC.NPCs.Find(x => x.Id == room.Id).Interact();
                             break;
                         case 1:
                             if (room.Enemy != 0)
@@ -103,6 +90,22 @@ void Main() {
                             }
                             break;
                         default:
+                            if (!isOpened)
+                            {
+                                isOpened = true;
+                                length += room.Items.Count - 1;
+                                Viewport.Interaction(room.Id, interaction, isOpened);
+                            }
+                            else
+                            {
+                                length--;
+                                IItem.Items.Find(x => x.Id == room.Items[interaction - 2]).PickUp(room.Id);
+                                interaction = length - 1;
+                                Viewport.ShowInventory(inventory);
+                                Viewport.ClearInteraction();
+                                Viewport.Interaction(room.Id, interaction, isOpened);
+                                Viewport.Show(room.Id);
+                            }
                             break;
                     }
                     break;

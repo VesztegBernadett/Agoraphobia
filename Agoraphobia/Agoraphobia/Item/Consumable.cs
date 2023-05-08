@@ -40,17 +40,12 @@ namespace Agoraphobia.Items
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }
+        public int Price { get; private set; }
 
         public void Use()
         {
 
         }
-
-        public void PickUp()
-        {
-
-        }
-
         public string Inspect()
         {
             return $"";

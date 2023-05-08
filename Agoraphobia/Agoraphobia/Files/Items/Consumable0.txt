@@ -7,3 +7,4 @@ A yummy snack#Description
 0#Armor
 0#Attack
 1#Duration
+100#Price
