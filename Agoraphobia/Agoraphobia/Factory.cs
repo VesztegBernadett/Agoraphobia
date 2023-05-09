@@ -34,7 +34,6 @@ namespace Agoraphobia
             int piece = 0;
             int orientation = 0;
             bool type = false;
-            List<int> exits = new List<int>();
             int npc = 0;
             int enemy = 0;
             string intro = "";
@@ -223,12 +222,9 @@ namespace Agoraphobia
                             case "Items":
                                 items = data[0].Split(';').Select(int.Parse).ToList();
                                 break;
-                            case "Exits":
-                                exits = data[0].Split(';').Select(int.Parse).ToList();
-                                break;
                         }
                     }
-                    new Room(id, name, desc, type, orientation, npc, enemy, items, exits);
+                    new Room(id, name, desc, type, orientation, npc, enemy, items);
                     break;
             }
         }

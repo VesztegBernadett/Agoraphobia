@@ -121,10 +121,11 @@ namespace Agoraphobia
             Console.SetCursorPosition(148, 22);
             Console.Write(". Inspect | + Use | - Drop");
         }
-        private static void ShowDescription(ref int vOffset, int height, string text, int limit, int start)
+        private static void ShowDescription(ref int vOffset, string text, int limit, int start)
         {
             string[] words = text.Split(' ');
             int current = 0;
+            vOffset++;
             for (int i = 0; i < words.Length; i++)
             {
                 if (current + words[i].Length >= limit)
@@ -132,56 +133,78 @@ namespace Agoraphobia
                     vOffset++;
                     current = 0;
                 }
-                Console.SetCursorPosition(start + current, 25 + vOffset + height);
+                Console.SetCursorPosition(start + current, 24 + vOffset);
                 current += words[i].Length + 1;
                 Console.Write($"{words[i]} ");
             }
         }
-        public static void Interaction(int roomId, int id, bool isOpened)
+        public static void Interaction(int roomId, int id, bool isOpened, bool isTriggered)
         {
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
-            int height = room.Description.Length / 110 + 1;
             int selected = 0;
             int vOffset = 0;
             ShowRoomInfo(ref vOffset, room);
-
+            vOffset++;
             if (room.NPC != 0)
             {
+                vOffset++;
                 NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
-                ShowOption(ref selected, id, 0, 0 + height, npc.Art);
+                ShowOption(ref selected, id, 0, 0 + vOffset, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
-                ShowDescription(ref vOffset, height, npc.Description, 60, 15);
+                ShowDescription(ref vOffset, npc.Description, 60, 15);
             }
-            else vOffset++;
             if (room.Enemy != 0)
             {
+                vOffset++;
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
-                ShowOption(ref selected, id, 0, -1 + height + vOffset, enemy.Art);
+                ShowOption(ref selected, id, 0, 0 + vOffset, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
-                vOffset += 2;
-                ShowDescription(ref vOffset, height, enemy.Description, 60, 15);
+                ShowDescription(ref vOffset, enemy.Description, 60, 15);
             }
-            else vOffset++;
-            if (room.Items.Count > 1)
+            else
             {
-                if (isOpened)
+                vOffset++;
+                if (isTriggered)
                 {
-                    Console.SetCursorPosition(10, 24 + selected + height + vOffset);
-                    Console.Write(">> Sack:                     ");
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    for (int i = 0; i < room.Items.Count(); i++)
+                    Console.SetCursorPosition(10, 24 + vOffset);
+                    Console.Write(">> Exits:         ");
+                    for (int i = 0; i < room.Exits.Count; i++)
                     {
-                        IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
-                        ShowOption(ref selected, id, 2, -1 + height + vOffset, item.Art);
-                        Console.Write($">> Pick up {item.Name}");
+                        vOffset++;
+                        IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
+                        ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                        Console.Write($"  >> Go to: {current.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, -2 + height + vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
+                    ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                    Console.Write($">> Exit room");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+            }
+            vOffset++;
+            if (room.Items.Count > 1)
+            {
+                if (isOpened)
+                {
+                    Console.SetCursorPosition(10, 24 + vOffset);
+                    Console.Write(">> Sack:                     ");
+                    for (int i = 0; i < room.Items.Count(); i++)
+                    {
+                        vOffset++;
+                        IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
+                        ShowOption(ref selected, id, 0, 0 + vOffset, item.Art);
+                        Console.Write($"  >> Pick up {item.Name}");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                }
+                else
+                {
+                    ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
                     Console.Write(">> Inspect Sack...");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
@@ -189,10 +212,11 @@ namespace Agoraphobia
             else if (room.Items.Count == 1)
             {
                 IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowOption(ref selected, id, 0, -2 + height + vOffset, item.Art);
-                Console.Write($">> Pick up {item.Name}");
+                ShowOption(ref selected, id, -2, 0 + vOffset, item.Art);
+                Console.Write($"  >> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
+            
         }
 
         private static void ShowRoomInfo (ref int vOffset, Room room)
@@ -201,7 +225,7 @@ namespace Agoraphobia
             Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
             Console.Write(room.Name);
             Console.BackgroundColor = ConsoleColor.Black;
-            ShowDescription(ref vOffset, 0, room.Description, 110, 5);
+            ShowDescription(ref vOffset, room.Description, 110, 5);
         }
 
         private static void ShowOption(ref int selected, int id, int hOffset, int vOffset, string art)
@@ -211,7 +235,7 @@ namespace Agoraphobia
                 ShowSingle(art, new int[] {80, 32});
                 Console.BackgroundColor = ConsoleColor.Magenta;
             }
-            Console.SetCursorPosition(10 + hOffset, 26 + selected + vOffset);
+            Console.SetCursorPosition(10 + hOffset, 24 + vOffset);
             selected++;
         }
         public static void Message(string msg)

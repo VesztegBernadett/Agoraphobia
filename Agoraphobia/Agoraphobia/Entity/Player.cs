@@ -43,7 +43,7 @@ namespace Agoraphobia.Entity
                 else energy = value;
             }
         }
-        private static int attack = 2;
+        private static int attack = 5;
         public static int AttackDamage
         {
             get => attack;
@@ -73,14 +73,12 @@ namespace Agoraphobia.Entity
 
         public static DateTime playTimeStart;
         private static int score = 0;
-        private static int roomcount = 0;
 
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
             Console.SetCursorPosition((120 - target.Name.Length) / 2, 1);
             Console.WriteLine(target.Name);
-            Console.SetCursorPosition(12, 5);
             Console.Write(target.Art);
             Viewport.ShowGrid();
             int inventory=0;

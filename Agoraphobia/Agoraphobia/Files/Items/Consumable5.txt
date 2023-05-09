@@ -1,0 +1,9 @@
+5#Id
+Cream cheese#Name
+Tasty and salty, where did it come from.#Description
+1#Rarity
+0#Energy
+3#HP
+1#Armor
+0#Attack
+1#Duration
