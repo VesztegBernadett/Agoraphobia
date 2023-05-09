@@ -3,6 +3,7 @@ using Agoraphobia.Entity;
 using Agoraphobia.Items;
 using Agoraphobia.Rooms;
 using System;
+using System.Globalization;
 using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
 
@@ -52,6 +53,9 @@ class Program
     }
     private static void Main()
     {
+        Player.playTimeStart = DateTime.UtcNow;
+        CultureInfo enCulture = new CultureInfo("en-US");
+        Thread.CurrentThread.CurrentCulture = enCulture;
         Console.Title = "Agoraphobia";
 
         CreateRoom(0);
@@ -69,138 +73,137 @@ class Program
         Console.ReadKey(true);
         MainScene();
     }
-    public static void MainScene()
-    {
-        // try
-        //{
-            Player.playTimeStart = DateTime.UtcNow;
-            Console.SetWindowSize(200, 45);
-            Console.CursorVisible = false;
-            Console.Clear();
-
-            int inventory = 0;
-            int interaction = 0;
-            bool isOpened = false;
-            bool isTriggered = false;
-            int length = room.Items.Count == 0 ? 1 : isOpened ? room.Items.Count + 1 : 2;
-            if (room.NPC != 0)
-                length++;
-
-            Viewport.Show(room.Id);
-            Viewport.ShowGrid();
-            Viewport.ShowStats();
-            Viewport.ShowInventory(inventory);
-            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-
-            ConsoleKey input = Console.ReadKey(true).Key;
-
-            while (input != ConsoleKey.X)
+        public static void MainScene()
+        {
+            try
             {
-                switch (input)
+                Console.SetWindowSize(200, 45);
+                Console.CursorVisible = false;
+                Console.Clear();
+
+                int inventory = 0;
+                int interaction = 0;
+                bool isOpened = false;
+                bool isTriggered = false;
+                int length = room.Items.Count == 0 ? 1 : isOpened ? room.Items.Count + 1 : 2;
+                if (room.NPC != 0)
+                    length++;
+
+                Viewport.Show(room.Id);
+                Viewport.ShowGrid();
+                Viewport.ShowStats();
+                Viewport.ShowInventory(inventory);
+                Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+
+                ConsoleKey input = Console.ReadKey(true).Key;
+
+                while (input != ConsoleKey.X)
                 {
-                    case ConsoleKey.LeftArrow:
-                        if (inventory == 0)
-                            inventory = Player.Inventory.Count - 1;
-                        else inventory--;
-                        Viewport.ShowInventory(inventory);
-                        break;
-                    case ConsoleKey.RightArrow:
-                        if (inventory == Player.Inventory.Count - 1)
-                            inventory = 0;
-                        else inventory++;
-                        Viewport.ShowInventory(inventory);
-                        break;
-                    case ConsoleKey.UpArrow:
-                        if (interaction == 0)
-                            interaction = length - 1;
-                        else interaction--;
-                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                        break;
-                    case ConsoleKey.DownArrow:
-                        if (interaction == length - 1)
-                            interaction = 0;
-                        else interaction++;
-                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                        break;
-                    case ConsoleKey.Enter:
-                        if (room.NPC == 0)
-                            interaction++;
-                        if (isTriggered)
-                            interaction++;
-                        switch (interaction)
-                        {
-                            case 0:
-                                if (room.NPC != 0)
-                                {
-                                    Viewport.ClearInteraction();
-                                    INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
-                                }
-                                break;
-                            case 1:
-                                if (room.Enemy != 0)
-                                {
-                                    Console.Clear();
-                                    Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
-                                    length++;
-                                }
-                                else if (!isTriggered)
-                                {
-                                    isTriggered = true;
-                                    length += room.Exits.Count - 1;
-                                    Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                                }
-                                break;
-                            default:
-                                if (isTriggered)
-                                    interaction--;
-                                if (!isOpened && room.Items.Count != 0 && interaction == length - 1)
-                                {
-                                    isOpened = true;
-                                    length += room.Items.Count - 1;
-                                    Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                                }
-                                else if (!isOpened)
-                                    SwitchRoom(interaction);
-                                else if (isOpened && interaction > length - room.Items.Count - 1)
-                                {
-                                    int offset = 0;
-                                    if (isTriggered)
-                                        offset += room.Exits.Count - 1;
-                                    length--;
-                                    IItem.Items.Find(x => x.Id == room.Items[interaction - 2 - offset]).PickUp(room.Id);
-                                    interaction = length - 1;
-                                    Viewport.ShowInventory(inventory);
-                                    Viewport.ClearInteraction();
-                                    Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                                    Viewport.Show(room.Id);
-                                    if (room.Items.Count == 0)
-                                        isOpened = false;
-                                }
-                                else if (isOpened && interaction <= length - room.Items.Count - 1)
-                                {
-                                    if (isTriggered)
-                                        SwitchRoom(interaction);
-                                    else
+                    switch (input)
+                    {
+                        case ConsoleKey.LeftArrow:
+                            if (inventory == 0)
+                                inventory = Player.Inventory.Count - 1;
+                            else inventory--;
+                            Viewport.ShowInventory(inventory);
+                            break;
+                        case ConsoleKey.RightArrow:
+                            if (inventory == Player.Inventory.Count - 1)
+                                inventory = 0;
+                            else inventory++;
+                            Viewport.ShowInventory(inventory);
+                            break;
+                        case ConsoleKey.UpArrow:
+                            if (interaction == 0)
+                                interaction = length - 1;
+                            else interaction--;
+                            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+                            break;
+                        case ConsoleKey.DownArrow:
+                            if (interaction == length - 1)
+                                interaction = 0;
+                            else interaction++;
+                            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+                            break;
+                        case ConsoleKey.Enter:
+                            if (room.NPC == 0)
+                                interaction++;
+                            if (isTriggered)
+                                interaction++;
+                            switch (interaction)
+                            {
+                                case 0:
+                                    if (room.NPC != 0)
+                                    {
+                                        Viewport.ClearInteraction();
+                                        INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
+                                    }
+                                    break;
+                                case 1:
+                                    if (room.Enemy != 0)
+                                    {
+                                        Console.Clear();
+                                        Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                                        length++;
+                                    }
+                                    else if (!isTriggered)
                                     {
                                         isTriggered = true;
                                         length += room.Exits.Count - 1;
                                         Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
                                     }
-                                }
+                                    break;
+                                default:
+                                    if (isTriggered)
+                                        interaction--;
+                                    if (!isOpened && room.Items.Count != 0 && interaction == length - 1)
+                                    {
+                                        isOpened = true;
+                                        length += room.Items.Count - 1;
+                                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+                                    }
+                                    else if (!isOpened)
+                                        SwitchRoom(interaction);
+                                    else if (isOpened && interaction > length - room.Items.Count - 1)
+                                    {
+                                        int offset = 0;
+                                        if (isTriggered)
+                                            offset += room.Exits.Count - 1;
+                                        length--;
+                                        IItem.Items.Find(x => x.Id == room.Items[interaction - 2 - offset]).PickUp(room.Id);
+                                        interaction = length - 1;
+                                        Viewport.ShowInventory(inventory);
+                                        Viewport.ClearInteraction();
+                                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+                                        Viewport.Show(room.Id);
+                                        if (room.Items.Count == 0)
+                                            isOpened = false;
+                                    }
+                                    else if (isOpened && interaction <= length - room.Items.Count - 1)
+                                    {
+                                        if (isTriggered)
+                                            SwitchRoom(interaction);
+                                        else
+                                        {
+                                            isTriggered = true;
+                                            length += room.Exits.Count - 1;
+                                            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+                                        }
+                                    }
+                                    break;
+                            }
                             break;
-                        }
-                        break;
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+                    input = Console.ReadKey(true).Key;
                 }
-                input = Console.ReadKey(true).Key;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                ZoomOut();
+            }
         }
-        //}
-        //catch (ArgumentOutOfRangeException e)
-        //{
-        //    ZoomOut();
-        //}
     }
-}
 }
 

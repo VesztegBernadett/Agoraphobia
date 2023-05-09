@@ -2,8 +2,8 @@
 Popcorn machine#Name
 A popcorn machine come alive. It's out to get you#Description
 0(0.8;DC(3-10#Inventory
-2#Defense
+0#Defense
 12#HP
 1#Energy
-3#AttackDamage
+4#AttackDamage
 0#Sanity

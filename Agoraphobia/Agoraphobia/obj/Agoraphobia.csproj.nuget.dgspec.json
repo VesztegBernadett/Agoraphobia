@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj": {}
+    "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj": {
+    "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+        "projectUniqueName": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
         "projectName": "Agoraphobia",
-        "projectPath": "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
-        "packagesPath": "C:\\Users\\Szokol Attila\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Szokol Attila\\Documents\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\obj\\",
+        "projectPath": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+        "packagesPath": "C:\\Users\\veszt\\.nuget\\packages\\",
+        "outputPath": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "G:\\vs nemtom\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Szokol Attila\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\veszt\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
