@@ -1,0 +1,8 @@
+4#Id
+Titanic#Name
+You are on the Titanic, but you can't swim. Maybe you can sit down in a lifeboat.#Description
+0#Type
+2#Orientation
+2#NPC
+4;4;4;4;4;4;4#Enemy
+0#Items

@@ -1,0 +1,8 @@
+6#Id
+Zoo#Name
+You are at the zoo. An interesting white creature want to attack you. But what is the creature?#Description
+0#Type
+2#Orientation
+2#NPC
+4;4;4;4;4;4;4#Enemy
+0#Items

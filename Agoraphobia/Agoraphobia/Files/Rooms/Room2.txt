@@ -1,0 +1,8 @@
+2#Id
+Cold school#Name
+An unheated school is a cold and desolate place. The students are cold. John Merta would teach them, but he can't stand the cold either. There's something in the corner, but it doesn't look like a nice person.#Description
+0#Type
+2#Orientation
+0#NPC
+3#Enemy
+0#Items
