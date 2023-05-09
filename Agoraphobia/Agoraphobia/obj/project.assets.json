@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Detti\\Projekt\\Felkuld\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+      "projectUniqueName": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
       "projectName": "Agoraphobia",
-      "projectPath": "C:\\Detti\\Projekt\\Felkuld\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+      "projectPath": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
       "packagesPath": "C:\\Users\\veszt\\.nuget\\packages\\",
-      "outputPath": "C:\\Detti\\Projekt\\Felkuld\\Agoraphobia\\Agoraphobia\\obj\\",
+      "outputPath": "C:\\Detti\\Projekt\\Projekt3\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

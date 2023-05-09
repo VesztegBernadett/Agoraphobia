@@ -3,6 +3,7 @@ using Agoraphobia.Entity;
 using Agoraphobia.Items;
 using Agoraphobia.Rooms;
 using System;
+using System.Globalization;
 
 namespace Agoraphobia
 {
@@ -48,6 +49,8 @@ namespace Agoraphobia
         public static Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
         public static void Main()
         {
+            CultureInfo enCulture = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = enCulture;
             Console.Title = "Agoraphobia";
 
             Createroom(0);
