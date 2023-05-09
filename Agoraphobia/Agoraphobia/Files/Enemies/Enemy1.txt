@@ -6,4 +6,4 @@ A popcorn machine come alive. It's out to get you#Description
 12#HP
 1#Energy
 4#AttackDamage
-0#Sanity
+2#Sanity

@@ -6,4 +6,4 @@ A wild rabbit you may wonder where it came from.#Description
 15#HP
 1#Energy
 6#AttackDamage
-0#Sanity
+4#Sanity

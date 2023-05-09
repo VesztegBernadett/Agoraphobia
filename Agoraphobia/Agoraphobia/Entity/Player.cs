@@ -48,7 +48,7 @@ namespace Agoraphobia.Entity
                 else energy = value;
             }
         }
-        private static int attack = 5;
+        private static int attack = 3;
         public static int AttackDamage
         {
             get => attack;

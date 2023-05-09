@@ -232,7 +232,9 @@ namespace Agoraphobia
         {
             if (selected == id)
             {
-                ShowSingle(art, new int[] {80, 32});
+                int[] coordinates = new int[] { 80, 32 };
+                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), coordinates);
+                ShowSingle(art, coordinates);
                 Console.BackgroundColor = ConsoleColor.Magenta;
             }
             Console.SetCursorPosition(10 + hOffset, 24 + vOffset);
