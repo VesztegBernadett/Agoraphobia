@@ -1,0 +1,9 @@
+6#Id
+Dream meat#Name
+Wait is this? Yeah It's good old regular meat.#Description
+1#Rarity
+0#Energy
+5#HP
+0#Armor
+0#Attack
+1#Duration
