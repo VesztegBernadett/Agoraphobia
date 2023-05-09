@@ -218,7 +218,35 @@ namespace Agoraphobia
             }
             
         }
+        public static void Shop(int id)
+        {
+            Console.Clear();
+            if (INPC.NPCs.Find(x => x.Id == id).Inventory.Count() >= 1)
+            {
+                List<int> targyak = INPC.NPCs.Find(x => x.Id == id).Inventory;
+                foreach (var item in targyak)
+                {
+                    Console.WriteLine($"{IItem.Items.Find(x => x.Id == item).Name}\t{IItem.Items.Find(x => x.Id == item).Price} DC");
+                }
 
+                Console.WriteLine("What do you want?");
+
+                int goods = Convert.ToInt32(Console.ReadLine());
+                if (Player.ChangeCoins(-(IItem.Items.Find(x => x.Id == goods - 1).Price)))
+                {
+                    Player.Inventory.Add(targyak[goods-1]);
+                }
+                else
+                {
+                    Console.WriteLine("You don't have money for this.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("You can't buy anything from this creature.");
+            }
+
+        }
         private static void ShowRoomInfo (ref int vOffset, Room room)
         {
             Console.BackgroundColor = ConsoleColor.DarkGreen;

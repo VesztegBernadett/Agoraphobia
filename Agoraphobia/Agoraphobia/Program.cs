@@ -178,6 +178,7 @@ namespace Agoraphobia
                                     {
                                         Viewport.ClearInteraction();
                                         INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
+                                        Viewport.Shop(room.NPC);
                                     }
                                     break;
                                 case 1:
