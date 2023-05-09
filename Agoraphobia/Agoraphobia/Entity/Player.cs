@@ -17,6 +17,11 @@ namespace Agoraphobia.Entity
         public static int Defense { get; private set; } = 3;
         public static int MaxHP { get; private set; } = 15;
         private static int hp = 15;
+
+
+        public static int EffectDuration = 0;
+        public static int ChangedDefense = 0;
+        public static int ChangedAttack = 0;
         public static int HP
         {
             get => hp;
@@ -78,17 +83,25 @@ namespace Agoraphobia.Entity
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
-            Console.SetCursorPosition((120 - target.Name.Length) / 2, 1);
-            Console.WriteLine(target.Name);
-            Console.SetCursorPosition(12, 5);
-            Console.Write(target.Art);
-            Viewport.ShowGrid();
+            
             int inventory=0;
 
             while (Energy>0&&target.HP>0)
             {
+                Console.Clear();
+                Console.SetCursorPosition((120 - target.Name.Length - target.HP.ToString().Length) / 2, 1);
+                Console.WriteLine($"{target.Name}, {target.HP}");
+                List<string> rows = target.Art.Split('\n').ToList();
+                int TargetArtLength = 80 - rows[0].Length;
+                for (int i = 0; i < rows.Count(); i++)
+                {
+                    Console.SetCursorPosition(TargetArtLength, 3 + i);
+                    Console.Write(rows[i]);
+                }
+                Viewport.ShowGrid();
                 Viewport.ShowStats();
                 Viewport.ShowInventory(inventory);
+                Viewport.ShowItemInfo(inventory);
                 ConsoleKey input = Console.ReadKey(true).Key;
 
                 switch (input)
@@ -105,7 +118,8 @@ namespace Agoraphobia.Entity
                         break;
                     case ConsoleKey.Enter:
                         IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory[inventory]);
-                        if (selectedItem.GetType().ToString() =="Agoraphobia.Items.Weapon")
+                        string selectedItemType = selectedItem.GetType().ToString();
+                        if (selectedItemType=="Agoraphobia.Items.Weapon")
                         {
                             Weapon selectedWeapon = (Weapon)selectedItem;
                             if (selectedWeapon.Energy<=Energy)
@@ -113,6 +127,18 @@ namespace Agoraphobia.Entity
                                 Energy -= selectedWeapon.Energy;
                                 target.HP -= Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier))-target.Defense;
                             }
+                        }
+                        else if (selectedItemType=="Agoraphobia.Items.Consumable")
+                        {
+                            Consumable selectedConsumable = (Consumable)selectedItem;
+                            EffectDuration = selectedConsumable.Duration;
+                            ChangedDefense = selectedConsumable.Armor;
+                            ChangedAttack = selectedConsumable.Attack;
+                            ChangeEnergy(+selectedConsumable.Energy);
+                            ChangeHP(+selectedConsumable.HP);
+                            ChangeDefense(+selectedConsumable.Armor);
+                            ChangeAttack(+selectedConsumable.Attack);
+                            Inventory.Remove(0);
                         }
                         break;
                 }

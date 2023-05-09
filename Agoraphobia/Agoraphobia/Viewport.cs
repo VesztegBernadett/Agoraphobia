@@ -94,7 +94,7 @@ namespace Agoraphobia
             Console.SetCursorPosition(125, 26);
             Console.Write($"Sanity: {Player.Sanity} / 100");
             Console.SetCursorPosition(125, 27);
-            Console.Write($"HP: {Player.MaxHP} / {Player.HP}");
+            Console.Write($"HP: {Player.HP} / {Player.MaxHP}");
             Console.SetCursorPosition(125, 28);
             Console.Write($"Attack: {Player.AttackDamage}");
             Console.SetCursorPosition(125, 29);
@@ -119,7 +119,7 @@ namespace Agoraphobia
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             Console.SetCursorPosition(148, 22);
-            Console.Write(". Inspect | + Use | - Drop");
+            Console.Write("Hover inspect | Enter use | Backslash Drop");
         }
         private static void ShowDescription(ref int vOffset, int height, string text, int limit, int start)
         {
@@ -231,6 +231,23 @@ namespace Agoraphobia
                     Console.SetCursorPosition(5 + i, 25 + a);
                     Console.Write(" ");
                 }
+            }
+        }
+
+        public static void ShowItemInfo(int SelectedItemNumber)
+        {
+            int selecteditemnumber = SelectedItemNumber;
+            Console.SetCursorPosition(5, 25);
+            IItem selectedItem = IItem.Items.Find(x => x.Id == Player.Inventory[selecteditemnumber]);
+            if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Weapon")
+            {
+                Weapon selectedWeapon = (Weapon)selectedItem;
+                Console.Write($"Weapon multiplier: {selectedWeapon.MinMultiplier}-{selectedWeapon.MaxMultiplier} Potential damage: {selectedWeapon.MinMultiplier*Player.AttackDamage}-{selectedWeapon.MaxMultiplier*Player.AttackDamage}");
+            }
+            else if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Consumable")
+            {
+                Consumable selectedConsumable = (Consumable)selectedItem;
+                Console.Write($"Consumable replenishes: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it lasts for {selectedConsumable.Duration} rounds");
             }
         }
     }

@@ -19,7 +19,11 @@ namespace Agoraphobia
         }
         string Inspect();
         void Drop();
-        void Delete();
+        void Delete(int itemID)
+        {
+            Player.Inventory.Remove(itemID);
+        }
+
         ItemRarity Rarity { get; set; }
         int Price { get; }
 
