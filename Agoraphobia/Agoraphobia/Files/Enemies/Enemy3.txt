@@ -1,0 +1,9 @@
+2#Id
+Frozen director#Name
+Taller and more muscular than John Merta. He was the headmaster of the school.#Description
+0(0.5;DC(1-20#Inventory
+3#Defense
+25#HP
+1#Energy
+4#AttackDamage
+15#Sanity

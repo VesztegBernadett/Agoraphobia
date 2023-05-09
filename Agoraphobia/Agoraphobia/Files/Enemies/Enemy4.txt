@@ -1,0 +1,9 @@
+4#Id
+Scared person#Name
+They don't think. They are just panick. They are often in a group.#Description
+6(0.9;DC(0-0#Inventory
+1#Defense
+18#HP
+1#Energy
+6#AttackDamage
+10#Sanity

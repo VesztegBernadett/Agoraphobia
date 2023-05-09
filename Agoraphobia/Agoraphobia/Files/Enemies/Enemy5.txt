@@ -1,0 +1,9 @@
+5#Id
+White tiger#Name
+This is a very special creature, only the bravest can tame it.#Description
+6(0.9;DC(0-0#Inventory
+1#Defense
+18#HP
+1#Energy
+7#AttackDamage
+8#Sanity
