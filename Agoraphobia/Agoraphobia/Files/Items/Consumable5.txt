@@ -7,3 +7,4 @@ Tasty and salty, where did it come from.#Description
 1#Armor
 0#Attack
 1#Duration
+250#Price

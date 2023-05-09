@@ -4,3 +4,4 @@ A wooden stick. Nobody knows how it got here.#Description
 1#Rarity
 1-1.5#Multiplier
 1#Energy
+50#Price

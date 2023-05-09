@@ -37,6 +37,7 @@ namespace Agoraphobia
             int npc = 0;
             int enemy = 0;
             string intro = "";
+            int price = 0;
             List<int> items = new List<int>();
             List<double> rates = new List<double>();
 
@@ -76,9 +77,12 @@ namespace Agoraphobia
                             case "Rarity":
                                 rarity = int.Parse(data[0]);
                                 break;
+                            case "Price":
+                                price = int.Parse(data[0]);
+                                break;
                         }
                     }
-                    new Armor(id, name, desc, def, attack, piece, rarity);
+                    new Armor(id, name, desc, def, attack, piece, rarity, price);
                     break;
                 case "Con":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -104,9 +108,12 @@ namespace Agoraphobia
                             case "Rarity":
                                 rarity = int.Parse(data[0]);
                                 break;
+                            case "Price":
+                                price = int.Parse(data[0]);
+                                break;
                         }
                     }
-                    new Consumable(id, name, desc, energy, hp, attack, def, duration, rarity);
+                    new Consumable(id, name, desc, energy, hp, attack, def, duration, rarity, price);
                     break;
                 case "Wea":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -125,9 +132,12 @@ namespace Agoraphobia
                             case "Rarity":
                                 rarity = int.Parse(data[0]);
                                 break;
+                            case "Price":
+                                price = int.Parse(data[0]);
+                                break;
                         }
                     }
-                    new Weapon(id, name, desc, minMultiplier, maxMultiplier, energy, rarity);
+                    new Weapon(id, name, desc, minMultiplier, maxMultiplier, energy, rarity, price);
                     break;
                 case "Ene":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))

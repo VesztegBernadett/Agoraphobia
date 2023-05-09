@@ -73,7 +73,7 @@ namespace Agoraphobia.Entity
             }
         }
         public static List<int> Inventory { get; private set; } = new List<int>();
-        public static int DreamCoins { get; private set; } = 0;
+        public static int DreamCoins { get; private set; } = 100;
         public static string Name { get; private set; } = "asdasd";
 
         public static DateTime playTimeStart;

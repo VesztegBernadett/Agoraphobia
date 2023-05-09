@@ -40,7 +40,7 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Armor(int id, string name, string desc, int def, int attack, int piece, int rarity)
+        public Armor(int id, string name, string desc, int def, int attack, int piece, int rarity, int price)
         {
             this.id = id;
             this.name = name;
@@ -49,6 +49,7 @@ namespace Agoraphobia.Items
             Attack = attack;
             Rarity = (ItemRarity)rarity;
             Armorpiece = (IArmor.Armorpiece)piece;
+            Price = price;
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }

@@ -92,17 +92,17 @@ namespace Agoraphobia
             Console.SetCursorPosition(123, 25);
             Console.Write("Statistics:");
             Console.SetCursorPosition(125, 26);
-            Console.Write($"Sanity: {Player.Sanity} / 100");
+            Console.Write($"Sanity: {Player.Sanity} / 100      ");
             Console.SetCursorPosition(125, 27);
-            Console.Write($"HP: {Player.HP} / {Player.MaxHP}");
+            Console.Write($"HP: {Player.HP} / {Player.MaxHP}    ");
             Console.SetCursorPosition(125, 28);
-            Console.Write($"Attack: {Player.AttackDamage}");
+            Console.Write($"Attack: {Player.AttackDamage}      ");
             Console.SetCursorPosition(125, 29);
-            Console.Write($"Defense: {Player.Defense}");
+            Console.Write($"Defense: {Player.Defense}      ");
             Console.SetCursorPosition(125, 30);
-            Console.Write($"Energy: {Player.Energy} / {Player.MAXENERGY}");
+            Console.Write($"Energy: {Player.Energy} / {Player.MAXENERGY}       ");
             Console.SetCursorPosition(125, 31);
-            Console.Write($"DreamCoins: {Player.DreamCoins}");
+            Console.Write($"DreamCoins: {Player.DreamCoins}       ");
         }
 
         public static void ShowInventory(int id)
@@ -220,32 +220,81 @@ namespace Agoraphobia
         }
         public static void Shop(int id)
         {
-            Console.Clear();
-            if (INPC.NPCs.Find(x => x.Id == id).Inventory.Count() >= 1)
+            int current = 0;
+            int selected = 0;
+            NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == id);
+            int length = npc.Inventory.Count + 1;
+            ClearInteraction();
+            ChooseItem(id, current, selected);
+
+            while (true)
             {
-                List<int> targyak = INPC.NPCs.Find(x => x.Id == id).Inventory;
-                foreach (var item in targyak)
+                ConsoleKey input = Console.ReadKey(true).Key;
+                switch (input)
                 {
-                    Console.WriteLine($"{IItem.Items.Find(x => x.Id == item).Name}\t{IItem.Items.Find(x => x.Id == item).Price} DC");
+                    case ConsoleKey.UpArrow:
+                        if (selected == 0)
+                            selected = length - 1;
+                        else selected--;
+                        ChooseItem(id, current, selected);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected == length - 1)
+                            selected = 0;
+                        else selected++;
+                        ChooseItem(id, current, selected);
+                        break;
+                    case ConsoleKey.Enter:
+                        if (selected == length - 1)
+                            Program.MainScene();
+                        else
+                        {
+                            IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[current]);
+                            if (Player.ChangeCoins(-item.Price))
+                            {
+                                length--;
+                                npc.Inventory.Remove(item.Id);
+                                Player.Inventory.Add(item.Id);
+                                ShowInventory(0);
+                                ShowStats();
+                                ClearInteraction();
+                                ChooseItem(id, current, selected);
+                            }
+                            else
+                            {
+                                Console.SetCursorPosition(10, 27 + length);
+                                Console.Write("Not enough DreamCoins!     ");
+                            }
+                        }
+                        break;
+                    default:
+                        break;
                 }
-
-                Console.WriteLine("What do you want?");
-
-                int goods = Convert.ToInt32(Console.ReadLine());
-                if (Player.ChangeCoins(-(IItem.Items.Find(x => x.Id == goods - 1).Price)))
+            }
+        }
+        private static void ChooseItem(int id, int current, int selected)
+        {
+            NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == id);
+            int length = npc.Inventory.Count;
+            if (npc.Inventory.Count() > 0)
+            {
+                List<int> items = npc.Inventory;
+                for (int i = 0; i < items.Count; i++)
                 {
-                    Player.Inventory.Add(targyak[goods-1]);
-                }
-                else
-                {
-                    Console.WriteLine("You don't have money for this.");
+                    IItem item = IItem.Items.Find(x => x.Id == items[i]);
+                    ShowOption(ref current, selected, 0, current + 1, item.Art);
+                    Console.Write($">> Purchase: {item.Name} - {item.Price} DC");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
             else
             {
+                Console.SetCursorPosition(10, 24);
                 Console.WriteLine("You can't buy anything from this creature.");
             }
-
+            ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"));
+            Console.Write(">> Exit             ");
+            Console.BackgroundColor = ConsoleColor.Black;
         }
         private static void ShowRoomInfo (ref int vOffset, Room room)
         {
@@ -278,9 +327,9 @@ namespace Agoraphobia
 
         public static void ClearInteraction()
         {
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 110; i++)
             {
-                for (int a = 0; a < 15; a++)
+                for (int a = 0; a < 20; a++)
                 {
                     Console.SetCursorPosition(5 + i, 25 + a);
                     Console.Write(" ");

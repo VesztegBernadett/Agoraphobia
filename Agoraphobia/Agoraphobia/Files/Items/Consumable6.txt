@@ -7,3 +7,4 @@ Wait is this? Yeah It's good old regular meat.#Description
 0#Armor
 0#Attack
 1#Duration
+500#Price

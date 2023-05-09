@@ -43,7 +43,7 @@ namespace Agoraphobia.Items
         {
 
         }
-        public Weapon(int id, string name, string desc, double minMultiplier, double maxMultiplier, int energy, int rarity)
+        public Weapon(int id, string name, string desc, double minMultiplier, double maxMultiplier, int energy, int rarity, int price)
         {
             this.id = id;
             this.name = name;
@@ -52,6 +52,7 @@ namespace Agoraphobia.Items
             MaxMultiplier = maxMultiplier;
             Energy = energy;
             Rarity = (ItemRarity)rarity;
+            Price = price;
             IItem.Items.Add(this);
             Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
         }

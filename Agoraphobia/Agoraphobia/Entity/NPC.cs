@@ -28,7 +28,7 @@ namespace Agoraphobia.Entity
         public string Intro { get; private set; }
         public void Interact()
         {
-            
+            Viewport.Shop(id);
         }
         public NPC(int id, string name, string desc, int coins, List<int> items, string intro)
         {
