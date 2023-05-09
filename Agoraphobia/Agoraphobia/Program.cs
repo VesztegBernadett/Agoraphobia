@@ -8,19 +8,50 @@ namespace Agoraphobia
 {
     class Program
     {
+        public static void ItemCreate(List<int> items)
+        {
+            foreach (var item in items)
+            {
+                if (File.Exists($"{IElement.PATH}Items/Consumable{item}.txt"))
+                {
+                    Factory.Create($"{IElement.PATH}Items/Consumable{item}.txt");
+                }
+                else if (File.Exists($"{IElement.PATH}Items/Armor{item}.txt"))
+                {
+                    Factory.Create($"{IElement.PATH}Items/Armor{item}.txt");
+                }
+                else
+                {
+                    Factory.Create($"{IElement.PATH}Items/Weapon{item}.txt");
+                }
+            }
+        }
+        public static void Createroom(int id)
+        {
+            Factory.Create($"{IElement.PATH}Rooms/Room{id}.txt");
+            ItemCreate(room.Items);
+
+            if (File.Exists($"{IElement.PATH}NPCs/NPC{room.NPC}.txt"))
+            {
+                Factory.Create($"{IElement.PATH}NPCs/NPC{room.NPC}.txt");
+                ItemCreate(INPC.NPCs.Find(x => x.Id == room.NPC).Inventory);
+            }
+
+
+
+            if (File.Exists($"{IElement.PATH}Enemies/Enemy{room.Enemy}.txt"))
+            {
+                Factory.Create($"{IElement.PATH}Enemies/Enemy{room.Enemy}.txt");
+                ItemCreate(IEnemy.Enemies.Find(x => x.Id == room.Enemy).Inventory);
+            }
+        }
         public static Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
         public static void Main()
         {
             Console.Title = "Agoraphobia";
 
-            Factory.Create($"{IElement.PATH}Items/Consumable0.txt");
-            Factory.Create($"{IElement.PATH}Items/Consumable1.txt");
-            Factory.Create($"{IElement.PATH}Rooms/Room0.txt");
-            Factory.Create($"{IElement.PATH}NPCs/NPC1.txt");
-            Factory.Create($"{IElement.PATH}Items/Weapon2.txt");
-            Factory.Create($"{IElement.PATH}Enemies/Enemy1.txt");
+            Createroom(0);
 
-            Player.Inventory.Add(2);
             MainScene();
         }
 
