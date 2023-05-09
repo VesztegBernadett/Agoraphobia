@@ -13,7 +13,7 @@ namespace Agoraphobia
     {
         private static readonly Random r = new Random();
         public static Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
-        private static void SwitchRoom (int interaction)
+        private static void SwitchRoom(int interaction)
         {
             if (room.NPC == 0)
                 interaction++;
@@ -62,17 +62,17 @@ namespace Agoraphobia
         }
         private static void CreateRoom(int id)
         {
-            if(!IRoom.Rooms.Any(x => x.Id == id))
+            if (!IRoom.Rooms.Any(x => x.Id == id))
                 Factory.Create($"{IElement.PATH}Rooms/Room{id}.txt");
             Room current = (Room)IRoom.Rooms.Find(x => x.Id == id);
             CreateItems(current.Items);
 
             if (current.NPC != 0)
             {
-                if(!INPC.NPCs.Any(x => x.Id == current.NPC))
+                if (!INPC.NPCs.Any(x => x.Id == current.NPC))
                     Factory.Create($"{IElement.PATH}NPCs/NPC{current.NPC}.txt");
                 CreateItems(INPC.NPCs.Find(x => x.Id == current.NPC).Inventory);
-            }   
+            }
             if (current.Enemy != 0)
             {
                 if (!IEnemy.Enemies.Any(x => x.Id == current.Enemy))
@@ -87,8 +87,8 @@ namespace Agoraphobia
             Thread.CurrentThread.CurrentCulture = enCulture;
             Console.Title = "Agoraphobia";
 
-            CreateRoom(0);
-            CreateRoom(1);
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
+                CreateRoom(i);
             MainScene();
         }
         private static void RemoveItem(ref int length, ref int interaction, int inventory, bool isOpened, bool isTriggered)
@@ -116,8 +116,8 @@ namespace Agoraphobia
         }
         public static void MainScene()
         {
-            //try
-            //{
+            try
+            {
                 Console.SetWindowSize(200, 45);
                 Console.CursorVisible = false;
                 Console.Clear();
@@ -192,6 +192,8 @@ namespace Agoraphobia
                                         isTriggered = true;
                                         CreateExits();
                                         length += room.Exits.Count - 1;
+                                        if(room.NPC == 0)
+                                            interaction--;
                                         Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
                                     }
                                     break;
@@ -236,12 +238,11 @@ namespace Agoraphobia
                     }
                     input = Console.ReadKey(true).Key;
                 }
-            //}
-            //catch (ArgumentOutOfRangeException e)
-            //{
-            //   ZoomOut();
-            //}
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+             ZoomOut();
+            }
         }
     }
 }
-
