@@ -1,0 +1,8 @@
+12#Id
+Dreamers restaurant#Name
+There is a table in front of you and on it is ____(positive) and behind the pult is a _____(negative)#Description
+0#Type
+2#Orientation
+0#NPC
+1#Enemy
+7#Items

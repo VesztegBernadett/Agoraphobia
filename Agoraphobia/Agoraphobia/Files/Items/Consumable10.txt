@@ -1,0 +1,10 @@
+10#Id
+Magic dynamite#Name
+It appears at the strangest places.#Description
+3#Rarity
+0#Energy
+0#HP
+0#Armor
+3#Attack
+2#Duration
+300#Price

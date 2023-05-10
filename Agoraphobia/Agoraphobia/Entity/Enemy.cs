@@ -53,6 +53,7 @@ namespace Agoraphobia.Entity
             {
                 Player.ChangeAttack(-Player.ChangedAttack);
                 Player.ChangeDefense(-Player.ChangedDefense);
+                Player.EffectDuration--;
             }
             if (Player.HP > 0)
             {

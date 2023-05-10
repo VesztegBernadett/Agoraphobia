@@ -1,0 +1,7 @@
+9#Id
+Captain's handgun#Name
+The captain in a rush left his favourite gun in the ship. It's really powerfull and ready to shoot.#Description
+4#Rarity
+4-5.5#Multiplier
+2#Energy
+700#Price

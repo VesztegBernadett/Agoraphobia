@@ -1,8 +1,8 @@
 3#Id
 Dreamers restaurant#Name
-The table in front of you is full of all kinds of delicious food. All free.#Description
+There is a table in front of you and on it is ____(positive) and behind the pult is a _____(positive)#Description
 0#Type
 1#Orientation
 2#NPC
-1#Enemy
+0#Enemy
 5;0;1#Items

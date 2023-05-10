@@ -132,6 +132,11 @@ namespace Agoraphobia.Entity
                         }
                         else if (selectedItemType=="Agoraphobia.Items.Consumable")
                         {
+                            if (EffectDuration > 0)
+                            {
+                                ChangeDefense(ChangedDefense);
+                                ChangeAttack(ChangedAttack);
+                            }
                             Consumable selectedConsumable = (Consumable)selectedItem;
                             EffectDuration = selectedConsumable.Duration;
                             ChangedDefense = selectedConsumable.Armor;
@@ -140,7 +145,7 @@ namespace Agoraphobia.Entity
                             ChangeHP(+selectedConsumable.HP);
                             ChangeDefense(+selectedConsumable.Armor);
                             ChangeAttack(+selectedConsumable.Attack);
-                            Inventory.Remove(0);
+                            Inventory.Remove(Inventory[inventory]);
                         }
                         break;
                 }

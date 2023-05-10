@@ -18,12 +18,18 @@ namespace Agoraphobia
         {
             //Its an universal Show method so we don't need it for each class
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
-
-            List<string> rows = art.Split('\n').ToList();
-            for (int i = 0; i < rows.Count(); i++)
+            if (art is not null)
             {
-                Console.SetCursorPosition(coordinates[0], coordinates[1] + i);
-                Console.Write(rows[i]);
+                List<string> rows = art.Split('\n').ToList();
+                for (int i = 0; i < rows.Count(); i++)
+                {
+                    Console.SetCursorPosition(coordinates[0], coordinates[1] + i);
+                    Console.Write(rows[i]);
+                }
+            }
+            else
+            {
+                Console.Write("\n");
             }
         }
 
@@ -174,8 +180,31 @@ namespace Agoraphobia
                     {
                         vOffset++;
                         IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
-                        ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
-                        Console.Write($"  >> Go to: {current.Name}         ");
+                        ShowOption(ref selected, id, 0, 0 + vOffset, null);
+                        Console.Write($"  >> Go to: {current.Name}");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                    }
+                    for (int i = 0; i < room.Exits.Count; i++)
+                    {
+                        vOffset+=2;
+                        IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
+                        Console.Write("\n");
+                        if (current.Description.Length > 120)
+                        {
+                            for (int y1 = 0; y1 < 120; y1++)
+                            {
+                                Console.Write(current.Description[y1]);
+                            }
+                            Console.Write("\n");
+                            for (int y1 = 120; y1 < current.Description.Length; y1++)
+                            {
+                                Console.Write(current.Description[y1]);
+                            }
+                        }
+                        else
+                        {
+                            Console.Write(current.Description);
+                        }
                         Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
