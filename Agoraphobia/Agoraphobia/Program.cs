@@ -6,6 +6,10 @@ using System;
 using System.Globalization;
 using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Agoraphobia
 {
