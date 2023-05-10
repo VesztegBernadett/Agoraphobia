@@ -183,29 +183,7 @@ namespace Agoraphobia
                         ShowOption(ref selected, id, 0, 0 + vOffset, null);
                         Console.Write($"  >> Go to: {current.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
-                    }
-                    for (int i = 0; i < room.Exits.Count; i++)
-                    {
-                        vOffset+=2;
-                        IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
-                        Console.Write("\n");
-                        if (current.Description.Length > 120)
-                        {
-                            for (int y1 = 0; y1 < 120; y1++)
-                            {
-                                Console.Write(current.Description[y1]);
-                            }
-                            Console.Write("\n");
-                            for (int y1 = 120; y1 < current.Description.Length; y1++)
-                            {
-                                Console.Write(current.Description[y1]);
-                            }
-                        }
-                        else
-                        {
-                            Console.Write(current.Description);
-                        }
-                        Console.BackgroundColor = ConsoleColor.Black;
+                        ShowDescription(ref vOffset, current.Description, 60, 15);
                     }
                 }
                 else
