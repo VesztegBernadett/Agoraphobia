@@ -4,5 +4,5 @@ John Merta is on a ship. He sees a new land. Maybe that is the land.... The new 
 0#Type
 1#Orientation
 0#NPC
-1#Enemy
+6#Enemy
 5;0;1#Items
