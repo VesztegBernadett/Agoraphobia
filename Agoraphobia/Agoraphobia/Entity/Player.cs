@@ -70,9 +70,9 @@ namespace Agoraphobia.Entity
             private set
             {
                 if (value <= 0)
-                    WakeUp();
-                else if (value >= 100)
                     GoInsane();
+                else if (value >= 100)
+                    WakeUp();
                 else sanity = value;
             }
         }
@@ -188,7 +188,7 @@ namespace Agoraphobia.Entity
         // ez ilyen.
         public static void Respawn()
         {
-            
+            ChangeSanity(-IEnemy.Enemies.Find(x => x.Id == Program.room.Enemy).Sanity);
             hp = MaxHP;
             energy = MAXENERGY;
             Program.room = (Room)IRoom.Rooms.Find(x => x.Id == 0);

@@ -17,7 +17,7 @@ namespace Agoraphobia.Entity
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
-
+        private int maxHP;
         public string Art { get; private set; }
         public string Description { get => description; }
         private readonly int dreamCoins;
@@ -74,6 +74,7 @@ namespace Agoraphobia.Entity
             Defense = def;
             AttackDamage = attack;
             this.sanity = sanity;
+            maxHP = hp;
             HP = hp;
             Energy = energy;
             dreamCoins = coins;
@@ -97,6 +98,7 @@ namespace Agoraphobia.Entity
             }
             Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy
             Program.room.RemoveEnemy();
+            hp = maxHP;
             Program.MainScene(); //Need to somehow get back to the Main scene
         }
     }
