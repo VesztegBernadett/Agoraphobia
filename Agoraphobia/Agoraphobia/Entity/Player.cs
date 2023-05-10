@@ -161,16 +161,21 @@ namespace Agoraphobia.Entity
 
         public static void Death()
         {
-            Viewport.Message("You are dead.");
-            Program.MainScene();
+            Viewport.Message("You are dead. Press any button to respawn.");
+            Respawn();
         }
 
         public static void GoInsane()
         {
-
+            // a gameEnded be lett rakva a input while loop feltételei közé
+            // ez azért kelett hogy ha vége a játéknak akkor ne lehessen
+            // menübe navigálni, új szobába menni stb. Program.cs:148
+            Program.gameEnded = true;
+            Console.Clear();
+            Console.SetCursorPosition(0, 0);
+            Viewport.Message($"You went insane, the game has ended. You may press any button to exit.");
         }
 
-        //TODO: DESIGN
         public static void WakeUp()
         {
             // TODO: A "victory screen"-t meg kell designolni, egyenlőre csak törli az összes ui-t és kiírja a játékidőt és pontszámot amit itemekből számol ki.
@@ -199,9 +204,10 @@ namespace Agoraphobia.Entity
             Console.WriteLine($"Elért pontszám: {score}");
         }
 
+        // ez ilyen.
         public static void Respawn()
         {
-
+            Program.MainScene();
         }
 
         public static void ChangeHP (int amount) => HP += amount;
