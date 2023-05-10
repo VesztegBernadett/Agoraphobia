@@ -278,7 +278,9 @@ namespace Agoraphobia
                             Program.MainScene();
                         else
                         {
-                            IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[current]);
+                            IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[selected]);
+                            //Console.Write(selected);
+                            //Console.ReadKey();
                             if (Player.ChangeCoins(-item.Price))
                             {
                                 length--;

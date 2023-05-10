@@ -6,6 +6,10 @@ using System;
 using System.Globalization;
 using System.ComponentModel.Design;
 using System.Text.RegularExpressions;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Agoraphobia
 {
@@ -13,6 +17,7 @@ namespace Agoraphobia
     {
         private static readonly Random r = new Random();
         public static Room room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
+        public static bool gameEnded = false;
         private static void SwitchRoom(int interaction)
         {
             if (room.NPC == 0)
@@ -138,7 +143,7 @@ namespace Agoraphobia
 
                 ConsoleKey input = Console.ReadKey(true).Key;
 
-                while (input != ConsoleKey.X)
+                while (input != ConsoleKey.X && !gameEnded)
                 {
                     switch (input)
                     {
@@ -238,7 +243,7 @@ namespace Agoraphobia
             }
             catch (ArgumentOutOfRangeException e)
             {
-             ZoomOut();
+                ZoomOut();
             }
         }
     }
