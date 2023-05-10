@@ -1,0 +1,8 @@
+14#Id
+Titanic#Name
+You are on the Titanic, but you can't swim. The ship started to sink and a ___(?) is looking at you that stands next to a ___(?).#Description
+0#Type
+2#Orientation
+0#NPC
+4#Enemy
+8#Items

@@ -1,0 +1,8 @@
+16#Id
+Unknown land of the unknown tribe#Name
+You see huts and fireplaces next to the fireplace there is a ___(?). Wait a ___(?) is watching you.#Description
+0#Type
+2#Orientation
+2#NPC
+0#Enemy
+4#Items

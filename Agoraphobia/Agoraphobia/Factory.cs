@@ -230,7 +230,14 @@ namespace Agoraphobia
                                 enemy = int.Parse(data[0]);
                                 break;
                             case "Items":
-                                items = data[0].Split(';').Select(int.Parse).ToList();
+                                if (data[0] == "")
+                                {
+                                    break;
+                                }
+                                else
+                                {
+                                    items = data[0].Split(';').Select(int.Parse).ToList();
+                                }
                                 break;
                         }
                     }

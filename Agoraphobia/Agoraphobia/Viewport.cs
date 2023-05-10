@@ -18,12 +18,18 @@ namespace Agoraphobia
         {
             //Its an universal Show method so we don't need it for each class
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
-
-            List<string> rows = art.Split('\n').ToList();
-            for (int i = 0; i < rows.Count(); i++)
+            if (art is not null)
             {
-                Console.SetCursorPosition(coordinates[0], coordinates[1] + i);
-                Console.Write(rows[i]);
+                List<string> rows = art.Split('\n').ToList();
+                for (int i = 0; i < rows.Count(); i++)
+                {
+                    Console.SetCursorPosition(coordinates[0], coordinates[1] + i);
+                    Console.Write(rows[i]);
+                }
+            }
+            else
+            {
+                Console.Write("\n");
             }
         }
 
@@ -140,6 +146,7 @@ namespace Agoraphobia
         }
         public static void Interaction(int roomId, int id, bool isOpened, bool isTriggered)
         {
+            ClearInteraction();
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
             int selected = 0;
             int vOffset = 0;
@@ -152,7 +159,8 @@ namespace Agoraphobia
                 ShowOption(ref selected, id, 0, 0 + vOffset, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}        ");
                 Console.BackgroundColor = ConsoleColor.Black;
-                ShowDescription(ref vOffset, npc.Description, 60, 15);
+                if (selected - 1 == id)
+                    ShowDescription(ref vOffset, npc.Description, 60, 15);
             }
             if (room.Enemy != 0)
             {
@@ -161,7 +169,8 @@ namespace Agoraphobia
                 ShowOption(ref selected, id, 0, 0 + vOffset, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}           ");
                 Console.BackgroundColor = ConsoleColor.Black;
-                ShowDescription(ref vOffset, enemy.Description, 60, 15);
+                if (selected - 1 == id)
+                    ShowDescription(ref vOffset, enemy.Description, 60, 15);
             }
             else
             {
@@ -174,9 +183,11 @@ namespace Agoraphobia
                     {
                         vOffset++;
                         IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
-                        ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
-                        Console.Write($"  >> Go to: {current.Name}         ");
+                        ShowOption(ref selected, id, 0, 0 + vOffset, null);
+                        Console.Write($"  >> Go to: {current.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
+                        if (selected - 1 == id)
+                            ShowDescription(ref vOffset, current.Description, 60, 15);
                     }
                 }
                 else
@@ -200,6 +211,8 @@ namespace Agoraphobia
                         ShowOption(ref selected, id, 0, 0 + vOffset, item.Art);
                         Console.Write($"  >> Pick up {item.Name}          ");
                         Console.BackgroundColor = ConsoleColor.Black;
+                        if (selected - 1 == id)
+                            ShowDescription(ref vOffset, item.Description, 60, 15);
                     }
                 }
                 else
@@ -329,13 +342,10 @@ namespace Agoraphobia
 
         public static void ClearInteraction()
         {
-            for (int i = 0; i < 110; i++)
+            for (int i = 0; i < 20; i++)
             {
-                for (int a = 0; a < 20; a++)
-                {
-                    Console.SetCursorPosition(5 + i, 25 + a);
-                    Console.Write(" ");
-                }
+                Console.SetCursorPosition(5, 25 + i);
+                Console.Write("                                                                                                               ");
             }
         }
 

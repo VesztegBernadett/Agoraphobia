@@ -1,8 +1,8 @@
 4#Id
 Titanic#Name
-You are on the Titanic, but you can't swim. Maybe you can sit down in a lifeboat.#Description
+You are on the Titanic, but you can't swim. The ship started to sink and a ___(?) is looking at you that stands next to a ___(?).#Description
 0#Type
 2#Orientation
-2#NPC
+0#NPC
 4#Enemy
-0#Items
+9#Items

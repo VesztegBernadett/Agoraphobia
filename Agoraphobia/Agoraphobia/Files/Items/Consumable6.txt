@@ -1,10 +1,10 @@
 6#Id
-Dream meat#Name
-Wait is this? Yeah It's good old regular meat.#Description
+Dream grape#Name
+Wait is this? It supposed to be meat but it's.. grape?#Description
 1#Rarity
 0#Energy
 5#HP
 0#Armor
 0#Attack
 1#Duration
-500#Price
+50#Price

@@ -1,0 +1,8 @@
+8#Id
+Little garden#Name
+You see a ____(?) laying on the ground next to a ___(?).#Description
+0#Type
+1#Orientation
+0#NPC
+0#Enemy
+3; 1#Items

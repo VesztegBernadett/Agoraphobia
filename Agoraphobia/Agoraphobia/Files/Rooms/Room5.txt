@@ -1,8 +1,8 @@
 5#Id
-Exploring the unkown#Name
-John Merta is on a ship. He sees a new land. Maybe that is the land.... The new land.#Description
+Unknown land of the unknown tribe#Name
+You see huts and fireplaces next to the fireplace there is a ___(positive). Wait a ___(negative) is watching you.#Description
 0#Type
-1#Orientation
+2#Orientation
 0#NPC
 6#Enemy
-5;0;1#Items
+6#Items

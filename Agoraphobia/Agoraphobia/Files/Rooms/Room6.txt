@@ -1,6 +1,6 @@
 6#Id
 Zoo#Name
-You are at the zoo. An interesting white creature want to attack you. But what is the creature?#Description
+You are at the zoo. A ___(?) and a ___(?) are next to the snack bar#Description
 0#Type
 2#Orientation
 2#NPC

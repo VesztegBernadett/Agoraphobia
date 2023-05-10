@@ -1,0 +1,8 @@
+18#Id
+Zoo#Name
+You are at the zoo. A ___(negative) and a ___(positive) are next to the snack bar#Description
+0#Type
+1#Orientation
+2#NPC
+1#Enemy
+0#Items
