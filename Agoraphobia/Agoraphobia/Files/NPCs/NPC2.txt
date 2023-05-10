@@ -1,0 +1,6 @@
+2#Id
+Calm person#Name
+A friendly person.#Description
+3#Type
+0;0;1#Inventory
+#Intro
