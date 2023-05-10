@@ -31,7 +31,10 @@ namespace Agoraphobia.Entity
                 if (value > MaxHP)
                     hp = MaxHP;
                 else if (value < 0)
+                {
+                    hp = 0;
                     Death();
+                }
                 else hp = value;
             }
         }
@@ -185,6 +188,10 @@ namespace Agoraphobia.Entity
         // ez ilyen.
         public static void Respawn()
         {
+            
+            hp = MaxHP;
+            energy = MAXENERGY;
+            Program.room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
             Program.MainScene();
         }
 
