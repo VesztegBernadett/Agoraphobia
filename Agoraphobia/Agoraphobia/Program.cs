@@ -175,9 +175,7 @@ namespace Agoraphobia
                             {
                                 case 0:
                                     if (room.NPC != 0)
-                                    {
                                         INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
-                                    }
                                     break;
                                 case 1:
                                     if (room.Enemy != 0)

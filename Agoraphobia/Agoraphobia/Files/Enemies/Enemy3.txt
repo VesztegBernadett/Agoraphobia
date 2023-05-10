@@ -1,4 +1,4 @@
-2#Id
+3#Id
 Frozen director#Name
 Taller and more muscular than John Merta. He was the headmaster of the school.#Description
 0(0.5;DC(1-20#Inventory
