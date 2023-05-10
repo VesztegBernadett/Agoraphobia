@@ -18,6 +18,7 @@ namespace Agoraphobia.Entity
         public static int MaxHP { get; private set; } = 15;
         private static int hp = 15;
 
+        public static int Points = 0;
 
         public static int EffectDuration = 0;
         public static int ChangedDefense = 0;
@@ -161,47 +162,27 @@ namespace Agoraphobia.Entity
 
         public static void Death()
         {
-            Viewport.Message("You are dead. Press any button to respawn.");
+            Viewport.Message("You are dead.");
             Respawn();
         }
 
         public static void GoInsane()
         {
-            // a gameEnded be lett rakva a input while loop feltételei közé
-            // ez azért kelett hogy ha vége a játéknak akkor ne lehessen
-            // menübe navigálni, új szobába menni stb. Program.cs:148
             Program.gameEnded = true;
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-            Viewport.Message($"You went insane, the game has ended. You may press any button to exit.");
+
+            DateTime playTimeEnd = DateTime.UtcNow;
+            TimeSpan playTime = playTimeEnd - playTimeStart;
+
+            Viewport.Message($"You went insane, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
         }
 
         public static void WakeUp()
         {
-            // TODO: A "victory screen"-t meg kell designolni, egyenlőre csak törli az összes ui-t és kiírja a játékidőt és pontszámot amit itemekből számol ki.
-
-            Console.Clear();
-            Console.SetCursorPosition(0, 0);
-
+            Program.gameEnded = true;
             DateTime playTimeEnd = DateTime.UtcNow;
             TimeSpan playTime = playTimeEnd - playTimeStart;
-            Console.WriteLine("játékidő: {0:hh} óra {0:mm} perc {0:ss} másodperc", playTime);
-            
-            Dictionary<ItemRarity, int> itemValue = new Dictionary<ItemRarity, int>() {
-                {ItemRarity.Common, 1 },
-                {ItemRarity.Uncommon, 2 },
-                {ItemRarity.Rare, 3 },
-                {ItemRarity.Epic, 4 },
-                {ItemRarity.Legendary, 5 },
-                {ItemRarity.Fabled, 6 },
-            };
 
-            foreach (int itemID in Player.Inventory){
-                IItem i = IItem.Items.Find(item => item.Id == itemID);
-                score += itemValue[i.Rarity] * 10;
-            }
-
-            Console.WriteLine($"Elért pontszám: {score}");
+            Viewport.Message($"You woke up successfully, and dreamt up the best story ever, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
         }
 
         // ez ilyen.

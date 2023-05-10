@@ -143,6 +143,9 @@ namespace Agoraphobia
 
                 ConsoleKey input = Console.ReadKey(true).Key;
 
+                // a gameEnded be lett rakva a input while loop feltételei közé
+                // ez azért kelett hogy ha vége a játéknak akkor ne lehessen
+                // menübe navigálni, új szobába menni stb. Player.WakeUp és Player.GoInsane használja
                 while (input != ConsoleKey.X && !gameEnded)
                 {
                     switch (input)
