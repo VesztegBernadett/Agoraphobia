@@ -150,6 +150,10 @@ namespace Agoraphobia.Entity
                             ChangeDefense(+selectedConsumable.Armor);
                             ChangeAttack(+selectedConsumable.Attack);
                             Inventory.Remove(Inventory[inventory]);
+                            if (inventory != 0)
+                            {
+                                inventory--;
+                            }
                         }
                         break;
                 }

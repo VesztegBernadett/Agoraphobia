@@ -243,6 +243,8 @@ namespace Agoraphobia
                     }
                     input = Console.ReadKey(true).Key;
                 }
+                //End()
+                //We need an end scene because now if we get out of the loop and finish this method, we get back to the last combat which called mainscene method
             }
             catch (ArgumentOutOfRangeException e)
             {
