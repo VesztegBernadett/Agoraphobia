@@ -106,7 +106,7 @@ namespace Agoraphobia
             Console.SetCursorPosition(125, 29);
             Console.Write($"Defense: {Player.Defense}      ");
             Console.SetCursorPosition(125, 30);
-            Console.Write($"Energy: {Player.Energy} / {Player.MAXENERGY}       ");
+            Console.Write($"Energy: {Player.Energy} / {Player.MaxEnergy}       ");
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}       ");
         }

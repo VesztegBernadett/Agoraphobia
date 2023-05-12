@@ -9,11 +9,13 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using static Agoraphobia.IItem;
+using System.IO;
 
 namespace Agoraphobia.Entity
 {
     internal class Player
     {
+        static string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
         public static int Defense { get; private set; } = 3;
         public static int MaxHP { get; private set; } = 15;
         private static int hp = 15;
@@ -38,7 +40,7 @@ namespace Agoraphobia.Entity
                 else hp = value;
             }
         }
-        public const int MAXENERGY = 3;
+        public static int MaxEnergy = 3;
         private static int energy = 3;
         public static int Energy
         {
@@ -47,8 +49,8 @@ namespace Agoraphobia.Entity
             {
                 if (value < 0)
                     energy = 0;
-                else if (value > MAXENERGY)
-                    energy = MAXENERGY;
+                else if (value > MaxEnergy)
+                    energy = MaxEnergy;
                 else energy = value;
             }
         }
@@ -76,7 +78,7 @@ namespace Agoraphobia.Entity
                 else sanity = value;
             }
         }
-        public static List<int> Inventory { get; private set; } = new List<int>();
+        public static List<int> Inventory { get; set; } = new List<int>();
         public static int DreamCoins { get; private set; } = 100;
         public static string Name { get; private set; } = "asdasd";
 
@@ -194,7 +196,7 @@ namespace Agoraphobia.Entity
         {
             ChangeSanity(-IEnemy.Enemies.Find(x => x.Id == Program.room.Enemy).Sanity);
             hp = MaxHP;
-            energy = MAXENERGY;
+            energy = MaxEnergy;
             Program.room = (Room)IRoom.Rooms.Find(x => x.Id == 0);
             Program.MainScene();
         }

@@ -44,7 +44,7 @@ namespace Agoraphobia.Entity
         public void Attack()
         {
             Player.ChangeHP(-(AttackDamage-Player.Defense));
-            Player.ChangeEnergy(Player.MAXENERGY);
+            Player.ChangeEnergy(Player.MaxEnergy);
             if (Player.EffectDuration > 1)
             {
                 Player.EffectDuration--;

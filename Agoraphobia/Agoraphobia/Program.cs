@@ -92,6 +92,22 @@ namespace Agoraphobia
             Thread.CurrentThread.CurrentCulture = enCulture;
             Console.Title = "Agoraphobia";
 
+            //Load player's values from file
+            string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
+            if (int.Parse(rows[10].Split('#')[0])!=1)
+            {
+                Player.ChangeDefense(int.Parse(rows[0].Split('#')[0])-Player.Defense);
+                Player.ChangeMaxHP( int.Parse(rows[1].Split('#')[0])-Player.MaxHP);
+                Player.ChangeHP(int.Parse(rows[2].Split('#')[0])-Player.HP);
+                Player.Points= int.Parse(rows[3].Split('#')[0]);
+                Player.MaxEnergy=int.Parse(rows[4].Split('#')[0]);
+                Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0])-Player.Energy);
+                Player.ChangeAttack(int.Parse(rows[6].Split('#')[0])-Player.AttackDamage);
+                Player.ChangeSanity(int.Parse(rows[7].Split('#')[0])-Player.Sanity);
+                Player.Inventory=rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
+                Player.ChangeCoins(int.Parse(rows[9].Split('#')[0])-Player.DreamCoins);
+            }
+
             for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
                 CreateRoom(i);
             MainScene();
@@ -243,12 +259,34 @@ namespace Agoraphobia
                     }
                     input = Console.ReadKey(true).Key;
                 }
-                //End()
                 //We need an end scene because now if we get out of the loop and finish this method, we get back to the last combat which called mainscene method
+                End();
             }
             catch (ArgumentOutOfRangeException e)
             {
                 ZoomOut();
+            }
+        }
+
+        private static void End()
+        {
+            if (gameEnded)
+            {
+                Environment.Exit(0);
+            }
+            else
+            {
+                //Save player's data when quit from the game
+                StreamWriter playerData = new StreamWriter($"{IElement.PATH}Player.txt");
+                playerData.Write($"{Player.Defense}#Defense\n{Player.MaxHP}#MaxHP\n" +
+                    $"{Player.HP}#HP\n{Player.Points}#Points\n" +
+                    $"{Player.MaxEnergy}#MaxEnergy\n{Player.Energy}#Energy\n" +
+                    $"{Player.AttackDamage}#Attack\n{Player.Sanity}#Sanity\n" +
+                    $"{string.Join(';',Player.Inventory)}#Inventory\n{Player.DreamCoins}#DreamCoins\n{0}#IsNew");
+                playerData.Close();
+
+                Viewport.Message("Your data is saved. See you later!");
+                Environment.Exit(0);
             }
         }
     }
