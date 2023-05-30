@@ -114,20 +114,52 @@ namespace Agoraphobia
         }
         private static void RemoveItem(ref int length, ref int interaction, int inventory, bool isOpened, bool isTriggered)
         {
-            if (room.NPC == 0)
+            if (Player.Inventory.Count() <= 18)
+            {
+                if (room.NPC == 0)
                 interaction++;
-            int temp = interaction;
-            int offset = 0;
-            if (isTriggered)
-                offset += room.Exits.Count - 1;
-            length--;
-            IItem.Items.Find(x => x.Id == room.Items[temp - 2 - offset]).PickUp(room.Id);
-            interaction = length - 1;
+                int temp = interaction;
+                int offset = 0;
+                if (isTriggered)
+                    offset += room.Exits.Count - 1;
+                length--;
+                IItem.Items.Find(x => x.Id == room.Items[temp - 2 - offset]).PickUp(room.Id);
+                interaction = length - 1;
+            }
+            else
+            {
+                Viewport.Message("Your inventory is full, you can't pick up this item.");
+            }
             Viewport.ShowInventory(inventory);
             Viewport.ClearInteraction();
             Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
             Viewport.Show(room.Id);
         }
+
+        private static void DropItem(ref int interaction, bool isOpened, bool isTriggered, ref int inventory)
+        {
+            int inv = inventory;
+            IItem.Items.Find(x => x.Id == Player.Inventory[inv]).Drop(room.Id, inv);
+
+            if (Player.Inventory.Count()==0)
+            {
+                inventory = 0;
+            }
+            else
+            {
+                inventory--;
+            }
+
+            //Clear inventory??
+            Console.Clear();
+
+            Viewport.ShowGrid();
+            Viewport.ShowInventory(inventory);
+            Viewport.ClearInteraction();
+            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
+            Viewport.Show(room.Id);
+        }
+
         private static void ZoomOut()
         {
             Console.Clear();
@@ -166,6 +198,9 @@ namespace Agoraphobia
                 {
                     switch (input)
                     {
+                        case ConsoleKey.D:
+                            DropItem(ref interaction, isOpened, isTriggered, ref inventory);
+                            break;
                         case ConsoleKey.LeftArrow:
                             if (inventory == 0)
                                 inventory = Player.Inventory.Count - 1;

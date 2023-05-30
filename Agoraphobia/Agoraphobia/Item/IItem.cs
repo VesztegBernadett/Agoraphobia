@@ -14,25 +14,30 @@ namespace Agoraphobia
         static List<IItem> Items = new List<IItem>();//Add the instance to this list in the constructor
         void PickUp(int roomId)
         {
-            IRoom.Rooms.Find(x => x.Id == roomId).Items.Remove(Id);
-            Player.Inventory.Add(Id);
+            
+                IRoom.Rooms.Find(x => x.Id == roomId).Items.Remove(Id);
+                Player.Inventory.Add(Id);
 
-            // this is cancer
-            Dictionary<ItemRarity, int> itemValue = new Dictionary<ItemRarity, int>() {
-                {ItemRarity.Common, 1 },
-                {ItemRarity.Uncommon, 2 },
-                {ItemRarity.Rare, 3 },
-                {ItemRarity.Epic, 4 },
-                {ItemRarity.Legendary, 5 },
-                {ItemRarity.Fabled, 6 },
-            };
+                // this is cancer
+                Dictionary<ItemRarity, int> itemValue = new Dictionary<ItemRarity, int>() {
+                    {ItemRarity.Common, 1 },
+                    {ItemRarity.Uncommon, 2 },
+                    {ItemRarity.Rare, 3 },
+                    {ItemRarity.Epic, 4 },
+                    {ItemRarity.Legendary, 5 },
+                    {ItemRarity.Fabled, 6 },
+                };
 
-            // TODO: count items that the player purchased not picked up
-            IItem i = Items.Find(x => x.Id == Id);
-            Player.Points += 10 * itemValue[i.Rarity];
+                // TODO: count items that the player purchased not picked up
+                IItem i = Items.Find(x => x.Id == Id);
+                Player.Points += 10 * itemValue[i.Rarity];
         }
         string Inspect();
-        void Drop();
+        void Drop(int roomId, int nth)
+        {
+            IRoom.Rooms.Find(x => x.Id == roomId).Items.Add(Id);
+            Player.Inventory.RemoveAt(nth);
+        }
         void Delete(int itemID)
         {
             Player.Inventory.Remove(itemID);
