@@ -14,6 +14,58 @@ namespace Agoraphobia
 {
     class Viewport
     {
+        public static void Menu()
+        {
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] {65, 2});
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
+            int selected = 1;
+            ConsoleKey input = ConsoleKey.UpArrow;
+            while (true)
+            {
+                switch (input)
+                {
+                    case ConsoleKey.UpArrow:
+                        if (selected == 0)
+                            selected = 2;
+                        else selected--;
+                        ChooseMenuPoint(selected);
+                        break;
+                    case ConsoleKey.DownArrow:
+                        if (selected == 2)
+                            selected = 0;
+                        else selected++;
+                        ChooseMenuPoint(selected);
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (selected)
+                        {
+                            case 0:
+
+                            case 1:
+
+                            case 2:
+                                break;
+                        }
+                        return;
+                }
+                input = Console.ReadKey(true).Key;
+            }
+        }
+        private static void ChooseMenuPoint(int selected)
+        {
+            if (selected == 0)
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            ShowSingle("New Game", new int[] { 93, 16 });
+            Console.BackgroundColor = ConsoleColor.Black;
+            if (selected == 1)
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            ShowSingle("Continue", new int[] { 93, 21 });
+            Console.BackgroundColor = ConsoleColor.Black;
+            if (selected == 2)
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            ShowSingle("Tutorial", new int[] { 93, 26 });
+            Console.BackgroundColor = ConsoleColor.Black;
+        }
         private static void ShowSingle(string art, int[] coordinates)
         {
             //Its an universal Show method so we don't need it for each class

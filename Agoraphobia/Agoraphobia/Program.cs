@@ -92,6 +92,7 @@ namespace Agoraphobia
             CultureInfo enCulture = new CultureInfo("en-US");
             Thread.CurrentThread.CurrentCulture = enCulture;
             Console.Title = "Agoraphobia";
+            Console.CursorVisible = false;
 
             //Load player's values from file
             string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
@@ -111,6 +112,24 @@ namespace Agoraphobia
 
             for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
                 CreateRoom(i);
+
+            while (true)
+            {
+                try
+                {
+                    Console.SetWindowSize(200, 45);
+                    Viewport.Menu();
+                    break;
+                }
+                catch (Exception)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Please zoom out until this text is slightly smaller, but still readable. Press any key if you're ready.");
+                    Console.ReadKey(true);
+                    continue;
+                }
+            }
+
             MainScene();
         }
         private static void RemoveItem(ref int length, ref int interaction, int inventory, bool isOpened, bool isTriggered)
@@ -169,7 +188,6 @@ namespace Agoraphobia
             try
             {
                 Console.SetWindowSize(200, 45);
-                Console.CursorVisible = false;
                 Console.Clear();
 
                 int inventory = 0;
