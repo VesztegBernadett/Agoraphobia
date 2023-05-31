@@ -27,18 +27,12 @@ namespace Agoraphobia
                     Console.Write(rows[i]);
                 }
             }
-            else
-            {
-                Console.Write("\n");
-            }
         }
-
         public static void Show(int roomId)
         {
+            ClearRoom();
             Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
-
             //NPCs
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), INPC.Coordinates);
             if (room.NPC != 0)
             {
                 //Id starts with 1
@@ -46,7 +40,6 @@ namespace Agoraphobia
                 ShowSingle(npc.Art, INPC.Coordinates);
             }
             //Enemies
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), IEnemy.Coordinates);
             if (room.Enemy != 0)
             {
                 //Id starts with 1
@@ -54,7 +47,6 @@ namespace Agoraphobia
                 ShowSingle(enemy.Art, IEnemy.Coordinates);
             }
             //Items
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), IItem.Coordinates);
             if (room.Items.Count > 0)
             {
                 //Id starts with 0
@@ -124,8 +116,9 @@ namespace Agoraphobia
                 Console.Write(IItem.Items.Find(x => x.Id == Player.Inventory[i]).Name);
                 Console.BackgroundColor = ConsoleColor.Black;
             }
-            Console.SetCursorPosition(148, 22);
-            Console.Write("Hover inspect | Enter use | Backslash Drop");
+            string text = "Hover inspect | Enter use | D Drop";
+            Console.SetCursorPosition(120 + (80 - text.Length) / 2, 22);
+            Console.Write(text);
         }
         private static void ShowDescription(ref int vOffset, string text, int limit, int start)
         {
@@ -156,8 +149,8 @@ namespace Agoraphobia
             {
                 vOffset++;
                 NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
-                ShowOption(ref selected, id, 0, 0 + vOffset, npc.Art);
-                Console.Write($">> Interact with: {npc.Name}        ");
+                ShowOption(ref selected, id, 0, vOffset, npc.Art);
+                Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
                 if (selected - 1 == id)
                     ShowDescription(ref vOffset, npc.Description, 60, 15);
@@ -166,8 +159,8 @@ namespace Agoraphobia
             {
                 vOffset++;
                 Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
-                ShowOption(ref selected, id, 0, 0 + vOffset, enemy.Art);
-                Console.Write($">> Fight: {enemy.Name}           ");
+                ShowOption(ref selected, id, 0, vOffset, enemy.Art);
+                Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
                 if (selected - 1 == id)
                     ShowDescription(ref vOffset, enemy.Description, 60, 15);
@@ -178,13 +171,13 @@ namespace Agoraphobia
                 if (isTriggered)
                 {
                     Console.SetCursorPosition(10, 24 + vOffset);
-                    Console.Write(">> Exits:         ");
+                    Console.Write(">> Exits:");
                     for (int i = 0; i < room.Exits.Count; i++)
                     {
                         vOffset++;
                         IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
-                        ShowOption(ref selected, id, 0, 0 + vOffset, null);
-                        Console.Write($"  >> Go to: {current.Name}");
+                        ShowOption(ref selected, id, 2, vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                        Console.Write($">> Go to: {current.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                         if (selected - 1 == id)
                             ShowDescription(ref vOffset, current.Description, 60, 15);
@@ -192,7 +185,7 @@ namespace Agoraphobia
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
                     Console.Write($">> Exit room");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
@@ -203,13 +196,13 @@ namespace Agoraphobia
                 if (isOpened)
                 {
                     Console.SetCursorPosition(10, 24 + vOffset);
-                    Console.Write(">> Sack:                     ");
+                    Console.Write(">> Sack:");
                     for (int i = 0; i < room.Items.Count(); i++)
                     {
                         vOffset++;
                         IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
-                        ShowOption(ref selected, id, 0, 0 + vOffset, item.Art);
-                        Console.Write($"  >> Pick up {item.Name}          ");
+                        ShowOption(ref selected, id, 2, vOffset, item.Art);
+                        Console.Write($">> Pick up {item.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                         if (selected - 1 == id)
                             ShowDescription(ref vOffset, item.Description, 60, 15);
@@ -217,16 +210,16 @@ namespace Agoraphobia
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, 0 + vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
-                    Console.Write(">> Inspect Sack...       ");
+                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
+                    Console.Write(">> Inspect Sack...");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
             else if (room.Items.Count == 1)
             {
                 IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowOption(ref selected, id, -2, 0 + vOffset, item.Art);
-                Console.Write($"  >> Pick up {item.Name}          ");
+                ShowOption(ref selected, id, -2, vOffset, item.Art);
+                Console.Write($"  >> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             
@@ -237,11 +230,11 @@ namespace Agoraphobia
             int selected = 0;
             NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == id);
             int length = npc.Inventory.Count + 1;
-            ClearInteraction();
             ChooseItem(id, current, selected);
 
             while (true)
             {
+                ChooseItem(id, current, selected);
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
                 {
@@ -265,21 +258,24 @@ namespace Agoraphobia
                             IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[selected]);
                             //Console.Write(selected);
                             //Console.ReadKey();
-                            if (Player.ChangeCoins(-item.Price))
+                            if (Player.Inventory.Count <= 18)
                             {
-                                length--;
-                                npc.Inventory.Remove(item.Id);
-                                Player.Inventory.Add(item.Id);
-                                ShowInventory(0);
-                                ShowStats();
-                                ClearInteraction();
-                                ChooseItem(id, current, selected);
+                                if (Player.ChangeCoins(-item.Price))
+                                {
+                                    length--;
+                                    npc.Inventory.Remove(item.Id);
+                                    Player.Inventory.Add(item.Id);
+                                    ShowInventory(0);
+                                    ShowStats();
+                                    ClearInteraction();
+                                    ChooseItem(id, current, selected);
+                                }
+                                else
+                                {
+                                    Message("Not enough DreamCoins!");
+                                }
                             }
-                            else
-                            {
-                                Console.SetCursorPosition(10, 27 + length);
-                                Console.Write("Not enough DreamCoins!     ");
-                            }
+                            else Message("Your inventory is full, you can't pick up this item.");
                         }
                         break;
                     default:
@@ -289,6 +285,7 @@ namespace Agoraphobia
         }
         private static void ChooseItem(int id, int current, int selected)
         {
+            ClearInteraction();
             NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == id);
             int length = npc.Inventory.Count;
             if (npc.Inventory.Count() > 0)
@@ -298,7 +295,7 @@ namespace Agoraphobia
                 {
                     IItem item = IItem.Items.Find(x => x.Id == items[i]);
                     ShowOption(ref current, selected, 0, current + 1, item.Art);
-                    Console.Write($">> Purchase: {item.Name} - {item.Price} DC           ");
+                    Console.Write($">> Purchase: {item.Name} - {item.Price} DC");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
@@ -307,8 +304,8 @@ namespace Agoraphobia
                 Console.SetCursorPosition(10, 24);
                 Console.WriteLine("You can't buy anything from this creature.");
             }
-            ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"));
-            Console.Write(">> Exit             ");
+            ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+            Console.Write(">> Exit");
             Console.BackgroundColor = ConsoleColor.Black;
         }
         private static void ShowRoomInfo (ref int vOffset, Room room)
@@ -324,8 +321,7 @@ namespace Agoraphobia
         {
             if (selected == id)
             {
-                int[] coordinates = new int[] { 80, 32 };
-                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Placeholder.txt"), coordinates);
+                int[] coordinates = new int[] { 80, 30 };
                 ShowSingle(art, coordinates);
                 Console.BackgroundColor = ConsoleColor.Magenta;
             }
@@ -345,10 +341,17 @@ namespace Agoraphobia
             for (int i = 0; i < 20; i++)
             {
                 Console.SetCursorPosition(5, 25 + i);
-                Console.Write("                                                                                                               ");
+                Console.Write("                                                                                                                   ");
             }
         }
-
+        public static void ClearRoom()
+        {
+            for (int i = 1; i < 22; i++)
+            {
+                Console.SetCursorPosition(0, 1 + i);
+                Console.Write("                                                                                                                        ");
+            }
+        }
         public static void ShowItemInfo(int SelectedItemNumber)
         {
             int selecteditemnumber = SelectedItemNumber;

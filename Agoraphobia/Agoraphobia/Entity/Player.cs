@@ -114,11 +114,13 @@ namespace Agoraphobia.Entity
 
                 switch (input)
                 {
+                    case ConsoleKey.UpArrow:
                     case ConsoleKey.LeftArrow:
                         if (inventory == 0)
                             inventory = Player.Inventory.Count - 1;
                         else inventory--;
                         break;
+                    case ConsoleKey.DownArrow:
                     case ConsoleKey.RightArrow:
                         if (inventory == Player.Inventory.Count - 1)
                             inventory = 0;

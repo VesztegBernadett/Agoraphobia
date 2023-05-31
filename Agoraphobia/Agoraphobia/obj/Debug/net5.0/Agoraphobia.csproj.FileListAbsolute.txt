@@ -1,0 +1,5 @@
+D:\Nerd Shit\balint\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.csproj.AssemblyReference.cache
+D:\Nerd Shit\balint\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nerd Shit\balint\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.AssemblyInfoInputs.cache
+D:\Nerd Shit\balint\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.AssemblyInfo.cs
+D:\Nerd Shit\balint\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.csproj.CoreCompileInputs.cache

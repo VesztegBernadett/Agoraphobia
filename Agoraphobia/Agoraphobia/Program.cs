@@ -10,6 +10,7 @@ using System.Linq;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using System.Transactions;
 
 namespace Agoraphobia
 {
@@ -132,6 +133,7 @@ namespace Agoraphobia
             }
             Viewport.ShowInventory(inventory);
             Viewport.ClearInteraction();
+            Viewport.ShowStats();
             Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
             Viewport.Show(room.Id);
         }
@@ -141,14 +143,8 @@ namespace Agoraphobia
             int inv = inventory;
             IItem.Items.Find(x => x.Id == Player.Inventory[inv]).Drop(room.Id, inv);
 
-            if (Player.Inventory.Count()==0)
-            {
-                inventory = 0;
-            }
-            else
-            {
+            if (inventory != 0)
                 inventory--;
-            }
 
             //Clear inventory??
             Console.Clear();
@@ -156,6 +152,7 @@ namespace Agoraphobia
             Viewport.ShowGrid();
             Viewport.ShowInventory(inventory);
             Viewport.ClearInteraction();
+            Viewport.ShowStats();
             Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
             Viewport.Show(room.Id);
         }
@@ -179,9 +176,7 @@ namespace Agoraphobia
                 int interaction = 0;
                 bool isOpened = false;
                 bool isTriggered = false;
-                int length = room.Items.Count == 0 ? 1 : isOpened ? room.Items.Count + 1 : 2;
-                if (room.NPC != 0)
-                    length++;
+                int length;
 
                 Viewport.Show(room.Id);
                 Viewport.ShowGrid();
@@ -196,6 +191,17 @@ namespace Agoraphobia
                 // menübe navigálni, új szobába menni stb. Player.WakeUp és Player.GoInsane használja
                 while (input != ConsoleKey.X && !gameEnded)
                 {
+                    length = 1;
+                    if (room.NPC != 0)
+                        length++;
+                    if (room.Items.Count != 0)
+                    {
+                        if (isOpened)
+                            length += room.Items.Count;
+                        else length++;
+                    }
+                    if (isTriggered)
+                        length += 2;
                     switch (input)
                     {
                         case ConsoleKey.D:
@@ -230,64 +236,62 @@ namespace Agoraphobia
                                 interaction++;
                             if (isTriggered)
                                 interaction++;
-                            switch (interaction)
+                            if (interaction == 0 || (interaction == 1 && isTriggered))
                             {
-                                case 0:
-                                    if (room.NPC != 0)
-                                        INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
-                                    break;
-                                case 1:
-                                    if (room.Enemy != 0)
-                                    {
-                                        Console.Clear();
-                                        Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
-                                        length++;
-                                    }
-                                    else if (!isTriggered)
+                                if (room.NPC != 0)
+                                    INPC.NPCs.Find(x => x.Id == room.NPC).Interact();
+                            }
+                            else if (interaction == 1)
+                            {
+                                if (room.Enemy != 0)
+                                {
+                                    Console.Clear();
+                                    Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                                    length++;
+                                }
+                                else if (!isTriggered)
+                                {
+                                    isTriggered = true;
+                                    CreateExits();
+                                    length += room.Exits.Count - 1;
+                                    if (room.NPC == 0)
+                                        interaction--;
+                                }
+                            }
+                            else
+                            {
+                                if (isTriggered)
+                                    interaction--;
+                                if (room.NPC == 0)
+                                    interaction--;
+                                if (!isOpened && room.Items.Count > 1 && interaction == length - 1)
+                                {
+                                    isOpened = true;
+                                    length += room.Items.Count - 1;
+                                }
+                                else if (!isOpened && room.Items.Count == 1 && interaction == length - 1)
+                                    RemoveItem(ref length, ref interaction, inventory, isOpened, isTriggered);
+                                else if (!isOpened)
+                                    SwitchRoom(interaction);
+                                else if (isOpened && interaction > length - room.Items.Count - 1)
+                                {
+                                    RemoveItem(ref length, ref interaction, inventory, isOpened, isTriggered);
+                                    if (room.Items.Count == 0)
+                                        isOpened = false;
+                                }
+                                else if (isOpened && interaction <= length - room.Items.Count - 1)
+                                {
+                                    if (isTriggered)
+                                        SwitchRoom(interaction);
+                                    else
                                     {
                                         isTriggered = true;
                                         CreateExits();
                                         length += room.Exits.Count - 1;
-                                        if(room.NPC == 0)
-                                            interaction--;
-                                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
                                     }
-                                    break;
-                                default:
-                                    if (isTriggered)
-                                        interaction--;
-                                    if (room.NPC == 0)
-                                        interaction--;
-                                    if (!isOpened && room.Items.Count > 1 && interaction == length - 1)
-                                    {
-                                        isOpened = true;
-                                        length += room.Items.Count - 1;
-                                        Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                                    }
-                                    else if (!isOpened && room.Items.Count == 1 && interaction == length - 1)
-                                        RemoveItem(ref length, ref interaction, inventory, isOpened, isTriggered);
-                                    else if (!isOpened)
-                                        SwitchRoom(interaction);
-                                    else if (isOpened && interaction > length - room.Items.Count - 1)
-                                    {
-                                        RemoveItem(ref length, ref interaction, inventory, isOpened, isTriggered);
-                                        if (room.Items.Count == 0)
-                                            isOpened = false;
-                                    }
-                                    else if (isOpened && interaction <= length - room.Items.Count - 1)
-                                    {
-                                        if (isTriggered)
-                                            SwitchRoom(interaction);
-                                        else
-                                        {
-                                            isTriggered = true;
-                                            CreateExits();
-                                            length += room.Exits.Count - 1;
-                                            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
-                                        }
-                                    }
-                                    break;
+                                }
                             }
+                            Viewport.Interaction(room.Id, interaction, isOpened, isTriggered);
                             break;
                         default:
                             break;
