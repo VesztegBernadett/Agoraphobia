@@ -11,6 +11,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Threading;
 using System.Transactions;
+using System.Reflection;
 
 namespace Agoraphobia
 {
@@ -126,6 +127,7 @@ namespace Agoraphobia
                 Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
                 Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
             }
+            else Viewport.Intro();
 
             for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
                 CreateRoom(i);
@@ -314,6 +316,8 @@ namespace Agoraphobia
                         default:
                             break;
                     }
+                    if (Console.KeyAvailable)
+                        Console.ReadKey(true);
                     input = Console.ReadKey(true).Key;
                 }
                 //We need an end scene because now if we get out of the loop and finish this method, we get back to the last combat which called mainscene method

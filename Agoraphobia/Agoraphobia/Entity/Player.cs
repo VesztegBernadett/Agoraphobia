@@ -109,6 +109,8 @@ namespace Agoraphobia.Entity
                 Viewport.ShowStats();
                 Viewport.ShowInventory(inventory);
                 Viewport.ShowItemInfo(inventory);
+                if (Console.KeyAvailable)
+                    Console.ReadKey(true);
                 ConsoleKey input = Console.ReadKey(true).Key;
 
                 switch (input)

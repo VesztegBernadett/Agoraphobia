@@ -9,13 +9,36 @@ using Agoraphobia.Items;
 using System.IO;
 using System.ComponentModel;
 using System.Threading;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Diagnostics;
 
 namespace Agoraphobia
 {
     class Viewport
     {
+        public static void Intro()
+        {
+            string[] text = File.ReadAllText($"{IElement.PATH}Intro.txt").Split('\n');
+            for (int i = 0; i < text.Length; i++)
+            {
+                Console.Clear();
+                Console.SetCursorPosition((200 - text[i].Length) / 2, 15);
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    Console.Write(text[i][j]);
+                    Thread.Sleep(10);
+                }
+                Console.WriteLine();
+                Console.SetCursorPosition((200 - "(Press any key to continue)".Length) / 2, 25);
+                Console.WriteLine("(Press any key to continue)");
+                if (Console.KeyAvailable)
+                    Console.ReadKey(true);
+                Console.ReadKey(true);
+            }
+        }
         public static void Menu()
         {
+            Console.Clear();
             ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] {65, 2});
             ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
             int selected = 1;
@@ -50,6 +73,8 @@ namespace Agoraphobia
                         }
                         return;
                 }
+                if (Console.KeyAvailable)
+                    Console.ReadKey(true);
                 input = Console.ReadKey(true).Key;
             }
         }
@@ -276,8 +301,8 @@ namespace Agoraphobia
             else if (room.Items.Count == 1)
             {
                 IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
-                ShowOption(ref selected, id, -2, vOffset, item.Art);
-                Console.Write($"  >> Pick up {item.Name}");
+                ShowOption(ref selected, id, 0, vOffset, item.Art);
+                Console.Write($">> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             
@@ -293,6 +318,8 @@ namespace Agoraphobia
             while (true)
             {
                 ChooseItem(id, current, selected);
+                if (Console.KeyAvailable)
+                    Console.ReadKey(true);
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
                 {
@@ -360,7 +387,7 @@ namespace Agoraphobia
             else
             {
                 Console.SetCursorPosition(10, 24);
-                Console.WriteLine("You can't buy anything from this creature.");
+                Console.Write("You can't buy anything from this creature.");
             }
             ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
             Console.Write(">> Exit");
@@ -390,7 +417,9 @@ namespace Agoraphobia
         {
             ClearInteraction();
             Console.SetCursorPosition(5, 25);
-            Console.Write(msg+"\n     Press any key to dream on.");
+            Console.Write(msg);
+            Console.SetCursorPosition(5, 26);
+            Console.Write("Press any key to dream on.");
             Console.ReadKey();
         }
 
