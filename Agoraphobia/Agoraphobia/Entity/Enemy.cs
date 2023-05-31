@@ -17,7 +17,7 @@ namespace Agoraphobia.Entity
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
-        private int maxHP;
+        public int MaxHP { get; set; }
         public string Art { get; private set; }
         public string Description { get => description; }
         private readonly int dreamCoins;
@@ -74,7 +74,7 @@ namespace Agoraphobia.Entity
             Defense = def;
             AttackDamage = attack;
             this.sanity = sanity;
-            maxHP = hp;
+            MaxHP = hp;
             HP = hp;
             Energy = energy;
             dreamCoins = coins;
@@ -91,14 +91,14 @@ namespace Agoraphobia.Entity
             Player.ChangeCoins(DreamCoins);
             foreach (int item in Inventory)
             {
-                if (r.NextDouble()<=DropRate[item])
+                if (r.NextDouble()<=DropRate[item] && Player.Inventory.Count <= 18)
                 {
                     Player.Inventory.Add(item);
                 }
             }
             Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy
             Program.room.RemoveEnemy();
-            hp = maxHP;
+            hp = MaxHP;
             Program.MainScene(); //Need to somehow get back to the Main scene
         }
     }

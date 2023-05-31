@@ -307,10 +307,12 @@ namespace Agoraphobia
             }
         }
 
-        private static void End()
+        public static void End()
         {
             if (gameEnded)
             {
+                string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
+                File.WriteAllText($"{IElement.PATH}Player.txt", content);
                 Environment.Exit(0);
             }
             else

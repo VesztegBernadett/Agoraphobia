@@ -11,6 +11,7 @@ namespace Agoraphobia.Entity
     {
         int Defense { get; }
         int HP { get; set; }
+        int MaxHP { get; set; }
         int Energy { get; }
         int AttackDamage { get; }
         int Sanity { get; }

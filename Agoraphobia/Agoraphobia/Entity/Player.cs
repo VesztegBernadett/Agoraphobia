@@ -83,8 +83,7 @@ namespace Agoraphobia.Entity
         public static string Name { get; private set; } = "asdasd";
 
         public static DateTime playTimeStart;
-        private static int score = 0;
-
+        
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
@@ -97,8 +96,8 @@ namespace Agoraphobia.Entity
             while (Energy>0&&target.HP>0)
             {
                 Console.Clear();
-                Console.SetCursorPosition((120 - target.Name.Length - target.HP.ToString().Length) / 2, 1);
-                Console.WriteLine($"{target.Name}, {target.HP}");
+                Console.SetCursorPosition((120 - target.Name.Length - 3 - target.MaxHP.ToString().Length - target.HP.ToString().Length) / 2, 1);
+                Console.WriteLine($"{target.Name}, {target.HP} / {target.MaxHP}");
                 List<string> rows = target.Art.Split('\n').ToList();
                 int TargetArtLength = 80 - rows[0].Length;
                 for (int i = 0; i < rows.Count(); i++)
@@ -191,6 +190,7 @@ namespace Agoraphobia.Entity
             TimeSpan playTime = playTimeEnd - playTimeStart;
 
             Viewport.Message($"You woke up successfully, and dreamt up the best story ever, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
+            Program.End();
         }
 
         // ez ilyen.
