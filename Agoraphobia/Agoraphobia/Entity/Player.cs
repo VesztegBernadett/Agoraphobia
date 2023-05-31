@@ -181,6 +181,7 @@ namespace Agoraphobia.Entity
             TimeSpan playTime = playTimeEnd - playTimeStart;
 
             Viewport.Message($"You went insane, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
+            Program.End();
         }
 
         public static void WakeUp()

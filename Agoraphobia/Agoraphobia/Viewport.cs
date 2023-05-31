@@ -40,16 +40,22 @@ namespace Agoraphobia
                         switch (selected)
                         {
                             case 0:
-
+                                string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
+                                File.WriteAllText($"{IElement.PATH}Player.txt", content);
+                                return;
                             case 1:
-
+                                return;
                             case 2:
-                                break;
+                                return;
                         }
                         return;
                 }
                 input = Console.ReadKey(true).Key;
             }
+        }
+        private static void Tutorial()
+        {
+
         }
         private static void ChooseMenuPoint(int selected)
         {

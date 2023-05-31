@@ -94,25 +94,6 @@ namespace Agoraphobia
             Console.Title = "Agoraphobia";
             Console.CursorVisible = false;
 
-            //Load player's values from file
-            string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
-            if (int.Parse(rows[10].Split('#')[0])!=1)
-            {
-                Player.ChangeDefense(int.Parse(rows[0].Split('#')[0])-Player.Defense);
-                Player.ChangeMaxHP( int.Parse(rows[1].Split('#')[0])-Player.MaxHP);
-                Player.ChangeHP(int.Parse(rows[2].Split('#')[0])-Player.HP);
-                Player.Points= int.Parse(rows[3].Split('#')[0]);
-                Player.MaxEnergy=int.Parse(rows[4].Split('#')[0]);
-                Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0])-Player.Energy);
-                Player.ChangeAttack(int.Parse(rows[6].Split('#')[0])-Player.AttackDamage);
-                Player.ChangeSanity(int.Parse(rows[7].Split('#')[0])-Player.Sanity);
-                Player.Inventory=rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
-                Player.ChangeCoins(int.Parse(rows[9].Split('#')[0])-Player.DreamCoins);
-            }
-
-            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
-                CreateRoom(i);
-
             while (true)
             {
                 try
@@ -129,6 +110,25 @@ namespace Agoraphobia
                     continue;
                 }
             }
+
+            //Load player's values from file
+            string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
+            if (int.Parse(rows[10].Split('#')[0]) != 1)
+            {
+                Player.ChangeDefense(int.Parse(rows[0].Split('#')[0]) - Player.Defense);
+                Player.ChangeMaxHP(int.Parse(rows[1].Split('#')[0]) - Player.MaxHP);
+                Player.ChangeHP(int.Parse(rows[2].Split('#')[0]) - Player.HP);
+                Player.Points = int.Parse(rows[3].Split('#')[0]);
+                Player.MaxEnergy = int.Parse(rows[4].Split('#')[0]);
+                Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0]) - Player.Energy);
+                Player.ChangeAttack(int.Parse(rows[6].Split('#')[0]) - Player.AttackDamage);
+                Player.ChangeSanity(int.Parse(rows[7].Split('#')[0]) - Player.Sanity);
+                Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
+                Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
+            }
+
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
+                CreateRoom(i);
 
             MainScene();
         }
