@@ -9,6 +9,3 @@ Points#0
 #Inventory
 100#DreamCoins
 1#IsNew
-
-
-This file is just a sample with the basic stats.
