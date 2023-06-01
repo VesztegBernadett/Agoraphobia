@@ -9,13 +9,69 @@ using Agoraphobia.Items;
 using System.IO;
 using System.ComponentModel;
 using System.Threading;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+//using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Diagnostics;
 
 namespace Agoraphobia
 {
     class Viewport
     {
+        private static void SelectSlot()
+        {
+            ConsoleKey input = ConsoleKey.DownArrow;
+            int selected = -1;
+            do
+            {
+                Console.Clear();
+                switch (input)
+                {
+                    case ConsoleKey.DownArrow:
+                        if (selected < 3)
+                        {
+                            selected++;
+                        }
+                        break;
+                    case ConsoleKey.UpArrow:
+                        if (selected > 0)
+                        {
+                            selected--;
+                        }
+                        break;
+                }
+                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] { 65, 2 });
+                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
+                if (selected == 0)
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                ShowSingle("------------\n| 1st slot |\n------------", new int[] { 92, 13 });
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                if (selected == 1)
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                ShowSingle("------------\n| 2nd slot |\n------------", new int[] { 92, 18 });
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                if (selected == 2)
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                ShowSingle("------------\n| 3rd slot |\n------------", new int[] { 92, 23 });
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                if ( selected == 3)
+                    Console.BackgroundColor = ConsoleColor.Magenta;
+                ShowSingle("------------\n|   Back   |\n------------", new int[] { 92, 28 });
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                input = Console.ReadKey(true).Key;
+
+            } while (input!=ConsoleKey.Enter);
+            if (selected == 3)
+            {
+                Menu();
+            }
+            else
+            {
+                Player.Slot = selected + 1;
+            }
+        }
         public static void Intro()
         {
             string[] text = File.ReadAllText($"{IElement.PATH}Intro.txt").Split('\n');
@@ -51,13 +107,12 @@ namespace Agoraphobia
                         if (selected == 0)
                             selected = 2;
                         else selected--;
-                        ChooseMenuPoint(selected);
+                
                         break;
                     case ConsoleKey.DownArrow:
                         if (selected == 2)
                             selected = 0;
                         else selected++;
-                        ChooseMenuPoint(selected);
                         break;
                     case ConsoleKey.Enter:
                         switch (selected)
@@ -67,12 +122,14 @@ namespace Agoraphobia
                                 File.WriteAllText($"{IElement.PATH}Player.txt", content);
                                 return;
                             case 1:
+                                SelectSlot();
                                 return;
                             case 2:
                                 return;
                         }
                         return;
                 }
+                ChooseMenuPoint(selected);
                 if (Console.KeyAvailable)
                     Console.ReadKey(true);
                 input = Console.ReadKey(true).Key;

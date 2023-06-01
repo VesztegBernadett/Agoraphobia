@@ -113,7 +113,7 @@ namespace Agoraphobia
             }
 
             //Load player's values from file
-            string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
+            string[] rows = File.ReadAllLines($"{IElement.PATH}Player{Player.Slot}.txt");
             if (int.Parse(rows[10].Split('#')[0]) != 1)
             {
                 Player.ChangeDefense(int.Parse(rows[0].Split('#')[0]) - Player.Defense);
@@ -334,13 +334,13 @@ namespace Agoraphobia
             if (gameEnded)
             {
                 string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
-                File.WriteAllText($"{IElement.PATH}Player.txt", content);
+                File.WriteAllText($"{IElement.PATH}Player{Player.Slot}.txt", content);
                 Environment.Exit(0);
             }
             else
             {
                 //Save player's data when quit from the game
-                StreamWriter playerData = new StreamWriter($"{IElement.PATH}Player.txt");
+                StreamWriter playerData = new StreamWriter($"{IElement.PATH}Player{Player.Slot}.txt");
                 playerData.Write($"{Player.Defense}#Defense\n{Player.MaxHP}#MaxHP\n" +
                     $"{Player.HP}#HP\n{Player.Points}#Points\n" +
                     $"{Player.MaxEnergy}#MaxEnergy\n{Player.Energy}#Energy\n" +

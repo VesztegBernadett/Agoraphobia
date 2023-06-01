@@ -15,11 +15,10 @@ namespace Agoraphobia.Entity
 {
     internal class Player
     {
-        static string[] rows = File.ReadAllLines($"{IElement.PATH}Player.txt");
         public static int Defense { get; private set; } = 3;
         public static int MaxHP { get; private set; } = 15;
         private static int hp = 15;
-
+        public static int Slot { get; set; }
         public static int Points = 0;
 
         public static int EffectDuration = 0;
