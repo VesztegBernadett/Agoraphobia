@@ -112,6 +112,10 @@ namespace Agoraphobia
                 }
             }
 
+            //Generate rooms
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
+                CreateRoom(i);
+
             //Load player's values from file
             string[] rows = File.ReadAllLines($"{IElement.PATH}Player{Player.Slot}.txt");
             if (int.Parse(rows[10].Split('#')[0]) != 1)
@@ -126,11 +130,10 @@ namespace Agoraphobia
                 Player.ChangeSanity(int.Parse(rows[7].Split('#')[0]) - Player.Sanity);
                 Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
                 Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
+                room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
             }
             else Viewport.Intro();
 
-            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
-                CreateRoom(i);
 
             MainScene();
         }
@@ -345,7 +348,7 @@ namespace Agoraphobia
                     $"{Player.HP}#HP\n{Player.Points}#Points\n" +
                     $"{Player.MaxEnergy}#MaxEnergy\n{Player.Energy}#Energy\n" +
                     $"{Player.AttackDamage}#Attack\n{Player.Sanity}#Sanity\n" +
-                    $"{string.Join(';',Player.Inventory)}#Inventory\n{Player.DreamCoins}#DreamCoins\n{0}#IsNew\n{DateTime.Now}#Modified");
+                    $"{string.Join(';',Player.Inventory)}#Inventory\n{Player.DreamCoins}#DreamCoins\n{0}#IsNew\n{DateTime.Now}#Modified\n{room.Id}#Room");
                 playerData.Close();
 
                 Viewport.Message("Your data is saved. See you later!");

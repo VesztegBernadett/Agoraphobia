@@ -10,3 +10,4 @@
 116#DreamCoins
 0#IsNew
 Not yet#Modified
+0#Room
