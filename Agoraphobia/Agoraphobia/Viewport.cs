@@ -20,9 +20,11 @@ namespace Agoraphobia
         {
             ConsoleKey input = ConsoleKey.DownArrow;
             int selected = -1;
+            Console.Clear();
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] { 65, 2 });
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
             do
             {
-                Console.Clear();
                 switch (input)
                 {
                     case ConsoleKey.DownArrow:
@@ -38,8 +40,6 @@ namespace Agoraphobia
                         }
                         break;
                 }
-                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] { 65, 2 });
-                ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
                 if (selected == 0)
                     Console.BackgroundColor = ConsoleColor.Magenta;
                 ShowSingle("------------\n| 1st slot |\n------------", new int[] { 92, 13 });
@@ -118,8 +118,9 @@ namespace Agoraphobia
                         switch (selected)
                         {
                             case 0:
+                                SelectSlot();
                                 string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
-                                File.WriteAllText($"{IElement.PATH}Player.txt", content);
+                                File.WriteAllText($"{IElement.PATH}Player{Player.Slot}.txt", content);
                                 return;
                             case 1:
                                 SelectSlot();
@@ -143,15 +144,15 @@ namespace Agoraphobia
         {
             if (selected == 0)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("New Game", new int[] { 93, 16 });
+            ShowSingle("------------\n| New Game |\n------------", new int[] { 93, 16 });
             Console.BackgroundColor = ConsoleColor.Black;
             if (selected == 1)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("Continue", new int[] { 93, 21 });
+            ShowSingle("------------\n| Continue |\n------------", new int[] { 93, 21 });
             Console.BackgroundColor = ConsoleColor.Black;
             if (selected == 2)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("Tutorial", new int[] { 93, 26 });
+            ShowSingle("------------\n| Tutorial |\n------------", new int[] { 93, 26 });
             Console.BackgroundColor = ConsoleColor.Black;
         }
         private static void ShowSingle(string art, int[] coordinates)
