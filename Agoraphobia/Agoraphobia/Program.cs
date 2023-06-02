@@ -345,7 +345,7 @@ namespace Agoraphobia
                     $"{Player.HP}#HP\n{Player.Points}#Points\n" +
                     $"{Player.MaxEnergy}#MaxEnergy\n{Player.Energy}#Energy\n" +
                     $"{Player.AttackDamage}#Attack\n{Player.Sanity}#Sanity\n" +
-                    $"{string.Join(';',Player.Inventory)}#Inventory\n{Player.DreamCoins}#DreamCoins\n{0}#IsNew");
+                    $"{string.Join(';',Player.Inventory)}#Inventory\n{Player.DreamCoins}#DreamCoins\n{0}#IsNew\n{DateTime.Now}#Modified");
                 playerData.Close();
 
                 Viewport.Message("Your data is saved. See you later!");

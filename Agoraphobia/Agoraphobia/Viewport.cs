@@ -20,6 +20,10 @@ namespace Agoraphobia
         {
             ConsoleKey input = ConsoleKey.DownArrow;
             int selected = -1;
+            string slot1 = File.ReadAllLines($"{IElement.PATH}Player1.txt")[11].Split('#')[0];
+            string slot2 = File.ReadAllLines($"{IElement.PATH}Player2.txt")[11].Split('#')[0];
+            string slot3 = File.ReadAllLines($"{IElement.PATH}Player3.txt")[11].Split('#')[0];
+            
             Console.Clear();
             ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] { 65, 2 });
             ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
@@ -42,17 +46,17 @@ namespace Agoraphobia
                 }
                 if (selected == 0)
                     Console.BackgroundColor = ConsoleColor.Magenta;
-                ShowSingle("------------\n| 1st slot |\n------------", new int[] { 92, 13 });
+                ShowSingle($"------------\n| 1st slot | Last modified: {slot1}\n------------", new int[] { 92, 13 });
                 Console.BackgroundColor = ConsoleColor.Black;
 
                 if (selected == 1)
                     Console.BackgroundColor = ConsoleColor.Magenta;
-                ShowSingle("------------\n| 2nd slot |\n------------", new int[] { 92, 18 });
+                ShowSingle($"------------\n| 2nd slot | Last modified: {slot2}\n------------", new int[] { 92, 18 });
                 Console.BackgroundColor = ConsoleColor.Black;
 
                 if (selected == 2)
                     Console.BackgroundColor = ConsoleColor.Magenta;
-                ShowSingle("------------\n| 3rd slot |\n------------", new int[] { 92, 23 });
+                ShowSingle($"------------\n| 3rd slot | Last modified: {slot3}\n------------", new int[] { 92, 23 });
                 Console.BackgroundColor = ConsoleColor.Black;
 
                 if ( selected == 3)
