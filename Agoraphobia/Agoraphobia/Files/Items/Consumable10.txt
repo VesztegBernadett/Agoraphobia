@@ -7,4 +7,4 @@ It appears at the strangest places.#Description
 0#Armor
 3#Attack
 2#Duration
-300#Price
+200#Price

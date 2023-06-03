@@ -6,5 +6,5 @@ Tasty and salty, where did it come from.#Description
 3#HP
 1#Armor
 0#Attack
-1#Duration
+3#Duration
 100#Price

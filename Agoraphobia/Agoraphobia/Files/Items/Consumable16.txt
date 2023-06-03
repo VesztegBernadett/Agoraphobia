@@ -7,4 +7,4 @@ You may equip this shield but at what cost?#Description
 3#Armor
 0#Attack
 100#Duration
-300#Price
+150#Price

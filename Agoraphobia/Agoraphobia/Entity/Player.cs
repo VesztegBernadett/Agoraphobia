@@ -142,7 +142,15 @@ namespace Agoraphobia.Entity
                         {
                             
                             Consumable selectedConsumable = (Consumable)selectedItem;
-                            if (EffectDuration > 0 && EffectDuration < 100)
+                            if (selectedConsumable.Duration == 100)
+                            {
+                                MaxHP += selectedConsumable.HP;
+                                MaxEnergy += selectedConsumable.Energy;
+                                ChangeDefense(+selectedConsumable.Armor);
+                                ChangeAttack(+selectedConsumable.Attack);
+                                Inventory.Remove(Inventory[inventory]);
+                            }
+                            else if (EffectDuration > 0 && EffectDuration < 100)
                             {
                                 ChangeAttack(-ChangedAttack);
                                 ChangeDefense(-ChangedDefense);
@@ -155,15 +163,7 @@ namespace Agoraphobia.Entity
                                 ChangeAttack(+selectedConsumable.Attack);
                                 Inventory.Remove(Inventory[inventory]);
                             }
-                            else if (EffectDuration == 100)
-                            {
-                                MaxHP += selectedConsumable.HP;
-                                MaxEnergy += selectedConsumable.Energy;
-                                ChangeDefense(+selectedConsumable.Armor);
-                                ChangeAttack(+selectedConsumable.Attack);
-                                Inventory.Remove(Inventory[inventory]);
-                            }
-                            else if (EffectDuration == 0 || EffectDuration < 0)
+                            else if ((EffectDuration == 0 || EffectDuration < 0) && selectedConsumable.Duration != 100)
                             {
                                 EffectDuration = selectedConsumable.Duration;
                                 ChangedDefense = selectedConsumable.Armor;

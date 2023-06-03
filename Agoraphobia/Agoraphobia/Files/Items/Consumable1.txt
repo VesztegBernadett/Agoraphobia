@@ -2,9 +2,9 @@
 Bread#Name
 A bit stale, but must do#Desciption
 0#Rarity
-1#Energy
+2#Energy
 0#HP
 2#Armor
 0#Attack
-1#Duration
+2#Duration
 50#Price

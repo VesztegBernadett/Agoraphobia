@@ -7,4 +7,4 @@ Where does this dust come from and why is it good if I inhale it?#Description
 -2#Armor
 0#Attack
 100#Duration
-300#Price
+200#Price

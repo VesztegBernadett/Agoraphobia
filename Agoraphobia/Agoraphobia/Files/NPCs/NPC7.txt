@@ -2,5 +2,5 @@
 Skelly the skeleton#Name
 A friendly skeleton he can't speak but he can strenghten your bones.#Description
 3#Type
-12;101#Inventory
+12;101;103;103#Inventory
 ...(he can't speak but you can tell he wants to give you a warm welcome).#Intro

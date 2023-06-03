@@ -7,4 +7,4 @@ Comes from evil entities, if you swallow one it might grant some strength.#Descr
 0#Armor
 2#Attack
 1#Duration
-150#Price
+50#Price

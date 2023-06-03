@@ -6,4 +6,4 @@ They have lived here since ancient times.#Description
 15#HP
 1#Energy
 8#AttackDamage
-25#Sanity
+10#Sanity

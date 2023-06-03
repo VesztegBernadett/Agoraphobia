@@ -253,7 +253,7 @@ namespace Agoraphobia
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}       ");
             Console.SetCursorPosition(125, 32);
-            Console.Write($"Inventory: {Player.Inventory.Count} / 10");
+            Console.Write($"Inventory: {Player.Inventory.Count} / 18");
             Console.SetCursorPosition(125, 33);
             Console.Write($"Current duration: {Player.EffectDuration}");
         }
@@ -524,7 +524,7 @@ namespace Agoraphobia
             else if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Consumable")
             {
                 Consumable selectedConsumable = (Consumable)selectedItem;
-                if (selectedConsumable.Energy == 100)
+                if (selectedConsumable.Duration == 100)
                 {
                     Console.Write($"This item or buff adds: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it's permanent");
                 }
