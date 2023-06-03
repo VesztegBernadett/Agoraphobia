@@ -1,0 +1,9 @@
+15#Id
+Ghost of Neumann#Name
+Wait, this is not an ordinary ghost. This is the ghost of the great hungarian mathematician, Neumann János!#Description
+12(0.5;15(0.1;DC(80-110#Inventory
+5#Defense
+17#HP
+1#Energy
+10#AttackDamage
+50#Sanity

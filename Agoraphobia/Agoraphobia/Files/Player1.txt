@@ -1,13 +1,13 @@
 3#Defense
 15#MaxHP
 15#HP
-50#Points
-3#MaxEnergy
-0#Energy
+Points#0
+3#MAXENERGY
+3#Energy
 3#Attack
-52#Sanity
-2;0;8#Inventory
-110#DreamCoins
-0#IsNew
-6/2/2023 10:22:00 PM#Modified
-14#Room
+50#Sanity
+#Inventory
+100#DreamCoins
+1#IsNew
+Not yet#Modified
+0#Room

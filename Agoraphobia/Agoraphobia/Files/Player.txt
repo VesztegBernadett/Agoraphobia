@@ -9,3 +9,5 @@ Points#0
 #Inventory
 100#DreamCoins
 1#IsNew
+Not yet#Modified
+0#Room

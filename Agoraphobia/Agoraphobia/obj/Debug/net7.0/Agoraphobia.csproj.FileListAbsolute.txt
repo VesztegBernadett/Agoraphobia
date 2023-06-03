@@ -28,3 +28,18 @@ D:\Nerd Shit\Agoraphobia2-main\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Deb
 D:\Nerd Shit\Agoraphobia2-main\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.pdb
 D:\Nerd Shit\Agoraphobia2-main\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
 D:\Nerd Shit\Agoraphobia2-main\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.dll
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\refint\Agoraphobia.dll
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.pdb
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.exe
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.deps.json
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.runtimeconfig.json
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.dll
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.pdb
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.AssemblyReference.cache
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.GeneratedMSBuildEditorConfig.editorconfig
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfoInputs.cache
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfo.cs
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.CoreCompileInputs.cache
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll

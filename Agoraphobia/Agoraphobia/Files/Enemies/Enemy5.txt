@@ -3,7 +3,7 @@ White tiger#Name
 This is a very special creature, only the bravest can tame it.#Description
 6(0.9;DC(30-60#Inventory
 3#Defense
-18#HP
+28#HP
 1#Energy
 7#AttackDamage
-10#Sanity
+20#Sanity

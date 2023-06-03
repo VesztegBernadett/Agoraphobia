@@ -90,10 +90,16 @@ namespace Agoraphobia
                 }
                 Console.WriteLine();
                 Console.SetCursorPosition((200 - "(Press any key to continue)".Length) / 2, 25);
-                Console.WriteLine("(Press any key to continue)");
-                if (Console.KeyAvailable)
+                Console.WriteLine("(Press C to continue or press S to skip)");
+                ConsoleKey introinput = Console.ReadKey(true).Key;
+                if (introinput == ConsoleKey.C)
+                {
                     Console.ReadKey(true);
-                Console.ReadKey(true);
+                }
+                else if (introinput == ConsoleKey.S)
+                {
+                    i = text.Length - 1;
+                }
             }
         }
         public static void Menu()
@@ -246,6 +252,10 @@ namespace Agoraphobia
             Console.Write($"Energy: {Player.Energy} / {Player.MaxEnergy}       ");
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}       ");
+            Console.SetCursorPosition(125, 32);
+            Console.Write($"Inventory: {Player.Inventory.Count} / 10");
+            Console.SetCursorPosition(125, 33);
+            Console.Write($"Current duration: {Player.EffectDuration}");
         }
 
         public static void ShowInventory(int id)
@@ -514,7 +524,14 @@ namespace Agoraphobia
             else if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Consumable")
             {
                 Consumable selectedConsumable = (Consumable)selectedItem;
-                Console.Write($"Consumable replenishes: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it lasts for {selectedConsumable.Duration} rounds");
+                if (selectedConsumable.Energy == 100)
+                {
+                    Console.Write($"This item or buff adds: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it's permanent");
+                }
+                else
+                {
+                    Console.Write($"Consumable replenishes: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it lasts for {selectedConsumable.Duration} rounds");
+                }
             }
         }
     }

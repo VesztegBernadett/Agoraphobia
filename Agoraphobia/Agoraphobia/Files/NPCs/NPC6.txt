@@ -1,0 +1,6 @@
+6#Id
+The King#Name
+The king is untouchable, he is the ruler of the dream world and he gives out rare items.#Description
+3#Type
+10;12;15#Inventory
+At ease John, perhaps you are interested in something from my treasury?#Intro

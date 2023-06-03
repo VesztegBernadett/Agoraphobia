@@ -1,0 +1,10 @@
+103#Id
+Armor plate#Name
+You fortify your defenses and armor.#Description
+6#Rarity
+0#Energy
+0#Hp
+2#Armor
+0#Attack
+100#Duration
+500#Price

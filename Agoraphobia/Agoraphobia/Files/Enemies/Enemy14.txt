@@ -1,0 +1,9 @@
+14#Id
+The cursed knight#Name
+This knight's mind got taken over by his sword he went insane, killing his king in the process.#Description
+14(0.5;11(0.5;DC(150-200#Inventory
+8#Defense
+30#HP
+1#Energy
+12#AttackDamage
+50#Sanity

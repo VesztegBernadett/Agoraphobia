@@ -35,3 +35,5 @@ C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net5.0\Agor
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net5.0\ref\Agoraphobia.dll
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net5.0\Agoraphobia.pdb
 C:\Users\balu0\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.genruntimeconfig.cache
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.dll
+E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net5.0\Agoraphobia.pdb

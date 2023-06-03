@@ -1,0 +1,10 @@
+102#Id
+HP up#Name
+A simple but permanent HP up#Description
+6#Rarity
+0#Energy
+3#Hp
+0#Armor
+0#Attack
+100#Duration
+300#Price

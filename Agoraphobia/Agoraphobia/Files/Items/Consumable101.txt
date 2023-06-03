@@ -1,0 +1,10 @@
+101#Id
+Damage up#Name
+A simple but permanent damage up#Description
+6#Rarity
+0#Energy
+0#Hp
+0#Armor
+1#Attack
+100#Duration
+500#Price

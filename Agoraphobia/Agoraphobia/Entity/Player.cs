@@ -140,20 +140,40 @@ namespace Agoraphobia.Entity
                         }
                         else if (selectedItemType=="Agoraphobia.Items.Consumable")
                         {
-                            if (EffectDuration > 0)
-                            {
-                                ChangeDefense(ChangedDefense);
-                                ChangeAttack(ChangedAttack);
-                            }
+                            
                             Consumable selectedConsumable = (Consumable)selectedItem;
-                            EffectDuration = selectedConsumable.Duration;
-                            ChangedDefense = selectedConsumable.Armor;
-                            ChangedAttack = selectedConsumable.Attack;
-                            ChangeEnergy(+selectedConsumable.Energy);
-                            ChangeHP(+selectedConsumable.HP);
-                            ChangeDefense(+selectedConsumable.Armor);
-                            ChangeAttack(+selectedConsumable.Attack);
-                            Inventory.Remove(Inventory[inventory]);
+                            if (EffectDuration > 0 && EffectDuration < 100)
+                            {
+                                ChangeAttack(-ChangedAttack);
+                                ChangeDefense(-ChangedDefense);
+                                EffectDuration = selectedConsumable.Duration;
+                                ChangedDefense = selectedConsumable.Armor;
+                                ChangedAttack = selectedConsumable.Attack;
+                                ChangeEnergy(+selectedConsumable.Energy);
+                                ChangeHP(+selectedConsumable.HP);
+                                ChangeDefense(+selectedConsumable.Armor);
+                                ChangeAttack(+selectedConsumable.Attack);
+                                Inventory.Remove(Inventory[inventory]);
+                            }
+                            else if (EffectDuration == 100)
+                            {
+                                MaxHP += selectedConsumable.HP;
+                                MaxEnergy += selectedConsumable.Energy;
+                                ChangeDefense(+selectedConsumable.Armor);
+                                ChangeAttack(+selectedConsumable.Attack);
+                                Inventory.Remove(Inventory[inventory]);
+                            }
+                            else if (EffectDuration == 0 || EffectDuration < 0)
+                            {
+                                EffectDuration = selectedConsumable.Duration;
+                                ChangedDefense = selectedConsumable.Armor;
+                                ChangedAttack = selectedConsumable.Attack;
+                                ChangeEnergy(+selectedConsumable.Energy);
+                                ChangeHP(+selectedConsumable.HP);
+                                ChangeDefense(+selectedConsumable.Armor);
+                                ChangeAttack(+selectedConsumable.Attack);
+                                Inventory.Remove(Inventory[inventory]);
+                            }
                             if (inventory != 0)
                             {
                                 inventory--;

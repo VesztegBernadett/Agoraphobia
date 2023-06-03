@@ -1,0 +1,8 @@
+48#Id
+Part of hell#Name
+You see flames burning in what seems impossible heat, and ____(?) has his gaze at you.#Description
+0#Type
+1#Orientation
+7#NPC
+0#Enemy
+11#Items

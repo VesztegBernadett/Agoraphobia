@@ -1,0 +1,8 @@
+39#Id
+Haunted graveyard#Name
+You feel as a chill runs down on your spine and as if someone is looking at you from behind you turn around and found a __(?).#Description
+0#Type
+1#Orientation
+7#NPC
+0#Enemy
+10#Items

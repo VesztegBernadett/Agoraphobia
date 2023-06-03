@@ -1,0 +1,8 @@
+31#Id
+Broken carriage#Name
+You see a broken carriage next to it is a ____(?) and a ___(?).#Description
+0#Type
+1#Orientation
+0#NPC
+12#Enemy
+12#Items
