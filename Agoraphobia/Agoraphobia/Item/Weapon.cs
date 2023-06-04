@@ -87,7 +87,7 @@ namespace Agoraphobia.Items
                 {
                     Rarity = (ItemRarity)rarity;
                 }
-                Price = price - 100;
+                Price = price - 50;
                 IItem.Items.Add(this);
                 Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
             }
@@ -95,18 +95,18 @@ namespace Agoraphobia.Items
             {
                 this.id = id;
                 this.name = "Cheap " + name;
-                description = "This item is on sale!" + desc;
+                description = "It's a dull item." + desc;
                 MinMultiplier = minMultiplier;
                 MaxMultiplier = maxMultiplier;
                 Energy = energy;
                 Rarity = (ItemRarity)rarity;
-                if (price > 100)
+                if (price > 200)
                 {
                     Price = price - 200;
                 }
                 else
                 {
-                    Price = price - 100;
+                    Price = price - 50;
                 }
                 IItem.Items.Add(this);
                 Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");

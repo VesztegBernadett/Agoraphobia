@@ -135,7 +135,16 @@ namespace Agoraphobia.Entity
                             if (selectedWeapon.Energy<=Energy)
                             {
                                 Energy -= selectedWeapon.Energy;
-                                target.HP -= Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier))-target.Defense;
+                                int Attacking = Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier)) - target.Defense;
+                                if (Attacking < 0)
+                                {
+                                    Console.SetCursorPosition(5, 26);
+                                    Console.Write("Your last attack was too weak to affect the enemy.");
+                                }
+                                else
+                                {
+                                    target.HP -= Attacking;
+                                }
                             }
                         }
                         else if (selectedItemType=="Agoraphobia.Items.Consumable")
