@@ -6,4 +6,4 @@ Big and strong and he has.. cheese? If you are not strong enough run!#Descriptio
 35#HP
 1#Energy
 10#AttackDamage
-30#Sanity
+20#Sanity

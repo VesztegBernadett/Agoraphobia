@@ -6,4 +6,4 @@ Wait, this is not an ordinary ghost. This is the ghost of the great hungarian ma
 17#HP
 1#Energy
 10#AttackDamage
-50#Sanity
+5#Sanity

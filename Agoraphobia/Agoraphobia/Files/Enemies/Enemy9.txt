@@ -6,4 +6,4 @@ DC(10-20#Inventory
 10#HP
 1#Energy
 10#AttackDamage
-20#Sanity
+5#Sanity

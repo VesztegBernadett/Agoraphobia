@@ -6,4 +6,4 @@ DC(150-250#Inventory
 20#HP
 1#Energy
 5#AttackDamage
-25#Sanity
+5#Sanity

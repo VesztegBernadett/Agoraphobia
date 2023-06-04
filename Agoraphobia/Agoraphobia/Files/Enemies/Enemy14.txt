@@ -6,4 +6,4 @@ This knight's mind got taken over by his sword he went insane, killing his king 
 30#HP
 1#Energy
 12#AttackDamage
-50#Sanity
+30#Sanity

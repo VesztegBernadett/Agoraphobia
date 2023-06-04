@@ -6,4 +6,4 @@ The mighty dragon, it takes a lot to stop her and she is furious because her dau
 45#HP
 1#Energy
 14#AttackDamage
-35#Sanity
+25#Sanity

@@ -6,4 +6,4 @@ A simple printer with a not so simple plan to destroy the world.#Description
 20#HP
 1#Energy
 8#AttackDamage
-25#Sanity
+15#Sanity

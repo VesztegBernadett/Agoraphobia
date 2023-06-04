@@ -6,4 +6,4 @@ This is a very special creature, only the bravest can tame it.#Description
 28#HP
 1#Energy
 7#AttackDamage
-20#Sanity
+10#Sanity

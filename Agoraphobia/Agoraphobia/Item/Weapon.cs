@@ -13,6 +13,7 @@ namespace Agoraphobia.Items
 {
     internal class Weapon : IWeapons
     {
+        private static readonly Random random = new Random();
         private readonly int id;
         public int Id { get => id; }
         private readonly string name;
@@ -45,16 +46,84 @@ namespace Agoraphobia.Items
         }
         public Weapon(int id, string name, string desc, double minMultiplier, double maxMultiplier, int energy, int rarity, int price)
         {
-            this.id = id;
-            this.name = name;
-            description = desc;
-            MinMultiplier = minMultiplier;
-            MaxMultiplier = maxMultiplier;
-            Energy = energy;
-            Rarity = (ItemRarity)rarity;
-            Price = price;
-            IItem.Items.Add(this);
-            Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            int r = random.Next(0, 10);
+            if (r == 1 || r == 2)
+            {
+                this.id = id;
+                this.name = "Rare " + name;
+                description = "It's a rare item." + desc;
+                MinMultiplier = minMultiplier + 1;
+                MaxMultiplier = maxMultiplier + 1;
+                if (energy > 1)
+                {
+                    Energy = energy - 1;
+                }
+                else { Energy = energy; }
+                if (rarity > 0 && rarity < 6)
+                {
+                    Rarity = (ItemRarity)rarity + 1;
+                }
+                else
+                {
+                    Rarity = (ItemRarity)rarity;
+                }
+                Price = price + 100;
+                IItem.Items.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            }
+            else if (r == 3)
+            {
+                this.id = id;
+                this.name = "Clumsy " + name;
+                description = "It's a dull item." + desc;
+                MinMultiplier = minMultiplier;
+                MaxMultiplier = maxMultiplier - 1;
+                Energy = energy;
+                if (rarity > 0)
+                {
+                    Rarity = (ItemRarity)rarity - 1;
+                }
+                else
+                {
+                    Rarity = (ItemRarity)rarity;
+                }
+                Price = price - 100;
+                IItem.Items.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            }
+            else if (r == 4)
+            {
+                this.id = id;
+                this.name = "Cheap " + name;
+                description = "This item is on sale!" + desc;
+                MinMultiplier = minMultiplier;
+                MaxMultiplier = maxMultiplier;
+                Energy = energy;
+                Rarity = (ItemRarity)rarity;
+                if (price > 100)
+                {
+                    Price = price - 200;
+                }
+                else
+                {
+                    Price = price - 100;
+                }
+                IItem.Items.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            }
+            else
+            {
+                this.id = id;
+                this.name = name;
+                description = desc;
+                MinMultiplier = minMultiplier;
+                MaxMultiplier = maxMultiplier;
+                Energy = energy;
+                Rarity = (ItemRarity)rarity;
+                Price = price;
+                IItem.Items.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            }
         }
     }
 }

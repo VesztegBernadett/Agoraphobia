@@ -6,4 +6,4 @@ These are similar to butterflies but they are evil.#Description
 20#HP
 1#Energy
 9#AttackDamage
-30#Sanity
+15#Sanity

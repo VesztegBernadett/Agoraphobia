@@ -12,6 +12,7 @@ namespace Agoraphobia.Entity
 {
     internal class Enemy : IEnemy
     {
+        private static readonly Random random = new Random();
         private readonly int id;
         public int Id { get => id; }
         private readonly string name;
@@ -66,22 +67,92 @@ namespace Agoraphobia.Entity
         }
         public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
         {
-            DropRate = new Dictionary<int, double>();
-            Inventory = items;
-            this.id = id;
-            this.name = name;
-            description = desc;
-            Defense = def;
-            AttackDamage = attack;
-            this.sanity = sanity;
-            MaxHP = hp;
-            HP = hp;
-            Energy = energy;
-            dreamCoins = coins;
-            for (int i = 0; i < items.Count; i++)
-                DropRate.Add(items[i], rates[i]);
-            IEnemy.Enemies.Add(this);
-            Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+            int r = random.Next(5);
+            if (r == 1)
+            {
+                DropRate = new Dictionary<int, double>();
+                Inventory = items;
+                this.id = id;
+                this.name = "Tough "+name;
+                description = "This one is tougher!"+desc;
+                Defense = def+2;
+                AttackDamage = attack+2;
+                this.sanity = sanity+10;
+                MaxHP = hp+5;
+                HP = hp+5;
+                Energy = energy;
+                dreamCoins = coins+100;
+                for (int i = 0; i < items.Count; i++)
+                    DropRate.Add(items[i], rates[i]);
+                IEnemy.Enemies.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+            }
+            else if (r == 2)
+            {
+                DropRate = new Dictionary<int, double>();
+                Inventory = items;
+                this.id = id;
+                this.name = "Weak "+name;
+                description = "This one is weaker!"+desc;
+                if (def != 0)
+                {
+                    Defense = def - 1;
+                }
+                else
+                {
+                    Defense = def;
+                }
+                if (attack > 5)
+                {
+                    AttackDamage = attack-2;
+                }
+                else
+                {
+                    AttackDamage = attack;
+                }
+                if (sanity > 10)
+                {
+                    this.sanity = sanity - 10;
+                }
+                else
+                {
+                    this.sanity = sanity;
+                }
+                MaxHP = hp-5;
+                HP = hp-5;
+                Energy = energy;
+                if (coins > 50)
+                {
+                    dreamCoins = coins - 50;
+                }
+                else
+                {
+                    dreamCoins = coins;
+                }
+                for (int i = 0; i < items.Count; i++)
+                    DropRate.Add(items[i], rates[i]);
+                IEnemy.Enemies.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+            }
+            else
+            {
+                DropRate = new Dictionary<int, double>();
+                Inventory = items;
+                this.id = id;
+                this.name = name;
+                description = desc;
+                Defense = def;
+                AttackDamage = attack;
+                this.sanity = sanity;
+                MaxHP = hp;
+                HP = hp;
+                Energy = energy;
+                dreamCoins = coins;
+                for (int i = 0; i < items.Count; i++)
+                    DropRate.Add(items[i], rates[i]);
+                IEnemy.Enemies.Add(this);
+                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+            }
         }
 
         public void Death()

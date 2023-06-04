@@ -6,4 +6,4 @@ They don't think. They are just panick. They are often in a group.#Description
 28#HP
 1#Energy
 6#AttackDamage
-10#Sanity
+5#Sanity

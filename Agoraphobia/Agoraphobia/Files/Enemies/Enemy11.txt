@@ -6,4 +6,4 @@ Nobody knows why and how is this sword here. You may get it but it will hurt.#De
 20#HP
 1#Energy
 50#AttackDamage
-30#Sanity
+10#Sanity

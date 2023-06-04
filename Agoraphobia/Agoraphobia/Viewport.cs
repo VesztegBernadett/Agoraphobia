@@ -519,7 +519,7 @@ namespace Agoraphobia
             if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Weapon")
             {
                 Weapon selectedWeapon = (Weapon)selectedItem;
-                Console.Write($"Weapon multiplier: {selectedWeapon.MinMultiplier}-{selectedWeapon.MaxMultiplier} Potential damage: {selectedWeapon.MinMultiplier*Player.AttackDamage}-{selectedWeapon.MaxMultiplier*Player.AttackDamage}");
+                Console.Write($"Energy cost: {selectedWeapon.Energy} Weapon multiplier: {selectedWeapon.MinMultiplier}-{selectedWeapon.MaxMultiplier} Potential damage: {selectedWeapon.MinMultiplier*Player.AttackDamage}-{selectedWeapon.MaxMultiplier*Player.AttackDamage}");
             }
             else if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Consumable")
             {

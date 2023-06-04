@@ -201,7 +201,7 @@ namespace Agoraphobia.Entity
             DateTime playTimeEnd = DateTime.UtcNow;
             TimeSpan playTime = playTimeEnd - playTimeStart;
 
-            Viewport.Message($"You went insane, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
+            Viewport.Message($"You went insane, the game has ended.\n\tPlaytime:{playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points-100}\n");
             Program.End();
         }
 
@@ -211,7 +211,7 @@ namespace Agoraphobia.Entity
             DateTime playTimeEnd = DateTime.UtcNow;
             TimeSpan playTime = playTimeEnd - playTimeStart;
 
-            Viewport.Message($"You woke up successfully, and dreamt up the best story ever, the game has ended.\n\tPlaytime: {playTime.Hours} hours {playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
+            Viewport.Message($"You woke up successfully, and dreamt up the best story ever, the game has ended.\n\tPlaytime:{playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
             Program.End();
         }
 
