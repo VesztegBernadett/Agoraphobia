@@ -31,21 +31,19 @@ namespace Agoraphobia
         private static void CreateExits()
         {
             room.Exits.Clear();
-            if (IRoom.Rooms.Count <= 3)
+            List<int> temp = IRoom.Rooms.Select(x => x.Id).ToList();
+            while (room.Exits.Count < 3)
             {
-                for (int i = 0; i < IRoom.Rooms.Count; i++)
+                int id = r.Next(0, temp.Count);
+                bool containsName = false;
+                if (temp[id] != room.Id)
                 {
-                    if (IRoom.Rooms[i].Id != room.Id)
-                        room.Exits.Add(IRoom.Rooms[i].Id);
-                }
-            }
-            else
-            {
-                List<int> temp = IRoom.Rooms.Select(x => x.Id).ToList();
-                while (room.Exits.Count < 3)
-                {
-                    int id = r.Next(0, temp.Count);
-                    if (temp[id] != room.Id)
+                    foreach (var item in room.Exits)
+                    {
+                        if (IRoom.Rooms.Find(x => x.Id == item).Name == IRoom.Rooms.Find(x => x.Id == temp[id]).Name)
+                            containsName = true;
+                    }
+                    if (!containsName)
                     {
                         room.Exits.Add(temp[id]);
                         temp.Remove(temp[id]);
@@ -111,6 +109,9 @@ namespace Agoraphobia
                     continue;
                 }
             }
+            //Generate rooms
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
+                CreateRoom(i);
 
             //Load player's values from file
             string[] rows = File.ReadAllLines($"{IElement.PATH}Player{Player.Slot}.txt");
@@ -130,10 +131,6 @@ namespace Agoraphobia
                 room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
             }
             else Viewport.Intro();
-
-            //Generate rooms
-            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
-                CreateRoom(i);
 
             MainScene();
         }
