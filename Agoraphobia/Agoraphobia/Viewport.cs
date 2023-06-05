@@ -78,29 +78,9 @@ namespace Agoraphobia
         }
         public static void Intro()
         {
+            Console.Clear();
             string[] text = File.ReadAllText($"{IElement.PATH}Intro.txt").Split('\n');
-            for (int i = 0; i < text.Length; i++)
-            {
-                Console.Clear();
-                Console.SetCursorPosition((200 - text[i].Length) / 2, 15);
-                for (int j = 0; j < text[i].Length; j++)
-                {
-                    Console.Write(text[i][j]);
-                    Thread.Sleep(10);
-                }
-                Console.WriteLine();
-                Console.SetCursorPosition((200 - "(Press any key to continue)".Length) / 2, 25);
-                Console.WriteLine("(Press C to continue or press S to skip)");
-                ConsoleKey introinput = Console.ReadKey(true).Key;
-                if (introinput == ConsoleKey.C)
-                {
-                    Console.ReadKey(true);
-                }
-                else if (introinput == ConsoleKey.S)
-                {
-                    i = text.Length - 1;
-                }
-            }
+            Output(0, text.Length, text, 0, 15, 200, ConsoleColor.Magenta, false);
         }
         public static void Menu()
         {
@@ -115,12 +95,12 @@ namespace Agoraphobia
                 {
                     case ConsoleKey.UpArrow:
                         if (selected == 0)
-                            selected = 2;
+                            selected = 3;
                         else selected--;
                 
                         break;
                     case ConsoleKey.DownArrow:
-                        if (selected == 2)
+                        if (selected == 3)
                             selected = 0;
                         else selected++;
                         break;
@@ -136,33 +116,230 @@ namespace Agoraphobia
                                 SelectSlot();
                                 return;
                             case 2:
+                                Console.Clear();
+                                Tutorial();
+                                Menu();
                                 return;
+                            case 3:
+                                Environment.Exit(0);
+                                break;
                         }
                         return;
                 }
                 ChooseMenuPoint(selected);
-                if (Console.KeyAvailable)
+                while (Console.KeyAvailable)
                     Console.ReadKey(true);
                 input = Console.ReadKey(true).Key;
             }
         }
+        private static void Output(int startIndex, int endIndex, string[] text, int hOffset, int vOffset, int width, ConsoleColor color, bool grid)
+        {
+            for (int i = startIndex; i < endIndex; i++)
+            {
+                int length = 2 * text[i].Count(x => x == '[') + 2;
+                if (grid)
+                    ShowGrid();
+                Console.SetCursorPosition(hOffset + (width - (text[i].Length - length)) / 2, vOffset);
+                for (int j = 0; j < text[i].Length; j++)
+                {
+                    if (text[i][j] == '[')
+                        Console.ForegroundColor = color;
+                    else if (text[i][j] == ']')
+                        Console.ForegroundColor = ConsoleColor.White;
+                    else
+                    {
+                        Console.Write(text[i][j]);
+                        Thread.Sleep(10);
+                    }
+                }
+                Console.SetCursorPosition(hOffset + (width - "(Press any key to continue)".Length) / 2, 10 + vOffset);
+                Console.Write("(Press any key to continue)");
+                while (Console.KeyAvailable)
+                    Console.ReadKey(true);
+                Console.ReadKey(true);
+                Console.Clear();
+            }
+        }
         private static void Tutorial()
         {
-
+            string[] text = File.ReadAllText($"{IElement.PATH}Tutorial.txt").Split('\n');
+            Output(0, 2, text, 0, 15, 200, ConsoleColor.Magenta, false);
+            Output(2, 4, text, 0, 5, 120, ConsoleColor.DarkRed, true);
+            Output(4, 5, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.SetCursorPosition((120 - "Room Name".Length) / 2, 0);
+            Console.Write("Room Name");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Output(5, 6, text, 0, 5, 120, ConsoleColor.DarkGreen, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 2, 14 });
+            Output(6, 7, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/NArt1.txt"), new int[] { 100, 6 });
+            Output(7, 8, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 20, 6 });
+            Output(8, 9, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt0.txt"), new int[] { 100, 6 });
+            Output(9, 10, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"), new int[] { 100, 6 });
+            Output(10, 11, text, 0, 5, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition((80 - "Inventory".Length) / 2 + 120, 0);
+            Console.Write("Inventory");
+            Output(11, 12, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 2);
+            Console.Write("Item1");
+            Output(12, 13, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 2);
+            Console.Write("Item1");
+            Console.SetCursorPosition(125, 3);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.Write("Item2");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Output(13, 14, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 2);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.Write("Item1");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.SetCursorPosition(125, 3);
+            Console.Write("Item2");
+            Output(14, 16, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            string current = "Hover inspect | Enter use | D Drop";
+            Console.SetCursorPosition(120 + (80 - current.Length) / 2, 22);
+            Console.Write(current);
+            Output(16, 17, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(143, 22);
+            Console.Write("Hover inspect |");
+            Output(17, 18, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(156, 22);
+            Console.Write("| Enter use |");
+            Output(18, 23, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(168, 22);
+            Console.Write("| D drop");
+            Output(23, 25, text, 120, 5, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(123, 25);
+            Console.Write("Statistics:");
+            Output(25, 26, text, 120, 28, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 26);
+            Console.Write($"Sanity: 50 / 100");
+            Output(26, 29, text, 120, 28, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 26);
+            Console.Write($"Sanity: 52 / 100");
+            Output(29, 30, text, 120, 28, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 26);
+            Console.Write($"Sanity: 48 / 100");
+            Output(30, 31, text, 120, 28, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 27);
+            Console.Write($"HP: 15 / 15");
+            Output(31, 35, text, 120, 28, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 28);
+            Console.Write($"Attack: 3");
+            Output(35, 38, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 29);
+            Console.Write($"Defense: 2");
+            Output(38, 39, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 30);
+            Console.Write($"Energy: 3 / 3");
+            Output(39, 46, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 31);
+            Console.Write($"DreamCoins: 100");
+            Output(46, 48, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 32);
+            Console.Write($"Inventory: 2 / 18");
+            Output(48, 49, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(125, 33);
+            Console.Write($"Current duration: 3");
+            Output(49, 53, text, 120, 25, 80, ConsoleColor.Magenta, true);
+            Output(53, 54, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(10, 25);
+            Console.Write("The description of the current room will be displayed here.");
+            Output(54, 56, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 30);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.Write(">> option 1");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.SetCursorPosition(12, 31);
+            Console.Write(">> option 2");
+            Output(56, 57, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 30);
+            Console.Write(">> option 1");
+            Console.SetCursorPosition(12, 31);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.Write(">> option 2");
+            Console.BackgroundColor = ConsoleColor.Black;
+            Output(57, 59, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 30);
+            Console.Write(">> option 1");
+            Console.SetCursorPosition(12, 31);
+            Console.BackgroundColor = ConsoleColor.Magenta;
+            Console.Write(">> option 2");
+            Console.BackgroundColor = ConsoleColor.Black;
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt0.txt"), new int[] { 80, 32 });
+            Output(59, 60, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 26);
+            Console.Write(">> Interact with: NPC");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/NArt1.txt"), new int[] { 80, 32 });
+            Output(60, 61, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 27);
+            Console.Write(">> Fight: Enemy");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 80, 32 });
+            Output(61, 62, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 27);
+            Console.Write(">> Exits:");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
+            Output(62, 64, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(50, 2);
+            Console.Write("Current Enemy, 10 / 15");
+            Output(64, 66, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 45, 5 });
+            Output(66, 67, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(3, 25);
+            Console.Write("Energy cost: 2, Multiplier: 1-3, Possible damage: 2-6");
+            Output(67, 70, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 27);
+            Console.Write(">> Exits:");
+            Console.SetCursorPosition(14, 28);
+            Console.Write(">> Exit 1:");
+            Console.SetCursorPosition(14, 29);
+            Console.Write(">> Exit 2:");
+            Console.SetCursorPosition(14, 30);
+            Console.Write(">> Exit 3:");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
+            Output(70, 73, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(14, 31);
+            Console.Write(">> Pick up: Item");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
+            Output(73, 74, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(14, 31);
+            Console.Write(">> Inspect Sack...");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"), new int[] { 80, 32 });
+            Output(74, 75, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 27);
+            Console.Write(">> Sack:");
+            Console.SetCursorPosition(14, 28);
+            Console.Write(">> >> Pick up: Item 1");
+            Console.SetCursorPosition(14, 29);
+            Console.Write(">> >> Pick up: Item 2");
+            Console.SetCursorPosition(14, 30);
+            Console.Write(">> >> Pick up: Item 3");
+            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
+            Output(75, 76, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            Output(76, 79, text, 0, 20, 200, ConsoleColor.Magenta, false);
         }
         private static void ChooseMenuPoint(int selected)
         {
             if (selected == 0)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("------------\n| New Game |\n------------", new int[] { 93, 16 });
+            ShowSingle("------------\n| New Game |\n------------", new int[] { 93, 13 });
             Console.BackgroundColor = ConsoleColor.Black;
             if (selected == 1)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("------------\n| Continue |\n------------", new int[] { 93, 21 });
+            ShowSingle("------------\n| Continue |\n------------", new int[] { 93, 18 });
             Console.BackgroundColor = ConsoleColor.Black;
             if (selected == 2)
                 Console.BackgroundColor = ConsoleColor.Magenta;
-            ShowSingle("------------\n| Tutorial |\n------------", new int[] { 93, 26 });
+            ShowSingle("------------\n| Tutorial |\n------------", new int[] { 93, 23 });
+            Console.BackgroundColor = ConsoleColor.Black;
+            if (selected == 3)
+                Console.BackgroundColor = ConsoleColor.Magenta;
+            ShowSingle("------------\n|   Exit   |\n------------", new int[] { 93, 28 });
             Console.BackgroundColor = ConsoleColor.Black;
         }
         private static void ShowSingle(string art, int[] coordinates)
@@ -253,9 +430,9 @@ namespace Agoraphobia
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}       ");
             Console.SetCursorPosition(125, 32);
-            Console.Write($"Inventory: {Player.Inventory.Count} / 18");
+            Console.Write($"Inventory: {Player.Inventory.Count} / 18      ");
             Console.SetCursorPosition(125, 33);
-            Console.Write($"Current duration: {Player.EffectDuration}");
+            Console.Write($"Current duration: {Player.EffectDuration}     ");
         }
 
         public static void ShowInventory(int id)
@@ -390,7 +567,7 @@ namespace Agoraphobia
             while (true)
             {
                 ChooseItem(id, current, selected);
-                if (Console.KeyAvailable)
+                while (Console.KeyAvailable)
                     Console.ReadKey(true);
                 ConsoleKey input = Console.ReadKey(true).Key;
                 switch (input)
@@ -415,7 +592,7 @@ namespace Agoraphobia
                             IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[selected]);
                             //Console.Write(selected);
                             //Console.ReadKey();
-                            if (Player.Inventory.Count <= 18)
+                            if (Player.Inventory.Count < 18)
                             {
                                 if (Player.ChangeCoins(-item.Price))
                                 {

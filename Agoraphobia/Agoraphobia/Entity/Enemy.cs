@@ -162,7 +162,7 @@ namespace Agoraphobia.Entity
             Player.ChangeCoins(DreamCoins);
             foreach (int item in Inventory)
             {
-                if (r.NextDouble()<=DropRate[item] && Player.Inventory.Count <= 18)
+                if (r.NextDouble()<=DropRate[item] && Player.Inventory.Count < 18)
                 {
                     Player.Inventory.Add(item);
                 }
@@ -170,6 +170,7 @@ namespace Agoraphobia.Entity
             Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy
             Program.room.RemoveEnemy();
             hp = MaxHP;
+            Player.ChangeEnergy(1);
             Program.MainScene(); //Need to somehow get back to the Main scene
         }
     }

@@ -43,3 +43,18 @@ E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\De
 E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.CoreCompileInputs.cache
 E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
 E:\!!..HÁZIFELADAT\2022-23\!projekt\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.exe
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.deps.json
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.runtimeconfig.json
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.dll
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.pdb
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.AssemblyReference.cache
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.GeneratedMSBuildEditorConfig.editorconfig
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfoInputs.cache
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfo.cs
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.CoreCompileInputs.cache
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.dll
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\refint\Agoraphobia.dll
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.pdb
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
+D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll

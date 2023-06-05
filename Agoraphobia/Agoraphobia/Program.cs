@@ -112,10 +112,6 @@ namespace Agoraphobia
                 }
             }
 
-            //Generate rooms
-            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
-                CreateRoom(i);
-
             //Load player's values from file
             string[] rows = File.ReadAllLines($"{IElement.PATH}Player{Player.Slot}.txt");
             if (int.Parse(rows[10].Split('#')[0]) != 1)
@@ -128,18 +124,22 @@ namespace Agoraphobia
                 Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0]) - Player.Energy);
                 Player.ChangeAttack(int.Parse(rows[6].Split('#')[0]) - Player.AttackDamage);
                 Player.ChangeSanity(int.Parse(rows[7].Split('#')[0]) - Player.Sanity);
-                Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
+                if (rows[8].Split('#')[0] != "")
+                    Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
                 Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
                 room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
             }
             else Viewport.Intro();
 
+            //Generate rooms
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
+                CreateRoom(i);
 
             MainScene();
         }
         private static void RemoveItem(ref int length, ref int interaction, int inventory, bool isOpened, bool isTriggered)
         {
-            if (Player.Inventory.Count() <= 18)
+            if (Player.Inventory.Count() < 18)
             {
                 if (room.NPC == 0)
                 interaction++;
@@ -338,7 +338,7 @@ namespace Agoraphobia
             {
                 string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
                 File.WriteAllText($"{IElement.PATH}Player{Player.Slot}.txt", content);
-                Environment.Exit(0);
+                Main();
             }
             else
             {
@@ -352,7 +352,7 @@ namespace Agoraphobia
                 playerData.Close();
 
                 Viewport.Message("Your data is saved. See you later!");
-                Environment.Exit(0);
+                Main();
             }
         }
     }

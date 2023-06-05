@@ -31,7 +31,7 @@ namespace Agoraphobia.Entity
             {
                 if (value > MaxHP)
                     hp = MaxHP;
-                else if (value < 0)
+                else if (value <= 0)
                 {
                     hp = 0;
                     Death();
@@ -96,7 +96,7 @@ namespace Agoraphobia.Entity
             {
                 Console.Clear();
                 Console.SetCursorPosition((120 - target.Name.Length - 3 - target.MaxHP.ToString().Length - target.HP.ToString().Length) / 2, 1);
-                Console.WriteLine($"{target.Name}, {target.HP} / {target.MaxHP}");
+                Console.Write($"{target.Name}, {target.HP} / {target.MaxHP}");
                 List<string> rows = target.Art.Split('\n').ToList();
                 int TargetArtLength = 80 - rows[0].Length;
                 for (int i = 0; i < rows.Count(); i++)
@@ -187,6 +187,7 @@ namespace Agoraphobia.Entity
                             {
                                 inventory--;
                             }
+                            Viewport.ShowStats();
                         }
                         break;
                 }

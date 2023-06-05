@@ -1,0 +1,79 @@
+Welcome to [Agoraphobia]'s Tutorial!
+In this brief introduction, you'll learn the [basics], [controls] and [mechanics] of the game.
+As you can see, this is the game's [Main Grid].
+It is divided into [four sections] that contain valuable information.
+In the top-left corner (here), you can find information about the current [Room] you are in.
+It consists of the [Room's name], which you can see at the top,
+John Merta's [Notebook],
+and arts of [NPCs],
+[Enemies]
+and [Items].
+Were there multiple items in the room you are in, they would appear in a [Sack].
+In this corner, you can find your [Inventory].
+The [items] currently in your posession are going to be listed here.
+The item currently [selected] is highlighted with a [purple] background.
+You can switch between selected items with the [right] and [left] arrows.
+Or, if you are in [combat], you can also use the [up] and [down] arrows.
+Here you can also find the [controls] of your inventory.
+While in combat, you can check your [item's stats] by [selecting] them.
+If you press [Enter], you can [use] your currently [selected item].
+If your selected item is a [weapon], you can use it to [attack].
+If it's a [consumable], its use is aiding you in battle.
+[Weapons] can be used [multiple times], while [consumables] have a [single-time usage].
+Keep in mind that you can only do these while you're participating in [combat].
+While you're in a [room], you can [drop] the items you don't need with [D].
+This might come useful when you have reached your [inventory limit].
+Here you can find your [Stats].
+The most essential one is your [Sanity].
+This is the stat that makes you [win] or [lose] the game.
+If it reaches [100], you [win], if it falls down to [zero], you [lose].
+If you defeat an [enemy], it will [increase], thus getting you closer to glory.
+However, if you [die] in the dream, it will [decrease].
+The next stat in your statistics is your [HP].
+It is displayed in the following format: [HP] / [MaxHP].
+Your [HP] cannot exceed your [MaxHP].
+If your [HP] reaches [zero], you [die], but only in the dream.
+The following stat is your [Attack].
+This shows the amount of [damage] you can deal to the [enemy] you are [attacking].
+The damage dealt can be [amplified] by the [multiplication rate] of your weapon.
+The next line shows your [defense], which [flatly decreases] the damage you take.
+Next is your [energy], which can be seen the following way: [Energy] / [MaxEnergy].
+This has to do with the [attacks] you can deal during [your turn] in combat.
+Each weapon has an [energy cost].
+This indicates the [amount of energy] you need in order to use it.
+As long as you have [energy], [your turn] will go on.
+However, once you run out of it, you'll be [attacked].
+During your turn, you can [attack], [use consumables], or [both].
+In the next line, you can find your [DreamCoins], which are the [game's currency].
+You can use them to buy various items from [NPCs].
+If you want to know how full your [inventory] is, you can read about it [here].
+And lastly, you can see how long the [currently equipped consumable] will last.
+If a consumable is already [activated], 
+and you decide to [use another one], 
+the [effects] of the previous consumable [will be overridden].
+And here lies the most vital part of your adventures, the [Interaction Screen].
+In the main interaction screen, you can find the [description] of the room you are in.
+You can also find the [main interaction panel], listing all the options you can choose from.
+The option currently [selected] will be [highlighted] with purple.
+You can [switch] between selected options using the [up] and [down] arrows.
+You can '[activate]' an option by pressing [Enter] while it's [selected].
+Next to every [option], you can find the [art] of the thing in question.
+The first option is usually an [NPC] you can buy things from.
+The second one is either an [Enemy] you can [fight] with,
+or, if there's no enemy present, the [exits] of the room.
+After choosing the [fighting] option, you'll see the [combat screen].
+At the top, you can see the [HP] of your [enemy], next to its [name].
+Its [HP] is displayed in the same format as yours.
+Below that, you can see the [art] of the enemy.
+In the lower grid, you can find the [stats] of the [currently selected item].
+This [refreshes] every time you [switch] between your items.
+You [cannot] enter combat without having a [weapon] in your inventory.
+If you choose the [exits] option, you'll see all three exits leading from the room you are in.
+If you choose any of those [exits], you'll [leave] the room and travel into a [different one].
+And last, but not least, come the [items] in the room.
+If there is [only one item], you'll be able to [pick it up] right away.
+However, if there are [multiple], you'll first have to [inspect the sack] in front of you.
+Once you do, you'll see a [dropdown list] of the current items, which you can freely choose from.
+If you wish to [pause your travels] and [continue] on a later date, just press [X], and your progress will be [saved].
+That is all you need to know in order to begin your journey...
+Now it's time to start dreaming...
