@@ -268,7 +268,37 @@ namespace Agoraphobia
                 if (id == i)
                     Console.BackgroundColor = ConsoleColor.Magenta;
                 Console.SetCursorPosition(125, 2 + i);
+                IItem.ItemRarity currentitemrarity = IItem.Items.Find(x => x.Id == Player.Inventory[i]).Rarity;
+                switch (currentitemrarity)
+                {
+                    case IItem.ItemRarity.Uncommon:
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                        }
+                    case IItem.ItemRarity.Rare:
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+                        }
+                    case IItem.ItemRarity.Epic:
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                            break;
+                        }
+                    case IItem.ItemRarity.Legendary:
+                        {
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            break;
+                        }
+                    case IItem.ItemRarity.Fabled:
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+                        }
+                }
                 Console.Write(IItem.Items.Find(x => x.Id == Player.Inventory[i]).Name);
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
             string text = "Hover inspect | Enter use | D Drop";

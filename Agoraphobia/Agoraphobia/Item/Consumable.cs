@@ -34,7 +34,7 @@ namespace Agoraphobia.Items
             {
                 this.id = id;
                 this.name = "Better " + name;
-                description = $"It's a better version of {name}."+desc;
+                description = $"It's a better version of {name}. "+desc;
                 Armor = armor+1;
                 Attack = attack+1;
                 Energy = energy+1;

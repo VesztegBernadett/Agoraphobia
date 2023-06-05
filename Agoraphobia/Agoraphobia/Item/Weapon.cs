@@ -19,7 +19,6 @@ namespace Agoraphobia.Items
         private readonly string name;
         public string Name { get => name; }
         private readonly string description;
-
         public string Art { get; private set; }
         public string Description { get => description; }
         public double MinMultiplier { get; private set; }
@@ -51,7 +50,7 @@ namespace Agoraphobia.Items
             {
                 this.id = id;
                 this.name = "Rare " + name;
-                description = "It's a rare item." + desc;
+                description = "It's a rare item. " + desc;
                 MinMultiplier = minMultiplier + 1;
                 MaxMultiplier = maxMultiplier + 1;
                 if (energy > 1)
@@ -75,9 +74,9 @@ namespace Agoraphobia.Items
             {
                 this.id = id;
                 this.name = "Clumsy " + name;
-                description = "It's a dull item." + desc;
-                MinMultiplier = minMultiplier;
-                MaxMultiplier = maxMultiplier - 1;
+                description = "It's a dull item. " + desc;
+                MinMultiplier = minMultiplier - 1;
+                MaxMultiplier = maxMultiplier;
                 Energy = energy;
                 if (rarity > 0)
                 {
@@ -95,7 +94,7 @@ namespace Agoraphobia.Items
             {
                 this.id = id;
                 this.name = "Cheap " + name;
-                description = "It's a dull item." + desc;
+                description = "This item is on sale! " + desc;
                 MinMultiplier = minMultiplier;
                 MaxMultiplier = maxMultiplier;
                 Energy = energy;
