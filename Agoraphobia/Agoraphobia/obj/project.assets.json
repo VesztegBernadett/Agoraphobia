@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Nerd Shit\\Agoraphobia2-zoli\\Agoraphobia2-main\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+      "projectUniqueName": "D:\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
       "projectName": "Agoraphobia",
-      "projectPath": "D:\\Nerd Shit\\Agoraphobia2-zoli\\Agoraphobia2-main\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
+      "projectPath": "D:\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\Agoraphobia.csproj",
       "packagesPath": "C:\\Users\\atisz\\.nuget\\packages\\",
-      "outputPath": "D:\\Nerd Shit\\Agoraphobia2-zoli\\Agoraphobia2-main\\Agoraphobia\\Agoraphobia\\obj\\",
+      "outputPath": "D:\\GitHub\\Agoraphobia2\\Agoraphobia\\Agoraphobia\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Visual Studio\\SDK\\NuGetPackages"

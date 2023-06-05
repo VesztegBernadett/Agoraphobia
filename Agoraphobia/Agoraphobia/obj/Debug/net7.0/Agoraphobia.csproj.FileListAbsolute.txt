@@ -58,3 +58,18 @@ D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Deb
 D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.pdb
 D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
 D:\Nerd Shit\Agoraphobia2-zoli\Agoraphobia2-main\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.exe
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.deps.json
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.runtimeconfig.json
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.dll
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\bin\Debug\net7.0\Agoraphobia.pdb
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.AssemblyReference.cache
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.GeneratedMSBuildEditorConfig.editorconfig
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfoInputs.cache
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.AssemblyInfo.cs
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.csproj.CoreCompileInputs.cache
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.dll
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\refint\Agoraphobia.dll
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.pdb
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\Agoraphobia.genruntimeconfig.cache
+D:\GitHub\Agoraphobia2\Agoraphobia\Agoraphobia\obj\Debug\net7.0\ref\Agoraphobia.dll
