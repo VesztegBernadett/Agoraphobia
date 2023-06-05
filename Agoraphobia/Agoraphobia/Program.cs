@@ -40,7 +40,7 @@ namespace Agoraphobia
                 {
                     foreach (var item in room.Exits)
                     {
-                        if (IRoom.Rooms.Find(x => x.Id == item).Name == IRoom.Rooms.Find(x => x.Id == temp[id]).Name)
+                        if (IRoom.Rooms.Find(x => x.Id == item).Name == IRoom.Rooms.Find(x => x.Id == temp[id]).Name || room.Name == IRoom.Rooms.Find(x => x.Id == temp[id]).Name)
                             containsName = true;
                     }
                     if (!containsName)
