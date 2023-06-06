@@ -263,9 +263,19 @@ namespace Agoraphobia
                             {
                                 if (room.Enemy != 0)
                                 {
-                                    Console.Clear();
-                                    Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
-                                    length++;
+                                    bool hasWeapon = false;
+                                    foreach (var item in Player.Inventory)
+                                    {
+                                        if (IItem.Items.Find(x => x.Id == item).GetType().ToString() == "Agoraphobia.Items.Weapon")
+                                            hasWeapon = true;
+                                    }
+                                    if (hasWeapon)
+                                    {
+                                        Console.Clear();
+                                        Player.Attack(IEnemy.Enemies.Find(x => x.Id == room.Enemy));
+                                        length++;
+                                    }
+                                    else Viewport.Message("You need to pick up a weapon first!");
                                 }
                                 else if (!isTriggered)
                                 {
