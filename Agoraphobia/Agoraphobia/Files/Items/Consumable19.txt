@@ -1,4 +1,4 @@
-102#Id
+19#Id
 HP up#Name
 A simple but permanent HP up#Description
 5#Rarity

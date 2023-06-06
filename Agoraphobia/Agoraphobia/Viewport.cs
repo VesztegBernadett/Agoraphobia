@@ -156,7 +156,8 @@ namespace Agoraphobia
                 Console.Write("(Press any key to continue)");
                 while (Console.KeyAvailable)
                     Console.ReadKey(true);
-                Console.ReadKey(true);
+                if (Console.ReadKey(true).Key == ConsoleKey.Escape)
+                    i = endIndex;
                 Console.Clear();
             }
         }

@@ -1,7 +1,7 @@
 3#Defense
 15#MaxHP
 15#HP
-Points#0
+0#Points
 3#MAXENERGY
 3#Energy
 3#Attack

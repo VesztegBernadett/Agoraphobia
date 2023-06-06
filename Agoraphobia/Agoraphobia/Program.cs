@@ -51,41 +51,31 @@ namespace Agoraphobia
                 }
             }
         }
-        private static void CreateItems(List<int> items)
-        {
-            foreach (var item in items)
-            {
-                if (!IItem.Items.Any(x => x.Id == item))
-                {
-                    if (File.Exists($"{IElement.PATH}Items/Consumable{item}.txt"))
-                        Factory.Create($"{IElement.PATH}Items/Consumable{item}.txt");
-                    else if (File.Exists($"{IElement.PATH}Items/Armor{item}.txt"))
-                        Factory.Create($"{IElement.PATH}Items/Armor{item}.txt");
-                    else Factory.Create($"{IElement.PATH}Items/Weapon{item}.txt");
-                }
-            }
-        }
-        private static void CreateRoom(int id)
+        public static void CreateRoom(int id)
         {
             if (!IRoom.Rooms.Any(x => x.Id == id))
                 Factory.Create($"{IElement.PATH}Rooms/Room{id}.txt");
-            Room current = (Room)IRoom.Rooms.Find(x => x.Id == id);
-            CreateItems(current.Items);
-
-            if (current.NPC != 0)
+        }
+        public static void CreateItem(int id)
+        {
+            if (!IItem.Items.Any(x => x.Id == id))
             {
-                if (!INPC.NPCs.Any(x => x.Id == current.NPC))
-                    Factory.Create($"{IElement.PATH}NPCs/NPC{current.NPC}.txt");
-                CreateItems(INPC.NPCs.Find(x => x.Id == current.NPC).Inventory);
-            }
-            if (current.Enemy != 0)
-            {
-                if (!IEnemy.Enemies.Any(x => x.Id == current.Enemy))
-                    Factory.Create($"{IElement.PATH}Enemies/Enemy{current.Enemy}.txt");
-                CreateItems(IEnemy.Enemies.Find(x => x.Id == current.Enemy).Inventory);
+                if (File.Exists($"{IElement.PATH}Items/Consumable{id}.txt"))
+                    Factory.Create($"{IElement.PATH}Items/Consumable{id}.txt");
+                else Factory.Create($"{IElement.PATH}Items/Weapon{id}.txt");
             }
         }
-        private static void Main()
+        public static void CreateNPC(int id)
+        {
+            if (!INPC.NPCs.Any(x => x.Id == id))
+                Factory.Create($"{IElement.PATH}NPCs/NPC{id}.txt");
+        }
+        public static void CreateEnemy(int id)
+        {
+            if (!IEnemy.Enemies.Any(x => x.Id == id))
+                Factory.Create($"{IElement.PATH}Enemies/Enemy{id}.txt");
+        }
+            private static void Main()
         {
             Player.playTimeStart = DateTime.UtcNow;
             CultureInfo enCulture = new CultureInfo("en-US");
@@ -112,25 +102,32 @@ namespace Agoraphobia
             //Generate rooms
             for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Rooms/").Count(); i++)
                 CreateRoom(i);
+            for (int i = 1; i <= Directory.GetFiles($"{IElement.PATH}NPCs/").Count(); i++)
+                CreateNPC(i);
+            for (int i = 0; i < Directory.GetFiles($"{IElement.PATH}Items/").Count(); i++)
+                CreateItem(i);
+            for (int i = 1; i <= Directory.GetFiles($"{IElement.PATH}Enemies/").Count(); i++)
+                CreateEnemy(i);
 
             //Load player's values from file
             string[] rows = File.ReadAllLines($"{IElement.PATH}Player{Player.Slot}.txt");
-            if (int.Parse(rows[10].Split('#')[0]) != 1)
-            {
-                Player.ChangeDefense(int.Parse(rows[0].Split('#')[0]) - Player.Defense);
-                Player.ChangeMaxHP(int.Parse(rows[1].Split('#')[0]) - Player.MaxHP);
-                Player.ChangeHP(int.Parse(rows[2].Split('#')[0]) - Player.HP);
-                Player.Points = int.Parse(rows[3].Split('#')[0]);
-                Player.MaxEnergy = int.Parse(rows[4].Split('#')[0]);
-                Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0]) - Player.Energy);
-                Player.ChangeAttack(int.Parse(rows[6].Split('#')[0]) - Player.AttackDamage);
-                Player.ChangeSanity(int.Parse(rows[7].Split('#')[0]) - Player.Sanity);
-                if (rows[8].Split('#')[0] != "")
-                    Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
-                Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
-                room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
-            }
-            else Viewport.Intro();
+            Player.ChangeDefense(int.Parse(rows[0].Split('#')[0]) - Player.Defense);
+            Player.ChangeMaxHP(int.Parse(rows[1].Split('#')[0]) - Player.MaxHP);
+            Player.ChangeHP(int.Parse(rows[2].Split('#')[0]) - Player.HP);
+            Player.Points = int.Parse(rows[3].Split('#')[0]);
+            Player.MaxEnergy = int.Parse(rows[4].Split('#')[0]);
+            Player.ChangeEnergy(int.Parse(rows[5].Split('#')[0]) - Player.Energy);
+            Player.ChangeAttack(int.Parse(rows[6].Split('#')[0]) - Player.AttackDamage);
+            Player.ChangeSanity(int.Parse(rows[7].Split('#')[0]) - Player.Sanity);
+            Player.EffectDuration = 0;
+            Player.Inventory.Clear();
+            if (rows[8].Split('#')[0] != "")
+                Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
+            Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
+            room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
+
+            if (int.Parse(rows[10].Split('#')[0]) == 1)
+                Viewport.Intro();
 
             MainScene();
         }
@@ -190,6 +187,7 @@ namespace Agoraphobia
             try
             {
                 Console.SetWindowSize(200, 45);
+                Console.CursorVisible = false;
                 Console.Clear();
 
                 int inventory = 0;
@@ -335,7 +333,7 @@ namespace Agoraphobia
             {
                 string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
                 File.WriteAllText($"{IElement.PATH}Player{Player.Slot}.txt", content);
-                Main();
+                gameEnded = false;
             }
             else
             {
@@ -349,8 +347,12 @@ namespace Agoraphobia
                 playerData.Close();
 
                 Viewport.Message("Your data is saved. See you later!");
-                Main();
             }
+            //IRoom.Rooms.Clear();
+            //IItem.Items.Clear();
+            //IEnemy.Enemies.Clear();
+            //INPC.NPCs.Clear();
+            Main();
         }
     }
 }

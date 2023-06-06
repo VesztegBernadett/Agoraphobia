@@ -1,4 +1,4 @@
-103#Id
+20#Id
 Armor plate#Name
 You fortify your defenses and armor.#Description
 5#Rarity

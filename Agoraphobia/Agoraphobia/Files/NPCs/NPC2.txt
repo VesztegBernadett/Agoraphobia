@@ -2,5 +2,5 @@
 Calm person#Name
 A friendly person.#Description
 3#Type
-0;0;1;102;102#Inventory
+0;0;1;19;19#Inventory
 #Intro

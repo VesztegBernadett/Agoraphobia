@@ -2,5 +2,5 @@
 Ivy the fairy#Name
 She is such a tiny creature. She looks like a small human with long ears and with pretty wings.#Description
 3#Type
-16;102;7;101#Inventory
+16;19;7;18#Inventory
 Hello big traveler! We haven't seen one like you in a while, do you need something?#Intro

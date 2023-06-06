@@ -1,4 +1,4 @@
-101#Id
+18#Id
 Damage up#Name
 A simple but permanent damage up#Description
 5#Rarity
