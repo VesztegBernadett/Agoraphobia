@@ -358,10 +358,10 @@ namespace Agoraphobia
 
                 Viewport.Message("Your data is saved. See you later!");
             }
-            //IRoom.Rooms.Clear();
-            //IItem.Items.Clear();
-            //IEnemy.Enemies.Clear();
-            //INPC.NPCs.Clear();
+            IRoom.Rooms.Clear();
+            IItem.Items.Clear();
+            IEnemy.Enemies.Clear();
+            INPC.NPCs.Clear();
             Main();
         }
     }
