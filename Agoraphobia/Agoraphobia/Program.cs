@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Transactions;
 using System.Reflection;
+using System.Diagnostics.Contracts;
+using static Agoraphobia.IItem;
 
 namespace Agoraphobia
 {
@@ -75,7 +77,7 @@ namespace Agoraphobia
             if (!IEnemy.Enemies.Any(x => x.Id == id))
                 Factory.Create($"{IElement.PATH}Enemies/Enemy{id}.txt");
         }
-            private static void Main()
+        private static void Main()
         {
             Player.playTimeStart = DateTime.UtcNow;
             CultureInfo enCulture = new CultureInfo("en-US");
@@ -122,7 +124,18 @@ namespace Agoraphobia
             Player.EffectDuration = 0;
             Player.Inventory.Clear();
             if (rows[8].Split('#')[0] != "")
+            {
                 Player.Inventory = rows[8].Split('#')[0].Split(';').Select(int.Parse).ToList();
+                foreach (var item in Player.Inventory.GroupBy(x => x))
+                {
+                    if (IItem.Items.Find(x => x.Id == item.Key).GetType().ToString() == "Agoraphobia.Items.Weapon")
+                    {
+                        Weapon weapon = (Weapon)IItem.Items.Find(x => x.Id == item.Key);
+                        for (int i = 0; i < item.Count() - 1; i++)
+                            weapon.LevelUp();
+                    }
+                }
+            }
             Player.ChangeCoins(int.Parse(rows[9].Split('#')[0]) - Player.DreamCoins);
             room = (Room)IRoom.Rooms.Find(x => x.Id == int.Parse(rows[12].Split('#')[0]));
 
@@ -133,17 +146,28 @@ namespace Agoraphobia
         }
         private static void RemoveItem(ref int length, ref int interaction, int inventory, bool isOpened, bool isTriggered)
         {
-            if (Player.Inventory.Count() < 18)
+            if (Player.InventoryLength < 18)
             {
                 if (room.NPC == 0)
-                interaction++;
+                    interaction++;
                 int temp = interaction;
                 int offset = 0;
                 if (isTriggered)
                     offset += room.Exits.Count - 1;
                 length--;
-                IItem.Items.Find(x => x.Id == room.Items[temp - 2 - offset]).PickUp(room.Id);
-                interaction = length - 1;
+                IItem item = IItem.Items.Find(x => x.Id == room.Items[temp - 2 - offset]);
+                if (item.GetType().ToString() == "Agoraphobia.Items.Consumable")
+                {
+                    Consumable consumable = (Consumable)item;
+                    consumable.PickUp(room.Id);
+                }
+                else
+                {
+                    Weapon weapon = (Weapon)item;
+                    weapon.PickUp(room.Id);
+                }
+                if (interaction == length)
+                    interaction--;
             }
             else
             {
@@ -159,13 +183,10 @@ namespace Agoraphobia
         private static void DropItem(ref int interaction, bool isOpened, bool isTriggered, ref int inventory)
         {
             int inv = inventory;
-            IItem.Items.Find(x => x.Id == Player.Inventory[inv]).Drop(room.Id, inv);
+            IItem.Items.Find(x => x.Id == Player.Inventory.Distinct().ToArray()[inv]).Drop(room.Id, Player.Inventory.Distinct().ToArray()[inv]);
 
-            if (inventory != 0)
+            if (inventory == Player.Inventory.Distinct().ToArray().Count())
                 inventory--;
-
-            //Clear inventory??
-            Console.Clear();
 
             Viewport.ShowGrid();
             Viewport.ShowInventory(inventory);
@@ -187,7 +208,6 @@ namespace Agoraphobia
             try
             {
                 Console.SetWindowSize(200, 45);
-                Console.CursorVisible = false;
                 Console.Clear();
 
                 int inventory = 0;
@@ -209,6 +229,7 @@ namespace Agoraphobia
                 // menübe navigálni, új szobába menni stb. Player.WakeUp és Player.GoInsane használja
                 while (input != ConsoleKey.X && !gameEnded)
                 {
+                    Console.CursorVisible = false;
                     length = 1;
                     if (room.NPC != 0)
                         length++;
@@ -227,12 +248,12 @@ namespace Agoraphobia
                             break;
                         case ConsoleKey.LeftArrow:
                             if (inventory == 0)
-                                inventory = Player.Inventory.Count - 1;
+                                inventory = Player.Inventory.GroupBy(x => x).Count() - 1;
                             else inventory--;
                             Viewport.ShowInventory(inventory);
                             break;
                         case ConsoleKey.RightArrow:
-                            if (inventory == Player.Inventory.Count - 1)
+                            if (inventory == Player.Inventory.GroupBy(x => x).Count() - 1)
                                 inventory = 0;
                             else inventory++;
                             Viewport.ShowInventory(inventory);
@@ -339,6 +360,12 @@ namespace Agoraphobia
 
         public static void End()
         {
+            Player.Points = 0;
+            foreach (var item in Player.Inventory)
+            {
+                IItem i = IItem.Items.Find(x => x.Id == item);
+                Player.Points += 10 * ItemValue[i.Rarity];
+            }
             if (gameEnded)
             {
                 string content = File.ReadAllText($"{IElement.PATH}Safety.txt");

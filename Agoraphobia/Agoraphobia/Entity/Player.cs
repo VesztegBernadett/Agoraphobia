@@ -82,29 +82,30 @@ namespace Agoraphobia.Entity
         public static string Name { get; private set; } = "asdasd";
 
         public static DateTime playTimeStart;
-        
+        public static int InventoryLength
+        {
+            get
+            {
+                int count = 0;
+                foreach (var item in Player.Inventory.GroupBy(x => x))
+                {
+                    if (IItem.Items.Find(x => x.Id == item.Key).GetType().ToString() == "Agroaphobia.Items.Consumable")
+                        count += item.Count();
+                    else count++;
+                }
+                return count;
+            }
+        }
         public static void Attack(IEnemy target)
         {
             Random r = new Random();
-            Console.SetCursorPosition((120 - target.Name.Length) / 2, 1);
-            Console.WriteLine(target.Name);
-            Console.Write(target.Art);
             Viewport.ShowGrid();
-            int inventory=0;
-
-            while (Energy>0&&target.HP>0)
+            Viewport.ShowSingle(target.Art, new int[] { 50, 5 });
+            int inventory = 0;
+            while (Energy > 0 && target.HP > 0)
             {
-                Console.Clear();
                 Console.SetCursorPosition((120 - target.Name.Length - 3 - target.MaxHP.ToString().Length - target.HP.ToString().Length) / 2, 1);
-                Console.Write($"{target.Name}, {target.HP} / {target.MaxHP}");
-                List<string> rows = target.Art.Split('\n').ToList();
-                int TargetArtLength = 80 - rows[0].Length;
-                for (int i = 0; i < rows.Count(); i++)
-                {
-                    Console.SetCursorPosition(TargetArtLength, 3 + i);
-                    Console.Write(rows[i]);
-                }
-                Viewport.ShowGrid();
+                Console.Write($"{target.Name}, {target.HP} / {target.MaxHP}    ");
                 Viewport.ShowStats();
                 Viewport.ShowInventory(inventory);
                 Viewport.ShowItemInfo(inventory);
@@ -117,17 +118,17 @@ namespace Agoraphobia.Entity
                     case ConsoleKey.UpArrow:
                     case ConsoleKey.LeftArrow:
                         if (inventory == 0)
-                            inventory = Player.Inventory.Count - 1;
+                            inventory = Player.Inventory.GroupBy(x => x).Count() - 1;
                         else inventory--;
                         break;
                     case ConsoleKey.DownArrow:
                     case ConsoleKey.RightArrow:
-                        if (inventory == Player.Inventory.Count - 1)
+                        if (inventory == Player.Inventory.GroupBy(x => x).Count() - 1)
                             inventory = 0;
                         else inventory++;
                         break;
                     case ConsoleKey.Enter:
-                        IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory[inventory]);
+                        IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory.Distinct().ToArray()[inventory]);
                         string selectedItemType = selectedItem.GetType().ToString();
                         if (selectedItemType=="Agoraphobia.Items.Weapon")
                         {
@@ -138,8 +139,7 @@ namespace Agoraphobia.Entity
                                 int Attacking = Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier)) - target.Defense;
                                 if (Attacking < 0)
                                 {
-                                    Console.SetCursorPosition(5, 26);
-                                    Console.Write("Your last attack was too weak to affect the enemy.");
+                                    Viewport.Message("Your last attack was too weak to affect the enemy.");
                                 }
                                 else
                                 {
@@ -157,7 +157,6 @@ namespace Agoraphobia.Entity
                                 MaxEnergy += selectedConsumable.Energy;
                                 ChangeDefense(+selectedConsumable.Armor);
                                 ChangeAttack(+selectedConsumable.Attack);
-                                Inventory.Remove(Inventory[inventory]);
                             }
                             else if (EffectDuration > 0 && EffectDuration < 100)
                             {
@@ -170,9 +169,8 @@ namespace Agoraphobia.Entity
                                 ChangeHP(+selectedConsumable.HP);
                                 ChangeDefense(+selectedConsumable.Armor);
                                 ChangeAttack(+selectedConsumable.Attack);
-                                Inventory.Remove(Inventory[inventory]);
                             }
-                            else if ((EffectDuration == 0 || EffectDuration < 0) && selectedConsumable.Duration != 100)
+                            else if (EffectDuration <= 0)
                             {
                                 EffectDuration = selectedConsumable.Duration;
                                 ChangedDefense = selectedConsumable.Armor;
@@ -181,9 +179,9 @@ namespace Agoraphobia.Entity
                                 ChangeHP(+selectedConsumable.HP);
                                 ChangeDefense(+selectedConsumable.Armor);
                                 ChangeAttack(+selectedConsumable.Attack);
-                                Inventory.Remove(Inventory[inventory]);
                             }
-                            if (inventory != 0)
+                            Inventory.RemoveAt(Inventory.LastIndexOf(Inventory.Distinct().ToArray()[inventory]));
+                            if (inventory == Player.InventoryLength)
                             {
                                 inventory--;
                             }

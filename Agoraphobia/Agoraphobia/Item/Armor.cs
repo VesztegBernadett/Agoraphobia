@@ -40,6 +40,10 @@ namespace Agoraphobia.Items
         {
 
         }
+        public void PickUp (int roomId)
+        {
+            
+        }
         public Armor(int id, string name, string desc, int def, int attack, int piece, int rarity, int price)
         {
             this.id = id;

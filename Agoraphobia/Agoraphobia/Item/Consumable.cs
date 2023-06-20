@@ -7,6 +7,8 @@ using System.Xml.Linq;
 using System.IO;
 using static Agoraphobia.IItem;
 using System.Collections;
+using Agoraphobia.Entity;
+using Agoraphobia.Rooms;
 
 namespace Agoraphobia.Items
 {
@@ -30,9 +32,9 @@ namespace Agoraphobia.Items
         public Consumable(int id, string name, string desc, int energy, int hp, int attack, int armor, int duration, int rarity, int price)
         {
             int r = random.Next(0, 8);
+            this.id = id;
             if (r == 1 && duration != 100)
             {
-                this.id = id;
                 this.name = "Better " + name;
                 description = $"It's a better version of {name}. "+desc;
                 Armor = armor+1;
@@ -40,21 +42,16 @@ namespace Agoraphobia.Items
                 Energy = energy+1;
                 HP = hp+2;
                 Duration = duration+1;
-                if (rarity != 0 && rarity != 5)
-                {
+                if (rarity != 6)
                     Rarity = (ItemRarity)rarity+1;
-                }
                 else
-                {
                     Rarity = (ItemRarity)rarity;
-                }
                 Price = price+100;
                 IItem.Items.Add(this);
                 Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
             }
             else
             {
-                this.id = id;
                 this.name = name;
                 description = desc;
                 Armor = armor;
@@ -78,7 +75,11 @@ namespace Agoraphobia.Items
         {
             return $"";
         }
-
+        public void PickUp(int roomId)
+        {
+            IRoom.Rooms.Find(x => x.Id == roomId).Items.Remove(Id);
+            Player.Inventory.Add(Id);
+        }
         public void Drop()
         {
 

@@ -74,7 +74,7 @@ namespace Agoraphobia.Entity
                 Inventory = items;
                 this.id = id;
                 this.name = "Tough "+name;
-                description = "This one is tougher!"+desc;
+                description = "This one is tougher! "+desc;
                 Defense = def+2;
                 AttackDamage = attack+2;
                 this.sanity = sanity+10;
@@ -93,7 +93,7 @@ namespace Agoraphobia.Entity
                 Inventory = items;
                 this.id = id;
                 this.name = "Weak "+name;
-                description = "This one is weaker!"+desc;
+                description = "This one is weaker! "+desc;
                 if (def != 0)
                 {
                     Defense = def - 1;
@@ -162,7 +162,7 @@ namespace Agoraphobia.Entity
             Player.ChangeCoins(DreamCoins);
             foreach (int item in Inventory)
             {
-                if (r.NextDouble()<=DropRate[item] && Player.Inventory.Count < 18)
+                if (r.NextDouble()<=DropRate[item] && Player.InventoryLength < 18)
                 {
                     Player.Inventory.Add(item);
                 }

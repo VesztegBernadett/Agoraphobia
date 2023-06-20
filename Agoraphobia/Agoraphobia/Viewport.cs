@@ -343,7 +343,7 @@ namespace Agoraphobia
             ShowSingle("------------\n|   Exit   |\n------------", new int[] { 93, 28 });
             Console.BackgroundColor = ConsoleColor.Black;
         }
-        private static void ShowSingle(string art, int[] coordinates)
+        public static void ShowSingle(string art, int[] coordinates)
         {
             //Its an universal Show method so we don't need it for each class
             //New interface IArtist contains the arts so we can now access all the showable elements by IArtist
@@ -431,22 +431,24 @@ namespace Agoraphobia
             Console.SetCursorPosition(125, 31);
             Console.Write($"DreamCoins: {Player.DreamCoins}       ");
             Console.SetCursorPosition(125, 32);
-            Console.Write($"Inventory: {Player.Inventory.Count} / 18      ");
+            Console.Write($"Inventory: {Player.InventoryLength} / 18      ");
             Console.SetCursorPosition(125, 33);
             Console.Write($"Current duration: {Player.EffectDuration}     ");
         }
 
         public static void ShowInventory(int id)
         {
+            ClearInventory();
             Console.SetCursorPosition(157, 0);
             Console.Write("Inventory");
             int vOffset = 0;
-            for (int i = 0; i < Player.Inventory.Count; i++)
+            int index = 0;
+            foreach (var item in Player.Inventory.GroupBy(x => x))
             {
-                if (id == i)
+                if (id == index)
                     Console.BackgroundColor = ConsoleColor.Magenta;
-                Console.SetCursorPosition(125, 2 + i);
-                IItem.ItemRarity currentitemrarity = IItem.Items.Find(x => x.Id == Player.Inventory[i]).Rarity;
+                Console.SetCursorPosition(125, 2 + index);
+                IItem.ItemRarity currentitemrarity = IItem.Items.Find(x => x.Id == item.Key).Rarity;
                 switch (currentitemrarity)
                 {
                     case IItem.ItemRarity.Uncommon:
@@ -475,9 +477,12 @@ namespace Agoraphobia
                             break;
                         }
                 }
-                Console.Write(IItem.Items.Find(x => x.Id == Player.Inventory[i]).Name);
+                if (IItem.Items.Find(x => x.Id == item.Key).GetType().ToString() == "Agoraphobia.Items.Consumable")
+                    Console.Write($"{IItem.Items.Find(x => x.Id == item.Key).Name} x{item.Count()}");
+                else Console.Write($"{IItem.Items.Find(x => x.Id == item.Key).Name} lvl. {item.Count()}");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
+                index++;
             }
             string text = "Hover inspect | Enter use | D Drop";
             Console.SetCursorPosition(120 + (80 - text.Length) / 2, 22);
@@ -623,7 +628,7 @@ namespace Agoraphobia
                             IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[selected]);
                             //Console.Write(selected);
                             //Console.ReadKey();
-                            if (Player.Inventory.Count < 18)
+                            if (Player.InventoryLength < 18)
                             {
                                 if (Player.ChangeCoins(-item.Price))
                                 {
@@ -711,6 +716,14 @@ namespace Agoraphobia
                 Console.Write("                                                                                                                   ");
             }
         }
+        public static void ClearInventory()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                Console.SetCursorPosition(121, 1 + i);
+                Console.Write("                                                                           ");
+            }
+        }
         public static void ClearRoom()
         {
             for (int i = 1; i < 22; i++)
@@ -719,11 +732,11 @@ namespace Agoraphobia
                 Console.Write("                                                                                                                        ");
             }
         }
-        public static void ShowItemInfo(int SelectedItemNumber)
+        public static void ShowItemInfo(int selectedItemIndex)
         {
-            int selecteditemnumber = SelectedItemNumber;
+            ClearInteraction();
             Console.SetCursorPosition(5, 25);
-            IItem selectedItem = IItem.Items.Find(x => x.Id == Player.Inventory[selecteditemnumber]);
+            IItem selectedItem = IItem.Items.Find(x => x.Id == Player.Inventory.Distinct().ToArray()[selectedItemIndex]);
             if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Weapon")
             {
                 Weapon selectedWeapon = (Weapon)selectedItem;
@@ -734,7 +747,7 @@ namespace Agoraphobia
                 Consumable selectedConsumable = (Consumable)selectedItem;
                 if (selectedConsumable.Duration == 100)
                 {
-                    Console.Write($"This item or buff adds: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it's permanent");
+                    Console.Write($"This item or buff adds: MaxEnergy: {selectedConsumable.Energy}, MaxHP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it's permanent");
                 }
                 else
                 {
