@@ -1,0 +1,5 @@
+6#Id
+The King#Name
+The King is untouchable. He is the ruler of The Dream World and he gives out rare items.#Description
+10;12;15;18;18;20#Inventory
+Come forth John, perhaps something from my treasury might peak your interests. Anything can be yours... at the right price, of course.#Intro

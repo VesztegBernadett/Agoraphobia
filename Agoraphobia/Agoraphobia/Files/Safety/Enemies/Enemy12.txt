@@ -1,0 +1,8 @@
+12#Id
+Baby dragon#Name
+She might be small now but she can become dangerous later. The bounty on her is decent.#Description
+DC(150-250#Inventory
+2#Defense
+20#HP
+5#AttackDamage
+5#Sanity

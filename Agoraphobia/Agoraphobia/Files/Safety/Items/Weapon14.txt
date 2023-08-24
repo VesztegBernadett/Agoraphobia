@@ -1,0 +1,7 @@
+14#Id
+The Cursed Sword#Name
+So you took out The Cursed Sword. It is a strong one indeed.#Description
+5#Rarity
+0-6.5#Multiplier
+1#Energy
+800#Price

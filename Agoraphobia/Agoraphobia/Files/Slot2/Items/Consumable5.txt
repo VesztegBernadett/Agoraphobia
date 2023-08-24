@@ -1,0 +1,10 @@
+5#Id
+Cream cheese#Name
+Tasty and salty, though it seems random.#Description
+1#Rarity
+0#Energy
+3#HP
+1#Armor
+0#Attack
+3#Duration
+100#Price

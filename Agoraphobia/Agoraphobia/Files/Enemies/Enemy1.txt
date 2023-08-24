@@ -1,9 +1,0 @@
-1#Id
-Popcorn machine#Name
-A popcorn machine come alive. It's out to get you#Description
-0(0.8;DC(10-20#Inventory
-0#Defense
-12#HP
-1#Energy
-4#AttackDamage
-2#Sanity

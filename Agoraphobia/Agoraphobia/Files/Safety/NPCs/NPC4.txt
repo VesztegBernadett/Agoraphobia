@@ -1,0 +1,5 @@
+4#Id
+Friendly computer#Name
+In this world everything is possible, but fortunately this fellow is on our side.#Description
+7;12;18#Inventory
+Bip bup bip bap? (Hello stranger, need anything?)#Intro

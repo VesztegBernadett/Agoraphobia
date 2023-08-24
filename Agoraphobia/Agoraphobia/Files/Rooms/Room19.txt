@@ -1,8 +1,0 @@
-19#Id
-Corrupted office#Name
-You stumble upon an office, parts of computers scattered over the place. You see a ___(?) on the desk it might be dangerous.#Description
-0#Type
-1#Orientation
-4#NPC
-0#Enemy
-12#Items

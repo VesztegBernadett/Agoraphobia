@@ -1,0 +1,8 @@
+5#Id
+Tough White tiger#Name
+This one is tougher! This is a unique creature, only the bravest can tame it.#Description
+6(0.9;DC(130-160#Inventory
+5#Defense
+33#HP
+9#AttackDamage
+20#Sanity

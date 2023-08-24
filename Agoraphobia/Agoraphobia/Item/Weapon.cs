@@ -16,7 +16,6 @@ namespace Agoraphobia.Items
 {
     internal class Weapon : IWeapons
     {
-        private static readonly Random random = new Random();
         private readonly int id;
         public int Id { get => id; }
         private readonly string name;
@@ -30,27 +29,10 @@ namespace Agoraphobia.Items
         public int Energy { get; private set; }
         public ItemRarity Rarity { get; set; }
         public int Price { get; private set; }
-        public void Use()
+        public void Obtain ()
         {
-
-        }
-        public string Inspect()
-        {
-            return $"";
-        }
-        public void Drop()
-        {
-
-        }
-        public void Delete()
-        {
-
-        }
-        public void PickUp (int roomId)
-        {
-            if ((int)this.Rarity != 5)
+            if ((int)Rarity != 5)
             {
-                IRoom.Rooms.Find(x => x.Id == roomId).Items.Remove(Id);
                 if (Player.Inventory.Any(x => x == Id))
                     LevelUp();
                 Player.Inventory.Add(Id);
@@ -82,7 +64,7 @@ namespace Agoraphobia.Items
             Rarity = (ItemRarity)rarity;
             Price = price;
             IItem.Items.Add(this);
-            Art = File.ReadAllText($"{IElement.PATH}/Arts/IArt{id}.txt");
+            Art = File.ReadAllText($"{Program.PATH}/Arts/IArt{id}.txt");
         }
     }
 }

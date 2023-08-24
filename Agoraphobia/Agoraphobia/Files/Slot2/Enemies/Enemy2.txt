@@ -1,0 +1,8 @@
+2#Id
+Tough Angry rabbit#Name
+This one is tougher! A wild rabbit. You may wonder about where it came from.#Description
+6(0.5;DC(120-130#Inventory
+3#Defense
+20#HP
+7#AttackDamage
+14#Sanity

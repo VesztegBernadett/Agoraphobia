@@ -1,0 +1,8 @@
+14#Id
+Weak The Cursed Knight#Name
+This one is weaker! This knight's mind got taken over by his sword. He went insane, killing his king in the process.#Description
+14(0.5;11(0.5;DC(100-150#Inventory
+7#Defense
+25#HP
+10#AttackDamage
+20#Sanity

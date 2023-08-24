@@ -1,9 +1,0 @@
-16#Id
-Pixie#Name
-These are similar to butterflies but they are evil.#Description
-17(0.3;11(0.5;DC(50-150#Inventory
-6#Defense
-20#HP
-1#Energy
-9#AttackDamage
-15#Sanity

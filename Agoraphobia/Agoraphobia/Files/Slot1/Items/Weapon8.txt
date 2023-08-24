@@ -1,0 +1,7 @@
+8#Id
+Malfunctioning gun#Name
+This gun's prime is long gone, although it still works (sometimes).#Description
+1#Rarity
+0-2.5#Multiplier
+1#Energy
+200#Price

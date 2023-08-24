@@ -1,8 +1,0 @@
-22#Id
-Dark cave#Name
-It's dark, you don't see much. However a ___(?) is coming towards you.#Description
-0#Type
-1#Orientation
-0#NPC
-9#Enemy
-13#Items

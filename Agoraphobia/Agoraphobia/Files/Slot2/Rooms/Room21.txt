@@ -1,0 +1,6 @@
+21#Id
+Corrupted office#Name
+You stumble upon an office, computers components scattered all over the floor. As you step in, a feeling of dread washes over you.#Description
+0#NPC
+1#Enemy
+8#Items

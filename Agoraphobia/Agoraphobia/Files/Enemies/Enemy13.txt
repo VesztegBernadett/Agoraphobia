@@ -1,9 +1,0 @@
-13#Id
-Dragon mom#Name
-The mighty dragon, it takes a lot to stop her and she is furious because her daughter is missing.#Description
-11(0.8;DC(250-300#Inventory
-5#Defense
-45#HP
-1#Energy
-14#AttackDamage
-25#Sanity

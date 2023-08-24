@@ -1,0 +1,8 @@
+8#Id
+Tough Evil Printer#Name
+This one is tougher! A simple printer with a not-so-simple plan to destroy The Dream World.#Description
+11(0.3;DC(130-160#Inventory
+6#Defense
+25#HP
+10#AttackDamage
+25#Sanity

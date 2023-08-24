@@ -1,0 +1,6 @@
+32#Id
+Broken carriage#Name
+You spot a carriage in ruins, its axle broken, its wagon splintered and smoking. It doesn't seem to be of much use to you, albeit you feel you must take a closer look...#Description
+0#NPC
+13#Enemy
+12#Items

@@ -1,9 +1,0 @@
-8#Id
-Evil Printer#Name
-A simple printer with a not so simple plan to destroy the world.#Description
-11(0.3;DC(30-60#Inventory
-4#Defense
-20#HP
-1#Energy
-8#AttackDamage
-15#Sanity

@@ -1,9 +1,0 @@
-9#Id
-Little bat#Name
-The youngest bat, he may be small but he can hurt you too.#Description
-DC(10-20#Inventory
-0#Defense
-10#HP
-1#Energy
-10#AttackDamage
-5#Sanity

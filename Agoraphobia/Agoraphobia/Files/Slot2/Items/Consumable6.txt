@@ -1,0 +1,10 @@
+6#Id
+Dream grape#Name
+Wait is this? It's supposed to be meat but it's... a grape?#Description
+1#Rarity
+0#Energy
+5#HP
+0#Armor
+0#Attack
+1#Duration
+50#Price

@@ -1,8 +1,0 @@
-25#Id
-Armory#Name
-There are broken swords everywhere and in the center of the room lays a ____(positive?).#Description
-0#Type
-1#Orientation
-0#NPC
-0#Enemy
-4#Items

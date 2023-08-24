@@ -20,28 +20,26 @@ namespace Agoraphobia
         {
             ConsoleKey input = ConsoleKey.DownArrow;
             int selected = -1;
-            string slot1 = File.ReadAllLines($"{IElement.PATH}Player1.txt")[11].Split('#')[0];
-            string slot2 = File.ReadAllLines($"{IElement.PATH}Player2.txt")[11].Split('#')[0];
-            string slot3 = File.ReadAllLines($"{IElement.PATH}Player3.txt")[11].Split('#')[0];
+            string slot1 = File.ReadAllLines($"{Program.PATH}Slot1/Player.txt")[11].Split('#')[0];
+            string slot2 = File.ReadAllLines($"{Program.PATH}Slot2/Player.txt")[11].Split('#')[0];
+            string slot3 = File.ReadAllLines($"{Program.PATH}Slot3/Player.txt")[11].Split('#')[0]; 
             
             Console.Clear();
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] { 65, 2 });
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Title.txt"), new int[] { 65, 2 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Book.txt"), new int[] { 74, 35 });
             do
             {
                 switch (input)
                 {
                     case ConsoleKey.DownArrow:
                         if (selected < 3)
-                        {
                             selected++;
-                        }
+                        else selected = 0;
                         break;
                     case ConsoleKey.UpArrow:
                         if (selected > 0)
-                        {
                             selected--;
-                        }
+                        else selected = 3;
                         break;
                 }
                 if (selected == 0)
@@ -68,25 +66,41 @@ namespace Agoraphobia
 
             } while (input!=ConsoleKey.Enter);
             if (selected == 3)
-            {
                 Menu();
-            }
             else
             {
-                Player.Slot = selected + 1;
+                switch (selected)
+                {
+                    case 0:
+                        if (slot1 == "Not yet")
+                            Program.newGame = true;
+                        else Program.newGame = false;
+                        break;
+                    case 1:
+                        if (slot2 == "Not yet")
+                            Program.newGame = true;
+                        else Program.newGame = false;
+                        break;
+                    case 2:
+                        if (slot3 == "Not yet")
+                            Program.newGame = true;
+                        else Program.newGame = false;
+                        break;
+                }
+                Program.slot = selected + 1;
             }
         }
         public static void Intro()
         {
             Console.Clear();
-            string[] text = File.ReadAllText($"{IElement.PATH}Intro.txt").Split('\n');
+            string[] text = File.ReadAllText($"{Program.PATH}Intro.txt").Split('\n');
             Output(0, text.Length, text, 0, 15, 200, ConsoleColor.Magenta, false);
         }
         public static void Menu()
         {
             Console.Clear();
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Title.txt"), new int[] {65, 2});
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 74, 35 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Title.txt"), new int[] {65, 2});
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Book.txt"), new int[] { 74, 35 });
             int selected = 1;
             ConsoleKey input = ConsoleKey.UpArrow;
             while (true)
@@ -109,8 +123,7 @@ namespace Agoraphobia
                         {
                             case 0:
                                 SelectSlot();
-                                string content = File.ReadAllText($"{IElement.PATH}Safety.txt");
-                                File.WriteAllText($"{IElement.PATH}Player{Player.Slot}.txt", content);
+                                Program.NewGame();
                                 return;
                             case 1:
                                 SelectSlot();
@@ -163,7 +176,7 @@ namespace Agoraphobia
         }
         private static void Tutorial()
         {
-            string[] text = File.ReadAllText($"{IElement.PATH}Tutorial.txt").Split('\n');
+            string[] text = File.ReadAllText($"{Program.PATH}Tutorial.txt").Split('\n');
             Output(0, 2, text, 0, 15, 200, ConsoleColor.Magenta, false);
             Output(2, 4, text, 0, 5, 120, ConsoleColor.DarkRed, true);
             Output(4, 5, text, 0, 5, 120, ConsoleColor.Magenta, true);
@@ -172,15 +185,15 @@ namespace Agoraphobia
             Console.Write("Room Name");
             Console.BackgroundColor = ConsoleColor.Black;
             Output(5, 6, text, 0, 5, 120, ConsoleColor.DarkGreen, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 2, 14 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Book.txt"), new int[] { 2, 14 });
             Output(6, 7, text, 0, 5, 120, ConsoleColor.Magenta, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/NArt1.txt"), new int[] { 100, 6 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/NArt1.txt"), new int[] { 100, 6 });
             Output(7, 8, text, 0, 5, 120, ConsoleColor.Magenta, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 20, 6 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/EArt1.txt"), new int[] { 20, 6 });
             Output(8, 9, text, 0, 5, 120, ConsoleColor.Magenta, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt0.txt"), new int[] { 100, 6 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt0.txt"), new int[] { 100, 6 });
             Output(9, 10, text, 0, 5, 120, ConsoleColor.Magenta, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"), new int[] { 100, 6 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt.txt"), new int[] { 100, 6 });
             Output(10, 11, text, 0, 5, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition((80 - "Inventory".Length) / 2 + 120, 0);
             Console.Write("Inventory");
@@ -266,34 +279,37 @@ namespace Agoraphobia
             Console.Write(">> option 2");
             Console.BackgroundColor = ConsoleColor.Black;
             Output(57, 59, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(5, 27);
+            Console.Write($"Popcorn\n     A yummy snack\n\n     Type: Consumable\n     Rarity: Common\n     Duration: 1\n     HP: 2\n     Armor: 0\n     Attack: 0\n     Energy: 1");
+            Output(59, 60, text, 0, 25, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(12, 30);
             Console.Write(">> option 1");
             Console.SetCursorPosition(12, 31);
             Console.BackgroundColor = ConsoleColor.Magenta;
             Console.Write(">> option 2");
             Console.BackgroundColor = ConsoleColor.Black;
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt0.txt"), new int[] { 80, 32 });
-            Output(59, 60, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt0.txt"), new int[] { 80, 32 });
+            Output(60, 61, text, 0, 29, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(12, 26);
             Console.Write(">> Interact with: NPC");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/NArt1.txt"), new int[] { 80, 32 });
-            Output(60, 61, text, 0, 29, 120, ConsoleColor.Magenta, true);
-            Console.SetCursorPosition(12, 27);
-            Console.Write(">> Fight: Enemy");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 80, 32 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/NArt1.txt"), new int[] { 80, 32 });
             Output(61, 62, text, 0, 29, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(12, 27);
+            Console.Write(">> Fight: Enemy");
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/EArt1.txt"), new int[] { 80, 32 });
+            Output(62, 63, text, 0, 29, 120, ConsoleColor.Magenta, true);
+            Console.SetCursorPosition(12, 27);
             Console.Write(">> Exits:");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
-            Output(62, 64, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
+            Output(63, 65, text, 0, 28, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(50, 2);
             Console.Write("Current Enemy, 10 / 15");
-            Output(64, 66, text, 0, 28, 120, ConsoleColor.Magenta, true);
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/EArt1.txt"), new int[] { 45, 5 });
-            Output(66, 67, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            Output(65, 67, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/EArt1.txt"), new int[] { 45, 5 });
+            Output(67, 68, text, 0, 28, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(3, 25);
             Console.Write("Energy cost: 2, Multiplier: 1-3, Possible damage: 2-6");
-            Output(67, 70, text, 0, 28, 120, ConsoleColor.Magenta, true);
+            Output(68, 71, text, 0, 28, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(12, 27);
             Console.Write(">> Exits:");
             Console.SetCursorPosition(14, 28);
@@ -302,16 +318,16 @@ namespace Agoraphobia
             Console.Write(">> Exit 2:");
             Console.SetCursorPosition(14, 30);
             Console.Write(">> Exit 3:");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
-            Output(70, 73, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Exit.txt"), new int[] { 80, 32 });
+            Output(71, 74, text, 0, 25, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(14, 31);
             Console.Write(">> Pick up: Item");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
-            Output(73, 74, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
+            Output(74, 75, text, 0, 25, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(14, 31);
             Console.Write(">> Inspect Sack...");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"), new int[] { 80, 32 });
-            Output(74, 75, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt.txt"), new int[] { 80, 32 });
+            Output(75, 76, text, 0, 25, 120, ConsoleColor.Magenta, true);
             Console.SetCursorPosition(12, 27);
             Console.Write(">> Sack:");
             Console.SetCursorPosition(14, 28);
@@ -320,9 +336,9 @@ namespace Agoraphobia
             Console.Write(">> >> Pick up: Item 2");
             Console.SetCursorPosition(14, 30);
             Console.Write(">> >> Pick up: Item 3");
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
-            Output(75, 76, text, 0, 25, 120, ConsoleColor.Magenta, true);
-            Output(76, 79, text, 0, 20, 200, ConsoleColor.Magenta, false);
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/IArt2.txt"), new int[] { 80, 32 });
+            Output(76, 77, text, 0, 25, 120, ConsoleColor.Magenta, true);
+            Output(77, 80, text, 0, 20, 200, ConsoleColor.Magenta, false);
         }
         private static void ChooseMenuPoint(int selected)
         {
@@ -357,10 +373,10 @@ namespace Agoraphobia
                 }
             }
         }
-        public static void Show(int roomId)
+        public static void Show()
         {
             ClearRoom();
-            Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
+            Room room = (Room)IRoom.Rooms.Find(x => x.Id == Program.room.Id);
             //NPCs
             if (room.NPC != 0)
             {
@@ -386,7 +402,7 @@ namespace Agoraphobia
                 }
                 else
                 {
-                    string sack = File.ReadAllText($"{IElement.PATH}Arts/IArt.txt");
+                    string sack = File.ReadAllText($"{Program.PATH}Arts/IArt.txt");
                     string[] lines = sack.Split('\n');
                     for (int i = 0; i < lines.Length; i++)
                     {
@@ -395,7 +411,7 @@ namespace Agoraphobia
                     }
                 }
             }
-            ShowSingle(File.ReadAllText($"{IElement.PATH}Arts/Book.txt"), new int[] { 2, 14 });
+            ShowSingle(File.ReadAllText($"{Program.PATH}Arts/Book.txt"), new int[] { 2, 14 });
         }
 
         public static void ShowGrid()
@@ -436,7 +452,7 @@ namespace Agoraphobia
             Console.Write($"Current duration: {Player.EffectDuration}     ");
         }
 
-        public static void ShowInventory(int id)
+        public static void ShowInventory()
         {
             ClearInventory();
             Console.SetCursorPosition(157, 0);
@@ -445,7 +461,7 @@ namespace Agoraphobia
             int index = 0;
             foreach (var item in Player.Inventory.GroupBy(x => x))
             {
-                if (id == index)
+                if (Program.inventory == index)
                     Console.BackgroundColor = ConsoleColor.Magenta;
                 Console.SetCursorPosition(125, 2 + index);
                 IItem.ItemRarity currentitemrarity = IItem.Items.Find(x => x.Id == item.Key).Rarity;
@@ -505,28 +521,27 @@ namespace Agoraphobia
                 Console.Write($"{words[i]} ");
             }
         }
-        public static void Interaction(int roomId, int id, bool isOpened, bool isTriggered)
+        public static void Interaction(int id, bool isOpened, bool isTriggered)
         {
             ClearInteraction();
-            Room room = (Room)IRoom.Rooms.Find(x => x.Id == roomId);
             int selected = 0;
             int vOffset = 0;
-            ShowRoomInfo(ref vOffset, room);
+            ShowRoomInfo(ref vOffset);
             vOffset++;
-            if (room.NPC != 0)
+            if (Program.room.NPC != 0)
             {
                 vOffset++;
-                NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == room.NPC);
+                NPC npc = (NPC)INPC.NPCs.Find(x => x.Id == Program.room.NPC);
                 ShowOption(ref selected, id, 0, vOffset, npc.Art);
                 Console.Write($">> Interact with: {npc.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
                 if (selected - 1 == id)
                     ShowDescription(ref vOffset, npc.Description, 60, 15);
             }
-            if (room.Enemy != 0)
+            if (Program.room.Enemy != 0)
             {
                 vOffset++;
-                Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == room.Enemy);
+                Enemy enemy = (Enemy)IEnemy.Enemies.Find(x => x.Id == Program.room.Enemy);
                 ShowOption(ref selected, id, 0, vOffset, enemy.Art);
                 Console.Write($">> Fight: {enemy.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
@@ -540,11 +555,11 @@ namespace Agoraphobia
                 {
                     Console.SetCursorPosition(10, 24 + vOffset);
                     Console.Write(">> Exits:");
-                    for (int i = 0; i < room.Exits.Count; i++)
+                    for (int i = 0; i < Program.room.Exits.Count; i++)
                     {
                         vOffset++;
-                        IRoom current = IRoom.Rooms.Find(x => x.Id == room.Exits[i]);
-                        ShowOption(ref selected, id, 2, vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                        IRoom current = IRoom.Rooms.Find(x => x.Id == Program.room.Exits[i]);
+                        ShowOption(ref selected, id, 2, vOffset, File.ReadAllText($"{Program.PATH}Arts/Exit.txt"));
                         Console.Write($">> Go to: {current.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
                         if (selected - 1 == id)
@@ -553,22 +568,22 @@ namespace Agoraphobia
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
+                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{Program.PATH}Arts/Exit.txt"));
                     Console.Write($">> Exit room");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
             vOffset++;
-            if (room.Items.Count > 1)
+            if (Program.room.Items.Count > 1)
             {
                 if (isOpened)
                 {
                     Console.SetCursorPosition(10, 24 + vOffset);
                     Console.Write(">> Sack:");
-                    for (int i = 0; i < room.Items.Count(); i++)
+                    for (int i = 0; i < Program.room.Items.Count(); i++)
                     {
                         vOffset++;
-                        IItem item = IItem.Items.Find(x => x.Id == room.Items[i]);
+                        IItem item = IItem.Items.Find(x => x.Id == Program.room.Items[i]);
                         ShowOption(ref selected, id, 2, vOffset, item.Art);
                         Console.Write($">> Pick up {item.Name}");
                         Console.BackgroundColor = ConsoleColor.Black;
@@ -578,14 +593,14 @@ namespace Agoraphobia
                 }
                 else
                 {
-                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{IElement.PATH}Arts/IArt.txt"));
+                    ShowOption(ref selected, id, 0, vOffset, File.ReadAllText($"{Program.PATH}Arts/IArt.txt"));
                     Console.Write(">> Inspect Sack...");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
             }
-            else if (room.Items.Count == 1)
+            else if (Program.room.Items.Count == 1)
             {
-                IItem item = IItem.Items.Find(x => x.Id == room.Items[0]);
+                IItem item = IItem.Items.Find(x => x.Id == Program.room.Items[0]);
                 ShowOption(ref selected, id, 0, vOffset, item.Art);
                 Console.Write($">> Pick up {item.Name}");
                 Console.BackgroundColor = ConsoleColor.Black;
@@ -626,16 +641,20 @@ namespace Agoraphobia
                         else
                         {
                             IItem item = IItem.Items.Find(x => x.Id == npc.Inventory[selected]);
-                            //Console.Write(selected);
-                            //Console.ReadKey();
                             if (Player.InventoryLength < 18)
                             {
                                 if (Player.ChangeCoins(-item.Price))
                                 {
                                     length--;
                                     npc.Inventory.Remove(item.Id);
-                                    Player.Inventory.Add(item.Id);
-                                    ShowInventory(0);
+                                    if (item.GetType().ToString() == "Agoraphobia.Items.Weapon")
+                                    {
+                                        Weapon weapon = (Weapon)item;
+                                        weapon.Obtain();
+                                    }
+                                    else
+                                        Player.Inventory.Add(item.Id);
+                                    ShowInventory();
                                     ShowStats();
                                     ClearInteraction();
                                     ChooseItem(id, current, selected);
@@ -647,6 +666,10 @@ namespace Agoraphobia
                             }
                             else Message("Your inventory is full, you can't pick up this item.");
                         }
+                        break;
+                    case ConsoleKey.I:
+                        if (selected != length - 1)
+                            Viewport.Message(IItem.Items.Find(x => x.Id == npc.Inventory[selected]).Inspect());
                         break;
                     default:
                         break;
@@ -668,23 +691,21 @@ namespace Agoraphobia
                     Console.Write($">> Purchase: {item.Name} - {item.Price} DC");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
+                ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{Program.PATH}Arts/Exit.txt"));
+                Console.Write(">> Exit");
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.SetCursorPosition(10, 27 + current);
+                Console.Write("(Press I to Inspect or Enter to buy)");
             }
-            else
-            {
-                Console.SetCursorPosition(10, 24);
-                Console.Write("You can't buy anything from this creature.");
-            }
-            ShowOption(ref current, selected, 0, current + 2, File.ReadAllText($"{IElement.PATH}Arts/Exit.txt"));
-            Console.Write(">> Exit");
-            Console.BackgroundColor = ConsoleColor.Black;
+            else Message("You can't buy anything from this creature.");
         }
-        private static void ShowRoomInfo (ref int vOffset, Room room)
+        private static void ShowRoomInfo (ref int vOffset)
         {
             Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.SetCursorPosition((120 - room.Name.Length) / 2, 0);
-            Console.Write(room.Name);
+            Console.SetCursorPosition((120 - Program.room.Name.Length) / 2, 0);
+            Console.Write(Program.room.Name);
             Console.BackgroundColor = ConsoleColor.Black;
-            ShowDescription(ref vOffset, room.Description, 110, 5);
+            ShowDescription(ref vOffset, Program.room.Description, 110, 5);
         }
 
         private static void ShowOption(ref int selected, int id, int hOffset, int vOffset, string art)
@@ -703,9 +724,9 @@ namespace Agoraphobia
             ClearInteraction();
             Console.SetCursorPosition(5, 25);
             Console.Write(msg);
-            Console.SetCursorPosition(5, 26);
+            Console.SetCursorPosition(5, 27 + msg.Count(x => x == '\n'));
             Console.Write("Press any key to dream on.");
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
 
         public static void ClearInteraction()
@@ -732,28 +753,12 @@ namespace Agoraphobia
                 Console.Write("                                                                                                                        ");
             }
         }
-        public static void ShowItemInfo(int selectedItemIndex)
+        public static void ShowItemInfo()
         {
             ClearInteraction();
             Console.SetCursorPosition(5, 25);
-            IItem selectedItem = IItem.Items.Find(x => x.Id == Player.Inventory.Distinct().ToArray()[selectedItemIndex]);
-            if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Weapon")
-            {
-                Weapon selectedWeapon = (Weapon)selectedItem;
-                Console.Write($"Energy cost: {selectedWeapon.Energy} Weapon multiplier: {selectedWeapon.MinMultiplier}-{selectedWeapon.MaxMultiplier} Potential damage: {selectedWeapon.MinMultiplier*Player.AttackDamage}-{selectedWeapon.MaxMultiplier*Player.AttackDamage}");
-            }
-            else if (selectedItem.GetType().ToString() == "Agoraphobia.Items.Consumable")
-            {
-                Consumable selectedConsumable = (Consumable)selectedItem;
-                if (selectedConsumable.Duration == 100)
-                {
-                    Console.Write($"This item or buff adds: MaxEnergy: {selectedConsumable.Energy}, MaxHP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it's permanent");
-                }
-                else
-                {
-                    Console.Write($"Consumable replenishes: Energy: {selectedConsumable.Energy}, HP: {selectedConsumable.HP} and it adds: Defense: {selectedConsumable.Armor}, Attack {selectedConsumable.Attack} and it lasts for {selectedConsumable.Duration} rounds");
-                }
-            }
+            IItem item = IItem.Items.Find(x => x.Id == Player.Inventory.Distinct().ToArray()[Program.inventory]);
+            Console.WriteLine(item.Inspect());
         }
     }
 }

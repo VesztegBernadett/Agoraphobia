@@ -1,7 +1,0 @@
-3#Id
-Dagger#Name
-A sharp dagger. A little dull but still usable.#Description
-1#Rarity
-1-2#Multiplier
-1#Energy
-120#Price

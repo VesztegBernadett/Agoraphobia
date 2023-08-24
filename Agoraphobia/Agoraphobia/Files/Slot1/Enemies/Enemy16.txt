@@ -1,0 +1,8 @@
+16#Id
+Tough Pixie#Name
+This one is tougher! These creatures are similar to butterflies or fairies, although they are evil.#Description
+17(0.3;11(0.5;DC(150-250#Inventory
+8#Defense
+25#HP
+11#AttackDamage
+25#Sanity

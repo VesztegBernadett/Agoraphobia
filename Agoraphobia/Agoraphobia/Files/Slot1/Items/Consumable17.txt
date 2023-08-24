@@ -1,0 +1,10 @@
+17#Id
+Pixie dust#Name
+Where does this dust come from and why is it good if I inhale it?#Description
+4#Rarity
+1#Energy
+-2#HP
+-2#Armor
+0#Attack
+100#Duration
+200#Price

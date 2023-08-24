@@ -1,0 +1,8 @@
+4#Id
+Weak Scared person#Name
+This one is weaker! They don't think. They just panic. They often assemble in groups to bring down lone travelers.#Description
+6(0.9;DC(10-30#Inventory
+0#Defense
+23#HP
+4#AttackDamage
+5#Sanity

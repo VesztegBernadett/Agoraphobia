@@ -1,0 +1,5 @@
+8#Id
+Ivy the fairy#Name
+She is such a tiny creature! She looks like a small human with long ears and pretty wings.#Description
+16;19;7;18#Inventory
+Hello big traveler! We haven't seen one like you in a while, do you need anything?#Intro

@@ -1,8 +1,0 @@
-1#Id
-Little garden#Name
-You see a ___(positive) laying on the ground next to a ____(negative).#Description
-0#Type
-1#Orientation
-0#NPC
-2#Enemy
-3#Items

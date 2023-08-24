@@ -1,0 +1,8 @@
+7#Id
+Bear#Name
+Big and strong and he has.. cheese? If you are not strong enough run!#Description
+5(1;DC(50-100#Inventory
+4#Defense
+35#HP
+10#AttackDamage
+20#Sanity

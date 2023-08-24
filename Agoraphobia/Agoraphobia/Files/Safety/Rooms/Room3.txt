@@ -1,0 +1,6 @@
+3#Id
+Dreamer's restaurant#Name
+The Dreamer's restaurant is the finest diner in the entire Dream World. It is full of rich food and wealthy people.#Description
+2#NPC
+0#Enemy
+5;0;1#Items

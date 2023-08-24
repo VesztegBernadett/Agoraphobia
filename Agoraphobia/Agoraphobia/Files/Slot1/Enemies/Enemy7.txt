@@ -1,0 +1,8 @@
+7#Id
+Tough Bear#Name
+This one is tougher! Big and strong and he has.. cheese? If you are not strong enough run!#Description
+5(1;DC(150-200#Inventory
+6#Defense
+40#HP
+12#AttackDamage
+30#Sanity

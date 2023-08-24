@@ -1,0 +1,10 @@
+11#Id
+Evil orb#Name
+Comes from evil entities, swallowing one might grant one strength.#Description
+2#Rarity
+1#Energy
+-3#HP
+0#Armor
+2#Attack
+1#Duration
+50#Price

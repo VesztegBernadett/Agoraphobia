@@ -1,0 +1,8 @@
+16#Id
+Pixie#Name
+These creatures are similar to butterflies or fairies, although they are evil.#Description
+17(0.3;11(0.5;DC(50-150#Inventory
+6#Defense
+20#HP
+9#AttackDamage
+15#Sanity

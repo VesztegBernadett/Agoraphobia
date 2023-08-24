@@ -1,0 +1,10 @@
+16#Id
+Haunted shield#Name
+You may arm yourself with this shield, but at what cost?#Description
+3#Rarity
+0#Energy
+-5#HP
+3#Armor
+0#Attack
+100#Duration
+150#Price

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia.Items
 {
-    internal interface IWeapons : IItemUsable
+    internal interface IWeapons : IItem
     {
         double MinMultiplier { get; }
         double MaxMultiplier { get; }

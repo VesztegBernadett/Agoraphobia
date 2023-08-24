@@ -1,6 +1,0 @@
-5#Id
-Caveman#Name
-He is a man from the forest, he sleep in a cave and eats what he finds.#Description
-3#Type
-3;6;13;19#Inventory
-Me want money, me need food, you need item?#Intro

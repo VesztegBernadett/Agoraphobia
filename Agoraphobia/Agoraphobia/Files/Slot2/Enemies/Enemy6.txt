@@ -1,0 +1,8 @@
+6#Id
+Weak Native#Name
+This one is weaker! They have lived here since ancient times.#Description
+4(0.1;DC(20-100#Inventory
+4#Defense
+10#HP
+6#AttackDamage
+10#Sanity

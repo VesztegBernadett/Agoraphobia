@@ -1,0 +1,6 @@
+6#Id
+Zoo#Name
+You find yourself in a zoo, filled with exotic animals from all over the planet. You stare in awe at the queer creatures, unable to stop a sudden chill running down your back.#Description
+2#NPC
+5#Enemy
+0#Items

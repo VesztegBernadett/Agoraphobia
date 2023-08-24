@@ -1,15 +1,5 @@
 ﻿using Agoraphobia.Items;
 using Agoraphobia.Rooms;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
-using static Agoraphobia.IItem;
-using System.IO;
 
 namespace Agoraphobia.Entity
 {
@@ -18,7 +8,6 @@ namespace Agoraphobia.Entity
         public static int Defense { get; private set; } = 3;
         public static int MaxHP { get; private set; } = 15;
         private static int hp = 15;
-        public static int Slot { get; set; }
         public static int Points = 0;
 
         public static int EffectDuration = 0;
@@ -79,8 +68,6 @@ namespace Agoraphobia.Entity
         }
         public static List<int> Inventory { get; set; } = new List<int>();
         public static int DreamCoins { get; private set; } = 100;
-        public static string Name { get; private set; } = "asdasd";
-
         public static DateTime playTimeStart;
         public static int InventoryLength
         {
@@ -96,19 +83,18 @@ namespace Agoraphobia.Entity
                 return count;
             }
         }
-        public static void Attack(IEnemy target)
+        public static void Attack(IEnemy target, ref int inventory)
         {
             Random r = new Random();
             Viewport.ShowGrid();
             Viewport.ShowSingle(target.Art, new int[] { 50, 5 });
-            int inventory = 0;
             while (Energy > 0 && target.HP > 0)
             {
                 Console.SetCursorPosition((120 - target.Name.Length - 3 - target.MaxHP.ToString().Length - target.HP.ToString().Length) / 2, 1);
                 Console.Write($"{target.Name}, {target.HP} / {target.MaxHP}    ");
                 Viewport.ShowStats();
-                Viewport.ShowInventory(inventory);
-                Viewport.ShowItemInfo(inventory);
+                Viewport.ShowInventory();
+                Viewport.ShowItemInfo();
                 if (Console.KeyAvailable)
                     Console.ReadKey(true);
                 ConsoleKey input = Console.ReadKey(true).Key;
@@ -128,26 +114,23 @@ namespace Agoraphobia.Entity
                         else inventory++;
                         break;
                     case ConsoleKey.Enter:
-                        IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory.Distinct().ToArray()[inventory]);
+                        int index = inventory;
+                        IItem selectedItem = IItem.Items.Find(x => x.Id == Inventory.Distinct().ToArray()[index]);
                         string selectedItemType = selectedItem.GetType().ToString();
-                        if (selectedItemType=="Agoraphobia.Items.Weapon")
+                        if (selectedItemType == "Agoraphobia.Items.Weapon")
                         {
                             Weapon selectedWeapon = (Weapon)selectedItem;
-                            if (selectedWeapon.Energy<=Energy)
+                            if (selectedWeapon.Energy <= Energy)
                             {
                                 Energy -= selectedWeapon.Energy;
                                 int Attacking = Convert.ToInt32(AttackDamage * (r.NextDouble() * (selectedWeapon.MaxMultiplier - selectedWeapon.MinMultiplier) + selectedWeapon.MinMultiplier)) - target.Defense;
                                 if (Attacking < 0)
-                                {
                                     Viewport.Message("Your last attack was too weak to affect the enemy.");
-                                }
                                 else
-                                {
                                     target.HP -= Attacking;
-                                }
                             }
                         }
-                        else if (selectedItemType=="Agoraphobia.Items.Consumable")
+                        else if (selectedItemType == "Agoraphobia.Items.Consumable")
                         {
                             
                             Consumable selectedConsumable = (Consumable)selectedItem;
@@ -181,14 +164,12 @@ namespace Agoraphobia.Entity
                                 ChangeAttack(+selectedConsumable.Attack);
                             }
                             Inventory.RemoveAt(Inventory.LastIndexOf(Inventory.Distinct().ToArray()[inventory]));
-                            if (inventory == Player.InventoryLength)
-                            {
+                            if (inventory == InventoryLength)
                                 inventory--;
-                            }
-                            Viewport.ShowStats();
                         }
                         break;
                 }
+                Viewport.ShowStats();
             }
             if (target.HP > 0)
             {
@@ -198,6 +179,7 @@ namespace Agoraphobia.Entity
 
         public static void Death()
         {
+            Viewport.ShowStats();
             Viewport.Message("You are dead.");
             Respawn();
         }
@@ -205,9 +187,9 @@ namespace Agoraphobia.Entity
         public static void GoInsane()
         {
             Program.gameEnded = true;
-
             DateTime playTimeEnd = DateTime.UtcNow;
             TimeSpan playTime = playTimeEnd - playTimeStart;
+            Viewport.ShowStats();
 
             Viewport.Message($"You went insane, the game has ended.\n\tPlaytime:{playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points-100}\n");
             Program.End();
@@ -218,6 +200,7 @@ namespace Agoraphobia.Entity
             Program.gameEnded = true;
             DateTime playTimeEnd = DateTime.UtcNow;
             TimeSpan playTime = playTimeEnd - playTimeStart;
+            Viewport.ShowStats();
 
             Viewport.Message($"You woke up successfully, and dreamt up the best story ever, the game has ended.\n\tPlaytime:{playTime.Minutes} minutes {playTime.Seconds} seconds | Score {Points}\n");
             Program.End();
@@ -249,6 +232,5 @@ namespace Agoraphobia.Entity
             }
         }
         public static void ChangeDefense (int amount) => Defense += amount;
-        public static void ChangeName(string name) => Name = name;
     }
 }

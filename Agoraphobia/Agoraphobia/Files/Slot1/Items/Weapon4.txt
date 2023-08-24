@@ -1,0 +1,7 @@
+4#Id
+Claymore#Name
+A sword that needs two hands to use. Sharp and strong but quite heavy#Description
+2#Rarity
+2-3#Multiplier
+2#Energy
+175#Price

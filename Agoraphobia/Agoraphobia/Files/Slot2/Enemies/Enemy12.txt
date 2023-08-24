@@ -1,0 +1,8 @@
+12#Id
+Weak Baby dragon#Name
+This one is weaker! She might be small now but she can become dangerous later. The bounty on her is decent.#Description
+DC(100-200#Inventory
+1#Defense
+15#HP
+5#AttackDamage
+5#Sanity

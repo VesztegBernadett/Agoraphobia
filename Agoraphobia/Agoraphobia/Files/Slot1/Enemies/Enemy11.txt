@@ -1,0 +1,8 @@
+11#Id
+The Cursed Sword#Name
+Nobody knows why and how this sword is here. You might pull it free, yet it has a grievous price.#Description
+14(1;DC(0-0#Inventory
+0#Defense
+20#HP
+50#AttackDamage
+10#Sanity

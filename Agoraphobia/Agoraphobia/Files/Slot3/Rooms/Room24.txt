@@ -1,0 +1,6 @@
+24#Id
+Dark cave#Name
+A vast, ominous cave, so dark you can't see past the tip of your nose. You hear the echoes of your footsteps, and something stirring in the dark at the sounds you make...#Description
+5#NPC
+0#Enemy
+0#Items

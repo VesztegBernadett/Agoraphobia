@@ -1,0 +1,10 @@
+0#Id
+Better Popcorn#Name
+It's a better version of Popcorn. A yummy snack#Description
+1#Rarity
+2#Energy
+4#HP
+1#Armor
+1#Attack
+2#Duration
+200#Price

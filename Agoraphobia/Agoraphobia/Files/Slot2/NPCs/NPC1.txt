@@ -1,0 +1,5 @@
+1#Id
+Cat#Name
+A strange creature. What might its intentions be?#Description
+0;1#Inventory
+It was about time you woke up... You've been out for DAYS! Oh, man, do we have a lot to catch up on...#Intro

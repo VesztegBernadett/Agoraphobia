@@ -1,0 +1,8 @@
+6#Id
+Native#Name
+They have lived here since ancient times.#Description
+4(0.1;DC(20-100#Inventory
+5#Defense
+15#HP
+8#AttackDamage
+10#Sanity

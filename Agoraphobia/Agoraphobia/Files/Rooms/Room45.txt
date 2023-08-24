@@ -1,8 +1,0 @@
-45#Id
-Magical forest#Name
-There are flowers you have not seen yet, trees taller than average and some sort of dust everywhere and you see a ___(?) coming towards you.#Description
-0#Type
-2#Orientation
-0#NPC
-13#Enemy
-17;6;7#Items

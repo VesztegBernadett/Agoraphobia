@@ -1,0 +1,8 @@
+8#Id
+Weak Evil Printer#Name
+This one is weaker! A simple printer with a not-so-simple plan to destroy The Dream World.#Description
+11(0.3;DC(30-60#Inventory
+3#Defense
+15#HP
+6#AttackDamage
+5#Sanity

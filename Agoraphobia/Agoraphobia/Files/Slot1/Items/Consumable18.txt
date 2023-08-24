@@ -1,0 +1,10 @@
+18#Id
+Damage up#Name
+A simple but permanent damage increase.#Description
+5#Rarity
+0#Energy
+0#HP
+0#Armor
+1#Attack
+100#Duration
+300#Price

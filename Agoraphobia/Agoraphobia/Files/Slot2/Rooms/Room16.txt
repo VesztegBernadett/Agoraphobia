@@ -1,0 +1,6 @@
+16#Id
+Unknown Land of The Unknown Tribe#Name
+You spot dozens of huts and fireplaces in a vast clearing next to the forest. You see people of the kind you've never seen before, and the sight makes you wonder whether you've stumbled upon friends or foes...#Description
+2#NPC
+0#Enemy
+4#Items

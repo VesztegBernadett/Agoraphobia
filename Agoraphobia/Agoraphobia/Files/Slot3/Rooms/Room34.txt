@@ -1,0 +1,6 @@
+34#Id
+Throne room#Name
+You have no idea how you got here, yet you find yourself in a throne room... and across it, you see The King of The Dream World seated upon a mighty throne. Best kneel before His Grace, lest you anger him...#Description
+0#NPC
+14#Enemy
+#Items

@@ -1,6 +1,0 @@
-3#Id
-Ill student#Name
-A kind student, his situation is quite unfortunate.#Description
-3#Type
-3;20;18#Inventory
-Hello kind sir! Please I'm hungry and I only have this dagger that I found. Can you buy it from me please?#Intro

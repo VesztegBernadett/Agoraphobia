@@ -1,8 +1,0 @@
-6#Id
-Zoo#Name
-You are at the zoo. A ___(?) and a ___(?) are next to the snack bar#Description
-0#Type
-2#Orientation
-2#NPC
-5#Enemy
-0#Items

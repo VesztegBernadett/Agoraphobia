@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using static Agoraphobia.IItem;
-using System.Collections;
-
+﻿using Agoraphobia.Items;
+using Agoraphobia.Rooms;
 
 namespace Agoraphobia.Entity
 {
@@ -21,8 +14,11 @@ namespace Agoraphobia.Entity
         public int MaxHP { get; set; }
         public string Art { get; private set; }
         public string Description { get => description; }
-        private readonly int dreamCoins;
-        public int DreamCoins { get => dreamCoins; }
+        private readonly int minDreamCoins;
+        public int MinDreamCoins { get => minDreamCoins; }
+        private readonly int maxDreamCoins;
+        public int MaxDreamCoins { get => maxDreamCoins; }
+        public int DreamCoins { get => random.Next(minDreamCoins, maxDreamCoins + 1); }
         public Dictionary<int, double> DropRate { get; private set; }
         private readonly int sanity;
         public int Sanity { get => sanity; }
@@ -39,7 +35,6 @@ namespace Agoraphobia.Entity
                 else hp = value;
             }
         }
-        public int Energy { get; private set; }
         public int AttackDamage { get; private set; }
         public List<int> Inventory { get; set; }
         public void Attack()
@@ -47,9 +42,7 @@ namespace Agoraphobia.Entity
             Player.ChangeHP(-(AttackDamage-Player.Defense));
             Player.ChangeEnergy(Player.MaxEnergy);
             if (Player.EffectDuration > 1)
-            {
                 Player.EffectDuration--;
-            }
             else if (Player.EffectDuration == 1)
             {
                 Player.ChangeAttack(-Player.ChangedAttack);
@@ -57,88 +50,70 @@ namespace Agoraphobia.Entity
                 Player.EffectDuration--;
             }
             if (Player.HP > 0)
-            {
-                Player.Attack(this);
-            }
-            else
-            {
-                Player.ChangeSanity(-Sanity);
-            }
+                Player.Attack(this, ref Program.inventory);
+            else Player.ChangeSanity(-2 * Sanity);
         }
-        public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int energy, int coins, List<int> items, List<double> rates)
+        public Enemy(int id, string name, string desc, int def, int attack, int sanity, int hp, int mincoins, int maxcoins, List<int> items, List<double> rates)
         {
             int r = random.Next(5);
-            if (r == 1)
+            DropRate = new Dictionary<int, double>();
+            Inventory = items;
+            this.id = id;
+            if (Program.newGame)
             {
-                DropRate = new Dictionary<int, double>();
-                Inventory = items;
-                this.id = id;
-                this.name = "Tough "+name;
-                description = "This one is tougher! "+desc;
-                Defense = def+2;
-                AttackDamage = attack+2;
-                this.sanity = sanity+10;
-                MaxHP = hp+5;
-                HP = hp+5;
-                Energy = energy;
-                dreamCoins = coins+100;
-                for (int i = 0; i < items.Count; i++)
-                    DropRate.Add(items[i], rates[i]);
-                IEnemy.Enemies.Add(this);
-                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
-            }
-            else if (r == 2)
-            {
-                DropRate = new Dictionary<int, double>();
-                Inventory = items;
-                this.id = id;
-                this.name = "Weak "+name;
-                description = "This one is weaker! "+desc;
-                if (def != 0)
+                if (r == 1)
                 {
-                    Defense = def - 1;
+                    this.name = "Tough " + name;
+                    description = "This one is tougher! " + desc;
+                    Defense = def + 2;
+                    AttackDamage = attack + 2;
+                    this.sanity = sanity + 10;
+                    MaxHP = hp + 5;
+                    HP = hp + 5;
+                    minDreamCoins = mincoins + 100;
+                    maxDreamCoins = maxcoins + 100;
+                }
+                else if (r == 2)
+                {
+                    this.name = "Weak " + name;
+                    description = "This one is weaker! " + desc;
+                    if (def != 0)
+                        Defense = def - 1;
+                    else Defense = def;
+                    if (attack > 5)
+                        AttackDamage = attack - 2;
+                    else AttackDamage = attack;
+                    if (sanity > 10)
+                        this.sanity = sanity - 10;
+                    else this.sanity = sanity;
+                    MaxHP = hp - 5;
+                    HP = hp - 5;
+                    if (mincoins > 50)
+                    {
+                        minDreamCoins = mincoins - 50;
+                        maxDreamCoins = maxcoins - 50;
+                    }
+                    else
+                    {
+                        minDreamCoins = mincoins;
+                        maxDreamCoins = maxcoins;
+                    }
                 }
                 else
                 {
+                    this.name = name;
+                    description = desc;
                     Defense = def;
-                }
-                if (attack > 5)
-                {
-                    AttackDamage = attack-2;
-                }
-                else
-                {
                     AttackDamage = attack;
-                }
-                if (sanity > 10)
-                {
-                    this.sanity = sanity - 10;
-                }
-                else
-                {
                     this.sanity = sanity;
+                    MaxHP = hp;
+                    HP = hp;
+                    minDreamCoins = mincoins;
+                    maxDreamCoins = maxcoins;
                 }
-                MaxHP = hp-5;
-                HP = hp-5;
-                Energy = energy;
-                if (coins > 50)
-                {
-                    dreamCoins = coins - 50;
-                }
-                else
-                {
-                    dreamCoins = coins;
-                }
-                for (int i = 0; i < items.Count; i++)
-                    DropRate.Add(items[i], rates[i]);
-                IEnemy.Enemies.Add(this);
-                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
             }
             else
             {
-                DropRate = new Dictionary<int, double>();
-                Inventory = items;
-                this.id = id;
                 this.name = name;
                 description = desc;
                 Defense = def;
@@ -146,13 +121,13 @@ namespace Agoraphobia.Entity
                 this.sanity = sanity;
                 MaxHP = hp;
                 HP = hp;
-                Energy = energy;
-                dreamCoins = coins;
-                for (int i = 0; i < items.Count; i++)
-                    DropRate.Add(items[i], rates[i]);
-                IEnemy.Enemies.Add(this);
-                Art = File.ReadAllText($"{IElement.PATH}/Arts/EArt{id}.txt");
+                minDreamCoins = mincoins;
+                maxDreamCoins = maxcoins;
             }
+            for (int i = 0; i < items.Count; i++)
+                DropRate.Add(items[i], rates[i]);
+            IEnemy.Enemies.Add(this);
+            Art = File.ReadAllText($"{Program.PATH}/Arts/EArt{id}.txt");
         }
 
         public void Death()
@@ -162,9 +137,15 @@ namespace Agoraphobia.Entity
             Player.ChangeCoins(DreamCoins);
             foreach (int item in Inventory)
             {
-                if (r.NextDouble()<=DropRate[item] && Player.InventoryLength < 18)
+                if (r.NextDouble() <= DropRate[item] && Player.InventoryLength < 18)
                 {
-                    Player.Inventory.Add(item);
+                    IItem current = IItem.Items.Find(x => x.Id == item);
+                    if (current.GetType().ToString() == "Agoraphobia.Items.Weapon")
+                    {
+                        Weapon weapon = (Weapon)current;
+                        weapon.Obtain();
+                    }
+                    else Player.Inventory.Add(item);
                 }
             }
             Viewport.Message($"{Name} is dead.");//Add what loot you get from the enemy

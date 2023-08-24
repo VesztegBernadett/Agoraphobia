@@ -1,0 +1,6 @@
+39#Id
+Haunted graveyard#Name
+You feel a sudden chill run down on your spine as you enter this haunted place... The stares of haunted souls pierce your chest like cold knives.#Description
+7#NPC
+0#Enemy
+10#Items

@@ -1,0 +1,10 @@
+0#Id
+Popcorn#Name
+A yummy snack#Description
+0#Rarity
+1#Energy
+2#HP
+0#Armor
+0#Attack
+1#Duration
+100#Price

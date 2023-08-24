@@ -1,0 +1,5 @@
+2#Id
+Calm person#Name
+A friendly person, though not too talkative.#Description
+0;0;1;19;19#Inventory
+...#Intro

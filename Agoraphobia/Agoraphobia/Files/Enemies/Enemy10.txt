@@ -1,9 +1,0 @@
-10#Id
-Big bat#Name
-You may know his son from somewhere, his son is small but the father is stronger.#Description
-DC(12-22#Inventory
-0#Defense
-20#HP
-1#Energy
-10#AttackDamage
-10#Sanity

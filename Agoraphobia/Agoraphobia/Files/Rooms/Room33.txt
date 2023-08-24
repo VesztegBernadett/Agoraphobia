@@ -1,8 +1,0 @@
-33#Id
-Throne room#Name
-You are in the king's room and you see ____(?) near the throne#Description
-0#Type
-1#Orientation
-6#NPC
-0#Enemy
-#Items

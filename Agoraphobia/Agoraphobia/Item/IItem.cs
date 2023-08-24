@@ -21,21 +21,31 @@ namespace Agoraphobia
                 {ItemRarity.Legendary, 5 },
                 {ItemRarity.Fabled, 6 },
             };
-        void PickUp(int roomId);
-        string Inspect();
-        void Drop(int roomId, int id)
+        void Obtain();
+        string Inspect()
         {
-            IRoom.Rooms.Find(x => x.Id == roomId).Items.Add(Id);
+            if (this.GetType().ToString() == "Agoraphobia.Items.Consumable")
+            {
+                Consumable item = (Consumable)this;
+                if (item.Duration == 100)
+                    return $"{item.Name}\n     {item.Description}\n\n     Type: Consumable\n     Rarity: {item.Rarity}\n     Duration: Infinite\n     MaxHP: {item.HP}\n     Armor: {item.Armor}\n     Attack: {item.Attack}\n     MaxEnergy: {item.Energy}";
+                else return $"{item.Name}\n     {item.Description}\n\n     Type: Consumable\n     Rarity: {item.Rarity}\n     Duration: {item.Duration}\n     HP: {item.HP}\n     Armor: {item.Armor}\n     Attack: {item.Attack}\n     Energy: {item.Energy}";
+            }
+            else
+            {
+                Weapon item = (Weapon)this;
+                return $"{item.Name}\n     {item.Description}\n\n     Type: Weapon\n     Rarity: {item.Rarity}\n     Multiplier: {item.MinMultiplier}-{item.MaxMultiplier}\n     Energy cost: {item.Energy}";
+            }
+        }
+        void Drop(int id)
+        {
+            IRoom.Rooms.Find(x => x.Id == Program.room.Id).Items.Add(Id);
             Player.Inventory.RemoveAt(Player.Inventory.LastIndexOf(id));
             if (IItem.Items.Find(x => x.Id == id).GetType().ToString() == "Agoraphobia.Items.Weapon" && Player.Inventory.Any(x => x == id))
             {
                 Weapon weapon = (Weapon)IItem.Items.Find(x => x.Id == id);
                 weapon.LevelDown();
             }
-        }
-        void Delete(int itemID)
-        {
-            Player.Inventory.Remove(itemID);
         }
         ItemRarity Rarity { get; set; }
         int Price { get; }

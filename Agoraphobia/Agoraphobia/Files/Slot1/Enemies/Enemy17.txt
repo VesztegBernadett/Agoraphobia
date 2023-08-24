@@ -1,0 +1,8 @@
+17#Id
+Tough The Devil#Name
+This one is tougher! The fear overwhelms you as you see him. Your hands are shaking so hard you find it difficult to even hold your weapon.#Description
+18(0.2;19(0.2;20(0.2;14(1;DC(600-1100#Inventory
+14#Defense
+45#HP
+22#AttackDamage
+70#Sanity

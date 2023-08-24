@@ -57,6 +57,7 @@ You can also find the [main interaction panel], listing all the options you can 
 The option currently [selected] will be [highlighted] with purple.
 You can [switch] between selected options using the [up] and [down] arrows.
 You can '[activate]' an option by pressing [Enter] while it's [selected].
+If you wish to take a look upon the [stats of your currently selected item], you need only press [I].
 Next to every [option], you can find the [art] of the thing in question.
 The first option is usually an [NPC] you can buy things from.
 The second one is either an [Enemy] you can [fight] with,
@@ -74,6 +75,6 @@ And last, but not least, come the [items] in the room.
 If there is [only one item], you'll be able to [pick it up] right away.
 However, if there are [multiple], you'll first have to [inspect the sack] in front of you.
 Once you do, you'll see a [dropdown list] of the current items, which you can freely choose from.
-If you wish to [pause your travels] and [continue] on a later date, just press [X], and your progress will be [saved].
+To [save your progress] and open the [main menu], you only have to press [Esc].
 That is all you need to know in order to begin your journey...
 Now it's time to start dreaming...

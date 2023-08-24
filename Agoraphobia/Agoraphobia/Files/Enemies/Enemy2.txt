@@ -1,9 +1,0 @@
-2#Id
-Angry rabbit#Name
-A wild rabbit you may wonder where it came from.#Description
-6(0.5;DC(20-30#Inventory
-1#Defense
-15#HP
-1#Energy
-5#AttackDamage
-4#Sanity

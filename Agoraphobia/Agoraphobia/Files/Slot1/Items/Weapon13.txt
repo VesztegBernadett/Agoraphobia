@@ -1,0 +1,7 @@
+13#Id
+Regular bow#Name
+It's a simple bow made out of wood and string.#Description
+1#Rarity
+0-2#Multiplier
+1#Energy
+50#Price

@@ -1,0 +1,8 @@
+1#Id
+Tough Popcorn machine#Name
+This one is tougher! A popcorn machine come alive. It's out to get you.#Description
+0(0.8;DC(110-120#Inventory
+2#Defense
+17#HP
+6#AttackDamage
+12#Sanity

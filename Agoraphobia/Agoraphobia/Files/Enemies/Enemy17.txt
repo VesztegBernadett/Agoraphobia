@@ -1,9 +1,0 @@
-17#Id
-The devil#Name
-The fear overwhelms you as you see him, as your hands are shaking you find it difficult to even hold your weapon.#Description
-18(0.2;19(0.2;20(0.2;14(1.0;DC(500-1000#Inventory
-12#Defense
-40#HP
-1#Energy
-20#AttackDamage
-60#Sanity

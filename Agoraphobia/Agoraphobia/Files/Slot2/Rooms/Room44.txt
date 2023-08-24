@@ -1,0 +1,6 @@
+44#Id
+Magical forest#Name
+Full of wonderful creatures and trees as tall as skyscrapers with vines hanging from every limb. The canopy is so thick the sun has no way to shine through, leaving you in the dark...#Description
+5#NPC
+0#Enemy
+0#Items

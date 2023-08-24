@@ -1,0 +1,8 @@
+13#Id
+Weak Dragon Mom#Name
+This one is weaker! The mighty dragon, a massive, deadly, fire-breathing beast. Now that she has lost her daughter, she is as furious as ever.#Description
+11(0.8;DC(200-250#Inventory
+4#Defense
+40#HP
+12#AttackDamage
+15#Sanity

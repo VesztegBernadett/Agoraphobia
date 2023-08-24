@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Agoraphobia.Items
 {
-    internal interface IConsumables : IItemUsable
+    internal interface IConsumables : IItem
     {
         int Energy { get; }
         int HP { get; }

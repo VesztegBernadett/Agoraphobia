@@ -12,9 +12,9 @@ namespace Agoraphobia.Entity
         int Defense { get; }
         int HP { get; set; }
         int MaxHP { get; set; }
-        int Energy { get; }
         int AttackDamage { get; }
         int Sanity { get; }
+        int DreamCoins { get; }
         void Attack();//We only use IAttackable for Enemy so we know that we attack the player
     }
 }

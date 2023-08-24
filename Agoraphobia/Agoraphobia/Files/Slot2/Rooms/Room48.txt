@@ -1,0 +1,6 @@
+48#Id
+Part of hell#Name
+You see flames burning all around you, and the heat is unbearable... yet you must endure it while facing your worst nightmares...#Description
+7#NPC
+0#Enemy
+11#Items

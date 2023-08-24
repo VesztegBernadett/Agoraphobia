@@ -21,7 +21,8 @@ namespace Agoraphobia
             int id = 0;
             string name = "";
             string desc = "";
-            int coins = 0;
+            int mincoins = 0;
+            int maxcoins = 0;
             double minMultiplier = 0;
             double maxMultiplier = 0;
             int sanity = 0;
@@ -31,9 +32,6 @@ namespace Agoraphobia
             int def = 0;
             int attack = 0;
             int rarity = 0;
-            int piece = 0;
-            int orientation = 0;
-            bool type = false;
             int npc = 0;
             int enemy = 0;
             string intro = "";
@@ -57,33 +55,8 @@ namespace Agoraphobia
                         break;
                 }
             }
-            switch (filename.Split('/')[5][..3])
+            switch (filename.Split('/')[6][..3])
             {
-                case "Arm":
-                    foreach (var line in File.ReadLines(filename, Encoding.UTF8))
-                    {
-                        string[] data = line.Split('#');
-                        switch (data[1])
-                        {
-                            case "Piece":
-                                piece = int.Parse(data[0]);
-                                break;
-                            case "Defense":
-                                def = int.Parse(data[0]);
-                                break;
-                            case "Attack":
-                                attack = int.Parse(data[0]);
-                                break;
-                            case "Rarity":
-                                rarity = int.Parse(data[0]);
-                                break;
-                            case "Price":
-                                price = int.Parse(data[0]);
-                                break;
-                        }
-                    }
-                    new Armor(id, name, desc, def, attack, piece, rarity, price);
-                    break;
                 case "Con":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
                     {
@@ -158,7 +131,8 @@ namespace Agoraphobia
                                     else
                                     {
                                         int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
-                                        coins = r.Next(interval[0], interval[1] + 1);
+                                        mincoins = interval[0];
+                                        maxcoins = interval[1];
                                     }
                                 }
                                 break;
@@ -168,9 +142,6 @@ namespace Agoraphobia
                             case "HP":
                                 hp = int.Parse(data[0]);
                                 break;
-                            case "Energy":
-                                energy = int.Parse(data[0]);
-                                break;
                             case "AttackDamage":
                                 attack = int.Parse(data[0]);
                                 break;
@@ -179,7 +150,7 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    new Enemy(id, name, desc, def, attack, sanity, hp, energy, coins, items, rates);
+                    new Enemy(id, name, desc, def, attack, sanity, hp, mincoins, maxcoins, items, rates);
                     break;
                 case "NPC":
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -191,17 +162,7 @@ namespace Agoraphobia
                                 if (data[0]!="")
                                 {
                                     foreach (var item in data[0].Split(';'))
-                                    {
-                                        int _;
-                                        string[] curr = item.Split('(');
-                                        if (int.TryParse(curr[0], out _))
-                                            items.Add(int.Parse(curr[0]));
-                                        else
-                                        {
-                                            int[] interval = Array.ConvertAll(curr[1].Split('-'), int.Parse);
-                                            coins = r.Next(interval[0], interval[1] + 1);
-                                        }
-                                    }
+                                        items.Add(int.Parse(item));
                                 }
                             break;
                             case "Intro":
@@ -209,7 +170,7 @@ namespace Agoraphobia
                                 break;
                         }
                     }
-                    new NPC(id, name, desc, coins, items, intro);
+                    new NPC(id, name, desc, items, intro);
                     break;
                 default:
                     foreach (var line in File.ReadLines(filename, Encoding.UTF8))
@@ -217,12 +178,6 @@ namespace Agoraphobia
                         string[] data = line.Split('#');
                         switch (data[1])
                         {
-                            case "Type":
-                                type = int.Parse(data[0]) == 0 ? false : true;
-                                break;
-                            case "Orientation":
-                                orientation = int.Parse(data[0]);
-                                break;
                             case "NPC":
                                 npc = int.Parse(data[0]);
                                 break;
@@ -231,17 +186,12 @@ namespace Agoraphobia
                                 break;
                             case "Items":
                                 if (data[0] == "")
-                                {
                                     break;
-                                }
-                                else
-                                {
-                                    items = data[0].Split(';').Select(int.Parse).ToList();
-                                }
+                                else items = data[0].Split(';').Select(int.Parse).ToList();
                                 break;
                         }
                     }
-                    new Room(id, name, desc, type, orientation, npc, enemy, items);
+                    new Room(id, name, desc, npc, enemy, items);
                     break;
             }
         }

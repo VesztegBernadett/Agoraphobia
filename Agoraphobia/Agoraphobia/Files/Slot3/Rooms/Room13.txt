@@ -1,0 +1,6 @@
+13#Id
+Titanic#Name
+You are on the Titanic, but you are unable to swim. The ship is about to hit an iceberg, and there is nothing you can do but watch in horror as the ship begins to sink.#Description
+2#NPC
+0#Enemy
+8#Items

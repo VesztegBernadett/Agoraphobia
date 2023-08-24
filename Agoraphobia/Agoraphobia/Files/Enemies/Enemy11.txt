@@ -1,9 +1,0 @@
-11#Id
-Cursed sword#Name
-Nobody knows why and how is this sword here. You may get it but it will hurt.#Description
-14(1.0#Inventory
-0#Defense
-20#HP
-1#Energy
-50#AttackDamage
-10#Sanity

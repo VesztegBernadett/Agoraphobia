@@ -1,0 +1,6 @@
+27#Id
+Armory#Name
+There are broken, rusted swords all over the space, bits of armor and chunks of dented metal scattered everywhere. Might be you can find something to your liking.#Description
+0#NPC
+0#Enemy
+3#Items

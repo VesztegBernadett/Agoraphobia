@@ -1,0 +1,10 @@
+1#Id
+Bread#Name
+#Description
+0#Rarity
+2#Energy
+0#HP
+2#Armor
+0#Attack
+2#Duration
+50#Price

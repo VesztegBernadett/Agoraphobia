@@ -1,0 +1,8 @@
+11#Id
+Weak The Cursed Sword#Name
+This one is weaker! Nobody knows why and how this sword is here. You might pull it free, yet it has a grievous price.#Description
+14(1;DC(0-0#Inventory
+0#Defense
+15#HP
+48#AttackDamage
+10#Sanity

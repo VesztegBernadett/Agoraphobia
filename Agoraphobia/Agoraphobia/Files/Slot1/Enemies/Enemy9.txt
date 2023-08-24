@@ -1,0 +1,8 @@
+9#Id
+Weak Little bat#Name
+This one is weaker! The youngest bat, he may be small, yet he can hurt you just fine.#Description
+DC(10-20#Inventory
+0#Defense
+5#HP
+8#AttackDamage
+5#Sanity

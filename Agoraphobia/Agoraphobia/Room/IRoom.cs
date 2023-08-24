@@ -13,14 +13,5 @@ namespace Agoraphobia.Rooms
         int Enemy { get; } // Ids of Enemies in the room
         List<int> Items { get; } // Ids of Items in the room
         List<int> Exits { get; }
-        int ItemsNum { get; }
-        enum Orientation
-        {
-            Positive,
-            Negative,
-            Neutral
-        };
-        bool IsQuest { get; }
-        string View();
     }
 }

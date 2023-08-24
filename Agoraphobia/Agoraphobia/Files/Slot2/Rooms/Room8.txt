@@ -1,0 +1,6 @@
+8#Id
+Little garden#Name
+A pleasent garden, designed for relaxation. You can feel the gentle breeze on your cheeks, but something doesn't feel right...#Description
+0#NPC
+0#Enemy
+3;1#Items

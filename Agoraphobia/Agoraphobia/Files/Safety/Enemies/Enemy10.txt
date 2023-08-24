@@ -1,0 +1,8 @@
+10#Id
+Big bat#Name
+An evil bat, driven by sheer fury. He's way too fast to flee from, so you must face him if you wish to advance.#Description
+DC(12-22#Inventory
+0#Defense
+20#HP
+10#AttackDamage
+10#Sanity
